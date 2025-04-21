@@ -17,6 +17,8 @@ class ArticleController extends Controller
     {
         $articleId = DB::table('articles')->insertGetId(['user_id' => 1,'content' => $request->get('content')]);
         dd('zapisano id: ' . $articleId);
+
+
         dd($request->all());
 
         //po zapisie i po edycji zrobic funkcje ktora uzupelni article_id w tabeli images bo tam musze dane zapisywac
