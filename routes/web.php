@@ -53,6 +53,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/tinymce/upload', [ImageController::class, 'uploadTinyMce'])->name('tiny-mce-upload.store');
 
 
+
+    Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
     Route::post('/storeArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreArticle'])->name('article.store');
 
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');

@@ -26,7 +26,9 @@ class ImageController extends Controller
 //Użycie z TinyMCE (endpoint do uploadu)
     public function uploadTinyMce(Request $request, ImageService $imageService)
     {
-        $userId = 1;
+        $userId = auth()->id();// Auth()->user()1;
+
+        DB::table('system_debug')->insert(['value' => serialize($request->file('file'))]);
 
         if ($request->hasFile('file')) {
             $urls = $imageService->saveImageVersions($request->file('file'), $userId);//auth()->id());

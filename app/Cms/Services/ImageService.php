@@ -23,7 +23,7 @@ class ImageService
 
     public function saveImageVersions(UploadedFile $file, int $userId, string $folder = 'articles'): array
     {
-        $basePath = "userId/images/{$folder}";
+        $basePath = $userId . "/images/{$folder}";
 
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();

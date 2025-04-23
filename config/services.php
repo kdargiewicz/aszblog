@@ -39,4 +39,8 @@ return [
         'api_key' => env('TINY_MCE_API_KEY'),
     ],
 
+    'google-map' => [
+        'api_key' => env('GOOGLE_MAP_API_KEY'),
+    ]
+
 ];
