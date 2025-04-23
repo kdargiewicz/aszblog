@@ -75,13 +75,6 @@
 
             </form>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="btn btn-danger">
-                Wyloguj się
-            </button>
-        </form>
-
         @if(Auth::user()->is_admin)
             </br></br></br></br>
         TO ZOSTAJE DO TESTOW ! ! !
