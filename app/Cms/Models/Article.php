@@ -3,7 +3,6 @@
 namespace App\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Cms\Models\Tag;
 
 class Article extends Model
 {
@@ -12,7 +11,7 @@ class Article extends Model
         'user_id',
         'article_uuid',
         'title',
-//        'tags_id',
+        'tags_id',
         'category_id',
         'latitude',
         'longitude',
@@ -21,13 +20,6 @@ class Article extends Model
     ];
 
     protected $casts = [
-        'tags_id' => 'array', // 👈 to dekoduje JSON na tablicę
+        'tags_id' => 'array',
     ];
-
-
-//    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-//    {
-//        return $this->belongsToMany(Tag::class, 'tags');
-//    }
-
 }

@@ -15,7 +15,7 @@ class ArticleRepository
             'user_id'        => $userId,
             'title'          => $dto->title,
             'category_id'    => $categoryId,
-            'tags_id'        => json_encode($tagIds),
+            'tags_id'        => $tagIds,
             'latitude'       => $dto->latitude,
             'longitude'      => $dto->longitude,
             'content'        => $dto->content,
@@ -32,7 +32,7 @@ class ArticleRepository
         $article->update([
             'title'          => $dto->title,
             'category_id'    => $categoryId,
-            'tags_id'        => json_encode($tagIds),
+            'tags_id'        => $tagIds,
             'latitude'       => $dto->latitude,
             'longitude'      => $dto->longitude,
             'content'        => $dto->content,

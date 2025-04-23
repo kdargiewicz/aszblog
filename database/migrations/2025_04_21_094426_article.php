@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->uuid('article_uuid')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('category_id')->nullable();
-            $table->string('tags_id')->nullable();
+            $table->json('tags_id')->nullable();
             $table->string('title')->nullable();
             $table->longText('content')->nullable();
             $table->boolean('is_published')->default(false);

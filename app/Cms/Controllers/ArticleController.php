@@ -45,7 +45,7 @@ class ArticleController extends Controller
 
             if ($article) {
                 $categoryId = $categoryTagResolver->resolveCategoryId($dto->category, $userId);
-                $tagIds     = $categoryTagResolver->resolveTagIds($dto->tags, $userId);
+                $tagIds = $categoryTagResolver->resolveTagIds($dto->tags, $userId);
                 $articleRepository->update($article, $dto, $categoryId, $tagIds);
 
                 return redirect()
