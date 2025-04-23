@@ -27,14 +27,13 @@ class ImageService
 
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-        $filename = 'img_' . now()->format('Ymd_His') . '_' . uniqid();
+        $filename = 'img_' . uniqid();
 
-
-        // Nazwy plików
+        $rawName = $filename . '_raw.' . $extension;
         $maxName = $filename . '_max.' . $extension;
         $minName = $filename . '_min.' . $extension;
 
-        // Ścieżki do zapisu
+        $rawPath = "{$basePath}/{$rawName}";
         $maxPath = "{$basePath}/{$maxName}";
         $minPath = "{$basePath}/{$minName}";
 
@@ -47,8 +46,10 @@ class ImageService
             logger()->warning('Błąd odczytu EXIF', ['msg' => $e->getMessage()]);
         }
 
+        $rawImage = $this->manager->read($file)->scale(width: 5120);
+        Storage::put($rawPath, (string) $rawImage->encode());
 
-        $maxImage = $this->manager->read($file)->scale(width: 1280);
+        $maxImage = $this->manager->read($file)->scale(width: 2560);
         Storage::put($maxPath, (string) $maxImage->encode());
 
         $minImage = $this->manager->read($file)->scale(width: 400);
@@ -66,20 +67,8 @@ class ImageService
 
         $this->repository->store($dto);
 
-//        //to oczywiscie do modelu / serwisu
-//        $insert = [
-//            'user_id' => 1,
-//            'article_id' => null,
-//            'original_name' => $originalName,
-//            'stored_name' => $filename,
-//            'url' => Storage::url($maxPath),
-//            'exif' => json_encode($exif),
-//            'extension' => $extension
-//        ];
-//
-//        DB::table('images')->insert($insert);
-
         return [
+            'raw' => Storage::url($rawPath),
             'max' => Storage::url($maxPath),
             'min' => Storage::url($minPath),
         ];
