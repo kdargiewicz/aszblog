@@ -55,7 +55,7 @@ class ImageService
         Storage::put($minPath, (string) $minImage->encode());
 
         $dto = new ImageDTO(
-            user_id: 1,//$userId,
+            user_id: $userId,
             article_id: null,
             original_name: $originalName,
             stored_name: $filename,

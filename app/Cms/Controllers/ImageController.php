@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Cms\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class ImageController extends Controller
@@ -28,7 +30,18 @@ class ImageController extends Controller
     {
         $userId = auth()->id();// Auth()->user()1;
 
-        DB::table('system_debug')->insert(['value' => serialize($request->file('file'))]);
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+
+        DB::table('system_debug')->insert(['value' => 'pizda']);
+        DB::table('system_debug')->insert(['value' => $userId]);//serialize($request->file('file'))]);
+
+
+
+
+    //    dd(Auth::user()->id);
+
+        DB::table('system_debug')->insert(['value' => $name]);
 
         if ($request->hasFile('file')) {
             $urls = $imageService->saveImageVersions($request->file('file'), $userId);//auth()->id());
@@ -61,7 +74,7 @@ class ImageController extends Controller
             'image' => 'required|image|max:30720', // max 5MB
         ]);
 
-        $userId = 1;// auth()->id() ?? 1; // na testy możesz ustawić 1
+        $userId = auth()->id();//$userId = 1;// auth()->id() ?? 1; // na testy możesz ustawić 1
         $urls = $imageService->saveImageVersions($request->file('image'), $userId);
 
         return redirect()->route('image.form')->with([

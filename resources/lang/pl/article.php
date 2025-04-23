@@ -17,5 +17,10 @@ return [
         'allow-comments-no' => 'Nie',
         'allow-comments-select' => 'Wybierz opcję',
         'set-map-location' => 'Wybierz lokalizację na mapie',
-    ]
+    ],
+
+    'requests' => [
+        'latitude_between' => 'Szerokość geograficzna musi być w zakresie od -90 do 90.',
+        'longitude_between' => 'Długość geograficzna musi być w zakresie od -180 do 180.',
+    ],
 ];

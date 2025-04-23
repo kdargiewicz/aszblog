@@ -9,18 +9,17 @@ return new class extends Migration {
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->uuid('article_uuid')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
-            $table->string('category')->nullable();
-            $table->string('tags')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->string('tags_id')->nullable();
+            $table->string('title')->nullable();
             $table->longText('content')->nullable();
-
             $table->boolean('is_published')->default(false);
-            $table->boolean('deleted')->default(false);
-
+            $table->boolean('allow_comments')->default(false);
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
-
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

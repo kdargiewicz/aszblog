@@ -57,6 +57,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
     Route::post('/storeArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreArticle'])->name('article.store');
 
+    //tu jakiej id trzeba przekazac niejawnie?
+//    Route::get('/editArticle', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
+    Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
+
+
+    Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
+
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
     Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');
 });

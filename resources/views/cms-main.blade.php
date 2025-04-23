@@ -10,6 +10,7 @@
     <link rel="stylesheet" href={{ asset('cms/css/cms-main.css') }}>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tiny.cloud/1/{{ config('services.tinymce.api_key') }}/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
@@ -29,8 +30,8 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
+    @include('alerts')
     <main>
-{{--        style="position: relative; height: 100%;">--}}
         @yield('content')
     </main>
 
