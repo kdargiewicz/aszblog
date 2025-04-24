@@ -9,6 +9,23 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Middleware\LogVisitMiddleware;
+
+//tutaj daje routy do zliczania odwiedzin na blogu bez auth
+//Route::middleware(LogVisitMiddleware::class)->group(function () {
+  //  Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
+//    Route::get('/article/{slug}', [ArticleController::class, 'show']);
+//    Route::get('/category/{name}', [CategoryController::class, 'show']);
+//});
+
+//moge tez wywolac to w pojedynczym route, np:
+//Route::get('/article/{slug}', [ArticleController::class, 'show'])
+//    ->middleware(LogVisitMiddleware::class);
+
+
+
+
+
 
 Route::get('/email/verify', [VerificationController::class, 'show'])
     ->middleware('auth')
@@ -46,8 +63,16 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+//Route::middleware(['auth', 'verified'])->group(function () { /// ----->> TEN ROUTE DAJ BO TYM NIZEJ MIERZE ODWIEDZINY A TO WYZEJ MAM MIERZYC ODWIEDZINY
+Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
+
+    Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
+        return view('dashboard', [
+            'visitCounter' => $tracker->getCountAllVisit(),
+        ]);
+    })->name('dashboard');
+
+
     Route::get('/cms/image/test', [ImageController::class, 'form'])->name('image.form');
     Route::post('/cms/image/upload', [ImageController::class, 'upload'])->name('image.upload');
     Route::post('/tinymce/upload', [ImageController::class, 'uploadTinyMce'])->name('tiny-mce-upload.store');
