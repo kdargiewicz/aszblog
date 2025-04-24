@@ -2,8 +2,11 @@
 
 namespace App\Cms\Repositories;
 
+use App\Cms\CmsHelper;
 use App\Cms\DTO\ArticleDTO;
 use App\Cms\Models\Article;
+use App\Cms\Models\Tag;
+use Illuminate\Support\Facades\DB;
 
 class ArticleRepository
 {
@@ -39,4 +42,19 @@ class ArticleRepository
             'allow_comments' => $dto->allow_comments,
         ]);
     }
+
+    public function getArticleList(int $userId)
+    {
+        $articles = DB::table('articles')
+            ->join('categories', 'articles.category_id', '=', 'categories.id')
+            ->where('articles.user_id', $userId)
+            ->select('articles.*', 'categories.name as category_name')
+            ->paginate(config('blog.article_list.pagination', 10));
+
+        $tags = app(Tag::class)->getTagsNameForUserId($userId);
+        $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);
+
+        return $articlesWithTagNames;
+    }
+
 }

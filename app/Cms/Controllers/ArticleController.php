@@ -96,6 +96,13 @@ class ArticleController extends Controller
                 ->with('error', __('flash-messages.article-store-error'));
         }
     }
+
+    public function getArticleList(): object
+    {
+        $articleList = app(ArticleRepository::class)->getArticleList(Auth::id());
+
+        return view('cms.article.list', compact('articleList'));
+    }
 }
 
 

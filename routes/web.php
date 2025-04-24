@@ -89,6 +89,8 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
 
+    Route::get('/articleList', [\App\Cms\Controllers\ArticleController::class, 'getArticleList'])->name('article.list');
+
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
     Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');
 });
