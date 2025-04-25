@@ -11,6 +11,12 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\LogVisitMiddleware;
 
+//test error
+use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+
 //tutaj daje routy do zliczania odwiedzin na blogu bez auth
 //Route::middleware(LogVisitMiddleware::class)->group(function () {
   //  Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
@@ -86,6 +92,23 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 //    Route::get('/editArticle', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
 
+
+    //testy errorow
+    Route::get('/test-error-500', function () {
+        throw new \Exception('To jest testowy błąd 500');
+    });
+
+    Route::get('/test-error-404', function () {
+        abort(404);
+    });
+
+    Route::get('/test-error-403', function () {
+        throw new AuthorizationException('Brak dostępu do tej funkcji');
+    });
+
+    Route::get('/test-error-419', function () {
+        abort(419); // np. CSRF Token mismatch
+    });
 
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
 
