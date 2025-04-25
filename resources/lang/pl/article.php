@@ -24,4 +24,11 @@ return [
         'latitude_between' => 'Szerokość geograficzna musi być w zakresie od -90 do 90.',
         'longitude_between' => 'Długość geograficzna musi być w zakresie od -180 do 180.',
     ],
+
+    'article_action' => [
+        'published' => 'Publikowany',
+        'not-published' => 'Nie publikowany',
+        'article-edit' => 'Edytuj artykuł',
+        'article-preview' => 'Podgląd artykułu',
+    ]
 ];

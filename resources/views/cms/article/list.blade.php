@@ -1,22 +1,4 @@
-{{--@extends('cms-main')--}}
-{{--@section('content')--}}
-{{--    <div class="w3-container w3-light-grey w3-margin">--}}
-{{--        <h2 class="w3-text-blue">{{ __('article.list') }}</h2>--}}
-
-{{--        @foreach($articleList as $article)--}}
-{{--            <div>--}}
-{{--                <h3>{{ $article->title }}</h3>--}}
-{{--                <p>kontent: {!! $article->content !!}</p>--}}
-{{--                <p>Kategoria: {{ $article->category_name }}</p>--}}
-{{--                <p>Tagi: {{ $article->tag_names }}</p>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
-
-{{--        {{ $articleList->links() }} --}}{{-- Paginacja --}}
-{{--    </div>--}}
-{{--@endsection--}}
 @extends('cms-main')
-
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
         <h2 class="w3-text-blue">{{ __('article.list') }}</h2>
@@ -28,9 +10,9 @@
                         <h4 class="w3-text-dark-grey">
                             {{ $article->title }}
                             @if(!$article->is_published)
-                                <span class="w3-tag w3-yellow w3-small w3-margin-left">{{ __('article.draft') }}</span>
+                                <span class="w3-tag w3-yellow w3-small w3-margin-left">{{ __('article.article_action.not-published') }}</span>
                             @else
-                                <span class="w3-tag w3-green w3-small w3-margin-left">{{ __('article.published') }}</span>
+                                <span class="w3-tag w3-green w3-small w3-margin-left">{{ __('article.article_action.published') }}</span>
                             @endif
                         </h4>
                         <p class="w3-text-grey w3-small">
@@ -43,11 +25,11 @@
 
                     <div class="w3-col s12 m3 w3-right-align w3-margin-top">
                         <a href="{{ route('article.edit', $article->article_uuid) }}" class="w3-button w3-blue w3-small w3-margin-bottom">
-                            {{ __('article.edit') }}
+                            {{ __('article.article_action.article-edit') }}
                         </a>
 {{--                        <a href="{{ route('article.show', $article->id) }}" target="_blank" class="w3-button w3-light-grey w3-small">--}}
                         <a href="" target="_blank" class="w3-button w3-light-grey w3-small">
-                            {{ __('article.preview') }}
+                            {{ __('article.article_action.article-preview') }}
                         </a>
                     </div>
                 </div>
