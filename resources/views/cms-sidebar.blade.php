@@ -16,6 +16,16 @@
             <h5>Dashboard</h5>
         </a>
     </div>
+
+    <div class="w3-container">
+        <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
+
+
+{{--        <a href="{{ route('/') }}" class="w3-bar-item">--}}
+{{--            <h5>BLOG-zoba go :P</h5>--}}
+{{--        </a>--}}
+    </div>
+
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
         <a href="{{ route('article.create') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square w3-margin-right"></i>Utwórz artykuł</a>
