@@ -2,6 +2,7 @@
 
 return [
     'add' => 'Dodaj artykuł',
+    'list' => 'Lista artykułów',
 
     'create-form' => [
         'title' => 'Tytuł',
