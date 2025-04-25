@@ -4,7 +4,7 @@
         <h2 class="w3-text-blue">{{ isset($article) ? 'Edycja arta ID: ' . $article->id :  __('article.add') }}</h2>
             <form method="POST" action="{{ isset($article) ? route('article.update', $article->id) : route('article.store') }}">
                 @csrf
-                <input type="hidden" name="article_uuid" value="{{ old('article_uuid', $article->article_uuid ?? (string) Str::uuid()) }}">
+                <input type="hidden" id="article_uuid" name="article_uuid" value="{{ old('article_uuid', $article->article_uuid ?? (string) Str::uuid()) }}">
 
             <label class="w3-text-grey"><b>{{ __('article.create-form.title') }}</b></label>
             <input class="w3-input w3-border w3-round w3-margin-bottom"

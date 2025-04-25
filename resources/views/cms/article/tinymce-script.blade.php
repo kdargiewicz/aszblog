@@ -12,6 +12,9 @@
         images_upload_credentials: true,
         automatic_uploads: true,
         file_picker_types: 'image',
+        relative_urls: false,
+        remove_script_host: false,
+        convert_urls: false,
         images_upload_handler: function (blobInfo, progress) {
             return new Promise(function (resolve, reject) {
                 const xhr = new XMLHttpRequest();
@@ -42,6 +45,11 @@
 
                 const formData = new FormData();
                 formData.append('file', blobInfo.blob(), blobInfo.filename());
+                const articleUuid = document.getElementById('article_uuid')?.value;
+                if (articleUuid) {
+                    formData.append('article_uuid', articleUuid);
+                }
+                formData.append('type', 'article');
 
                 xhr.send(formData);
             });

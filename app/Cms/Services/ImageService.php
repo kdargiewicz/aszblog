@@ -21,7 +21,8 @@ class ImageService
         $this->manager = new ImageManager(new Driver());
     }
 
-    public function saveImageVersions(UploadedFile $file, int $userId, string $folder = 'articles'): array
+//    public function saveImageVersions(UploadedFile $file, int $userId, string $folder = 'articles'): array
+    public function saveImageVersions(UploadedFile $file, int $userId, string $folder, string $typeImage = 'other', $uuid = null): array
     {
         $basePath = $userId . "/images/{$folder}";
 
@@ -39,12 +40,29 @@ class ImageService
 
         $exif = [];
 
-        try {
-            $rawExif = $this->manager->read($file)->exif();
+        $path = $file->getRealPath();
+        if ($path && function_exists('exif_read_data')) {
+            $rawExif = @exif_read_data($path);
             $exif = is_array($rawExif) ? $this->sanitizeExif($rawExif) : [];
-        } catch (\Throwable $e) {
-            logger()->warning('Błąd odczytu EXIF', ['msg' => $e->getMessage()]);
         }
+
+        //DB::table('system_debug')->insert(['json_data' => serialize($exif)]);//json_encode($exif, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
+       // dd(gettype($exif), $exif);
+
+        if (!empty($exif)) {
+           // dump($exif);
+            DB::table('system_debug')->insert([
+                'json_data' => json_encode($exif, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            ]);
+           // dd($exif);
+        }
+
+//        try {
+//            $rawExif = $this->manager->read($file)->exif();
+//            $exif = is_array($rawExif) ? $this->sanitizeExif($rawExif) : [];
+//        } catch (\Throwable $e) {
+//            logger()->warning('Błąd odczytu EXIF', ['msg' => $e->getMessage()]);
+//        }
 
         $rawImage = $this->manager->read($file)->scale(width: 5120);
         Storage::put($rawPath, (string) $rawImage->encode());
@@ -55,14 +73,19 @@ class ImageService
         $minImage = $this->manager->read($file)->scale(width: 400);
         Storage::put($minPath, (string) $minImage->encode());
 
+
+
+
         $dto = new ImageDTO(
             user_id: $userId,
             article_id: null,
+            article_uuid: $uuid,
             original_name: $originalName,
             stored_name: $filename,
             url: Storage::url($maxPath),
             exif: $exif,
-            extension: $extension
+            extension: $extension,
+            type: $typeImage,
         );
 
         $this->repository->store($dto);
@@ -74,22 +97,81 @@ class ImageService
         ];
     }
 
-    private function sanitizeExif(array $exif): array
+//    private function sanitizeExif(array $exif): array
+//    {
+//        return array_map(function ($value) {
+//            if (is_scalar($value) || is_null($value)) {
+//                return $value;
+//            }
+//
+//            if (is_array($value)) {
+//                return $this->sanitizeExif($value);
+//            }
+//
+//            return is_object($value) && method_exists($value, '__toString')
+//                ? (string)$value
+//                : gettype($value);
+//        }, $exif);
+//    }
+
+
+    //tu rozkminka exif mozna to dac do helperaExif:
+
+    protected function sanitizeExif(array $exif): array
     {
-        return array_map(function ($value) {
-            if (is_scalar($value) || is_null($value)) {
-                return $value;
-            }
-
-            if (is_array($value)) {
-                return $this->sanitizeExif($value);
-            }
-
-            return is_object($value) && method_exists($value, '__toString')
-                ? (string)$value
-                : gettype($value);
-        }, $exif);
+        return [
+            'camera_make'        => $exif['Make'] ?? null,
+            'camera_model'       => $exif['Model'] ?? null,
+            'aperture_value'     => $exif['ApertureValue'] ?? null,
+            'f_number'           => $exif['FNumber'] ?? null,
+            'exposure_time'      => $exif['ExposureTime'] ?? null,
+            'iso'                => $exif['ISOSpeedRatings'] ?? null,
+            'focal_length'       => $exif['FocalLength'] ?? null,
+            'date_taken'         => $exif['DateTimeOriginal'] ?? null,
+            'gps_latitude'       => $this->extractGps($exif, 'GPSLatitude', 'GPSLatitudeRef'),
+            'gps_longitude'      => $this->extractGps($exif, 'GPSLongitude', 'GPSLongitudeRef'),
+        ];
     }
+
+
+    protected function extractGps(array $exif, string $coordKey, string $refKey): ?float
+    {
+        if (!isset($exif[$coordKey], $exif[$refKey])) {
+            return null;
+        }
+
+        $coord = $exif[$coordKey];
+        $ref = $exif[$refKey];
+
+        $degrees = $this->gpsToFloat($coord);
+        if ($degrees === null) {
+            return null;
+        }
+
+        return in_array($ref, ['S', 'W']) ? -$degrees : $degrees;
+    }
+
+    protected function gpsToFloat(array $coord): ?float
+    {
+        if (count($coord) !== 3) {
+            return null;
+        }
+
+        list($deg, $min, $sec) = $coord;
+
+        return $this->parseExifRational($deg) + ($this->parseExifRational($min) / 60) + ($this->parseExifRational($sec) / 3600);
+    }
+
+    protected function parseExifRational($value): float
+    {
+        if (is_string($value) && str_contains($value, '/')) {
+            [$numerator, $denominator] = explode('/', $value);
+            return (float) $numerator / max((float) $denominator, 1);
+        }
+
+        return (float) $value;
+    }
+
 
 }
 

@@ -3,6 +3,7 @@
 namespace App\Cms\Controllers;
 
 use App\Cms\Repositories\ArticleRepository;
+use App\Cms\Repositories\ImageRepository;
 use App\Cms\Requests\ArticleRequest;
 use App\Cms\Services\CategoryTagResolverService;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    protected ImageRepository $imageRepository;
+
+    public function __construct(ImageRepository $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
     public function getCreateArticle(): object
     {
         $categories = Category::where('user_id', Auth::id())->get();
@@ -47,6 +54,7 @@ class ArticleController extends Controller
                 $categoryId = $categoryTagResolver->resolveCategoryId($dto->category, $userId);
                 $tagIds = $categoryTagResolver->resolveTagIds($dto->tags, $userId);
                 $articleRepository->update($article, $dto, $categoryId, $tagIds);
+                $this->imageRepository->assignArticleIdByUuid($article->getArticleUuid(), $article->getArticleId(), $userId);
 
                 return redirect()
                     ->route('article.edit', $article->article_uuid)
@@ -65,7 +73,6 @@ class ArticleController extends Controller
             ->with('error', __('flash-messages.article-update-error'));
     }
 
-
     public function postStoreArticle(ArticleRequest $request, ArticleRepository $articleRepository, CategoryTagResolverService $categoryTagResolver): object
     {
         try {
@@ -75,9 +82,10 @@ class ArticleController extends Controller
             $categoryId = $categoryTagResolver->resolveCategoryId($dto->category, $userId);
             $tagIds = $categoryTagResolver->resolveTagIds($dto->tags, $userId);
             $article = $articleRepository->store($dto, $categoryId, $tagIds, $userId);
+            $this->imageRepository->assignArticleIdByUuid($article->getArticleUuid(), $article->getArticleId(), $userId);
 
             return redirect()
-                ->route('article.edit', $article->article_uuid)
+                ->route('article.edit', $article->getArticleUuid())
                 ->with([
                     'success' => __('flash-messages.article-store-success'),
                 ]);

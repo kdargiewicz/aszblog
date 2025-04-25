@@ -22,4 +22,15 @@ class Article extends Model
     protected $casts = [
         'tags_id' => 'array',
     ];
+
+    public function getArticleId(): int
+    {
+        return $this->getAttribute('id');
+    }
+
+    public function getArticleUuid(): string
+    {
+        return $this->getAttribute('article_uuid');
+    }
+
 }
