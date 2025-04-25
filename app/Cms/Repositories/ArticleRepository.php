@@ -30,7 +30,7 @@ class ArticleRepository
         return $article;
     }
 
-    public function update(Article $article, ArticleDTO $dto, int $categoryId, array $tagIds): void
+    public function update(Article $article, ArticleDTO $dto, ?int $categoryId, array $tagIds): void
     {
         $article->update([
             'title'          => $dto->title,
