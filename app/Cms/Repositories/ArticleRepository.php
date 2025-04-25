@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleRepository
 {
-    public function store(ArticleDTO $dto, int $categoryId, array $tagIds, int $userId): Article
+    public function store(ArticleDTO $dto, ?int $categoryId, array $tagIds, int $userId): Article
     {
         $article = Article::firstOrCreate([
             'article_uuid' => $dto->article_uuid,

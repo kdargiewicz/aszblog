@@ -20,7 +20,7 @@
                 <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
                 <div class="w3-right">
 {{--                    <h3>99</h3>--}}
-                    <h3>{{ $visitCounter }}</h3>
+                    <h3>@if(isset($visitCounter)){{ $visitCounter }} @else 0 @endif</h3>
                 </div>
                 <div class="w3-clear"></div>
                 <h4>Views</h4>
