@@ -3,6 +3,7 @@
 namespace App\Cms\Repositories;
 
 use App\Cms\DTO\ImageDTO;
+use App\Constants\Constants;
 use Illuminate\Support\Facades\DB;
 use App\Cms\Models\Image;
 
@@ -30,6 +31,13 @@ class ImageRepository
         Image::where('article_uuid', $uuid)
             ->where('user_id', $userId)
             ->update(['article_id' => $articleId]);
+    }
+
+    public function deleteArticleImages($articleId, $userId)
+    {
+        return Image::where('article_id', $articleId)
+                ->where('user_id', $userId)
+                ->update(['deleted' => Constants::DELETED]);
     }
 
 }

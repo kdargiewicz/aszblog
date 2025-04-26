@@ -125,6 +125,9 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 //    Route::get('/editArticle', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
 
+    Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
+
+
 
     //testy errorow
     Route::get('/test-error-500', function () {

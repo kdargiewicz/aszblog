@@ -6,6 +6,7 @@ return [
     'error' => 'Lista błędów',
     'error_detail' => 'Szczegóły błędu',
     'error_back_to_list' => 'Powrót do listy',
+    'empty_list' => 'Brak artykułów',
 
     'create-form' => [
         'title' => 'Tytuł',
@@ -33,5 +34,10 @@ return [
         'not-published' => 'Nie publikowany',
         'article-edit' => 'Edytuj artykuł',
         'article-preview' => 'Podgląd artykułu',
+        'article-delete' => 'Usuń artykuł',
+        'confirm-delete-title' => 'Potwierdź usunięcie artykułu',
+        'confirm-delete-message' => 'Artykuł zostanie usunięty z listy ale dalej będzie opcja jego przywrócenia - w tym celu skontaktuj się z administratorem',
+        'confirm' => 'Usuń artykuł',
+        'cancel' => 'Anuluj i wróć do listy',
     ]
 ];

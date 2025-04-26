@@ -35,8 +35,9 @@
                     @endforeach
                 </div>
                 <div class="w3-center w3-margin-top">
-                    @include('pagination')
+                    @include('pagination', ['paginator' => $errors])
                 </div>
+
             </div>
         </div>
     </div>

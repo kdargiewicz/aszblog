@@ -6,6 +6,7 @@ use App\Cms\CmsHelper;
 use App\Cms\DTO\ArticleDTO;
 use App\Cms\Models\Article;
 use App\Cms\Models\Tag;
+use App\Constants\Constants;
 use Illuminate\Support\Facades\DB;
 
 class ArticleRepository
@@ -46,15 +47,21 @@ class ArticleRepository
     public function getArticleList(int $userId)
     {
         $articles = DB::table('articles')
-            ->join('categories', 'articles.category_id', '=', 'categories.id')
+            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.user_id', $userId)
+            ->where('articles.deleted', Constants::NOT_DELETED)
             ->select('articles.*', 'categories.name as category_name')
-            ->paginate(config('blog.article_list.pagination', 10));
+            ->paginate(config('blog.article_list.pagination'));
 
         $tags = app(Tag::class)->getTagsNameForUserId($userId);
         $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);
 
         return $articlesWithTagNames;
+    }
+
+    public function deleteArticle($articleId, $userId): int
+    {
+        return DB::table('articles')->where('user_id', $userId)->where('id', $articleId)->update(['deleted' => Constants::DELETED]);
     }
 
 }

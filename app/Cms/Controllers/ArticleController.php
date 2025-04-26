@@ -14,6 +14,7 @@ use App\Cms\Models\Article;
 use App\Cms\Models\Category;
 
 use Illuminate\Support\Facades\DB;
+use JetBrains\PhpStorm\NoReturn;
 
 class ArticleController extends Controller
 {
@@ -110,6 +111,19 @@ class ArticleController extends Controller
         $articleList = app(ArticleRepository::class)->getArticleList(Auth::id());
 
         return view('cms.article.list', compact('articleList'));
+    }
+
+    public function postArticleDelete($articleId)
+    {
+        app(ArticleRepository::class)->deleteArticle($articleId, Auth::id());
+        app(ImageRepository::class)->deleteArticleImages($articleId, Auth::id());
+
+        return redirect()
+            ->route('article.list') // lub inna nazwa Twojej trasy do listy artykułów
+            ->with('success', __('flash-messages.article-delete'));
+
+
+//        return $this->getArticleList()->with('success', __('flash-messages.article-delete'));
     }
 }
 

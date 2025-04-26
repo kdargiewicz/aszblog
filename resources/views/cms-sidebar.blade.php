@@ -19,7 +19,7 @@
 
     <div class="w3-container">
         <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
-        
+
     </div>
 
     <div class="w3-bar-block">

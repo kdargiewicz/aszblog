@@ -31,6 +31,13 @@
                         <a href="" target="_blank" class="w3-button w3-light-grey w3-small">
                             {{ __('article.article_action.article-preview') }}
                         </a>
+
+                        <button
+                            onclick="openDeleteModal('{{ route('article.delete', $article->id) }}')"
+                            class="w3-button w3-red w3-small">
+                            {{ __('article.article_action.article-delete') }}
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -39,10 +46,23 @@
                 <p>{{ __('article.empty_list') }}</p>
             </div>
         @endforelse
-        {{-- Paginacja --}}
         <div class="w3-center w3-margin-top w3-margin-bottom">
-            {{ $articleList->links() }}
+            @include('pagination', ['paginator' => $articleList])
         </div>
     </div>
+
+    @include('cms.modals.article-delete-modal')
+
+    <script>
+        function openDeleteModal(url) {
+            const modal = document.getElementById('deleteModal');
+            const form = document.getElementById('deleteForm');
+            form.action = url;
+            modal.style.display = 'block';
+        }
+    </script>
+
+
+
 @endsection
 
