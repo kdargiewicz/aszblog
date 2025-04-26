@@ -3,6 +3,9 @@
 return [
     'add' => 'Dodaj artykuł',
     'list' => 'Lista artykułów',
+    'error' => 'Lista błędów',
+    'error_detail' => 'Szczegóły błędu',
+    'error_back_to_list' => 'Powrót do listy',
 
     'create-form' => [
         'title' => 'Tytuł',

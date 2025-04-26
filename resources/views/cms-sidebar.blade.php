@@ -19,11 +19,7 @@
 
     <div class="w3-container">
         <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
-
-
-{{--        <a href="{{ route('/') }}" class="w3-bar-item">--}}
-{{--            <h5>BLOG-zoba go :P</h5>--}}
-{{--        </a>--}}
+        
     </div>
 
     <div class="w3-bar-block">
@@ -40,6 +36,11 @@
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+        @if(Auth::user()->is_admin)
+            <a href="{{ route('errors.log') }}" class="w3-bar-item w3-button w3-padding w3-text-red">
+                <i class="fa fa-exclamation-triangle"></i>  Error_log
+            </a>
+        @endif
     </div>
 </nav>

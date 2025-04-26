@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\PostTooLargeException;
+use App\Cms\Repositories\ErrorsRepository;
 
 //tutaj daje routy do zliczania odwiedzin na blogu bez auth
 //Route::middleware(LogVisitMiddleware::class)->group(function () {
@@ -77,6 +78,38 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
             'visitCounter' => $tracker->getCountAllVisit(),
         ]);
     })->name('dashboard');
+
+//    Route::get('/errors-log', function (\App\Cms\Repositories\ErrorsRepository $errors) {
+//        return view('cms.errors-log', [
+//            'errors' => $errors->getErrors(),
+//        ]);
+//    })->middleware(['admin', \App\Http\Middleware\AdminMiddleware::class])->name('errors.log');
+//
+//    Route::get('/error/{id}', function ($id, \App\Cms\Repositories\ErrorsRepository $errors) {
+//        return view('cms.errors-log', [
+//            'errors' => $errors->getErrorById($id),
+//        ]);
+//    })->middleware(['auth', 'admin'])->name('error.show');
+
+    // LISTA błędów
+    Route::get('/errors', function (ErrorsRepository $errors) {
+        return view('cms.errors-log', [
+            'errors' => $errors->getErrors(), // tutaj kolekcja błędów
+        ]);
+    })->middleware(['auth', 'admin'])->name('errors.log');
+
+// SZCZEGÓŁY pojedynczego błędu
+    Route::get('/error/{id}', function ($id, ErrorsRepository $errors) {
+        $error = $errors->getErrorById($id);
+
+        if (!$error) {
+            abort(404);
+        }
+
+        return view('cms.error-details', [
+            'error' => $error, // pojedynczy błąd
+        ]);
+    })->middleware(['auth', 'admin'])->name('error.show');
 
 
     Route::get('/cms/image/test', [ImageController::class, 'form'])->name('image.form');
