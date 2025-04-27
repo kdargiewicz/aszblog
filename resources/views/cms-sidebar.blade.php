@@ -1,7 +1,22 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;position:fixed;top:43px;bottom:0;overflow-y:auto" id="mySidebar"><br>
     <div class="w3-container w3-row">
         <div class="w3-col s4">
-            <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+
+            @if(!empty($userAvatar))
+                <img src="{{ asset($userAvatar) }}"
+                     class="w3-circle w3-margin-right"
+                     style="width:90px; height:90px; object-fit: cover;"
+                     alt="Avatar">
+            @else
+                <img src="https://www.w3schools.com/w3images/avatar2.png"
+                     class="w3-circle w3-margin-right"
+                     style="width:90px; height:90px; object-fit: cover;"
+                     alt="Default Avatar">
+            @endif
+
+
+
+            {{--            <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">--}}
         </div>
         <div class="w3-col s8 w3-bar">
             <span>Welcome, <strong>{{ Auth::user()->name }}</strong></span><br>
@@ -37,11 +52,13 @@
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+        <a href="{{ route('user.settings') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
         @if(Auth::user()->is_admin)
             <a href="{{ route('errors.log') }}" class="w3-bar-item w3-button w3-padding w3-text-red">
                 <i class="fa fa-exclamation-triangle"></i>  Error_log
             </a>
+            <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>
+            <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>
         @endif
     </div>
 </nav>

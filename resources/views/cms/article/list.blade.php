@@ -28,7 +28,7 @@
                             {{ __('article.article_action.article-edit') }}
                         </a>
 {{--                        <a href="{{ route('article.show', $article->id) }}" target="_blank" class="w3-button w3-light-grey w3-small">--}}
-                        <a href="" target="_blank" class="w3-button w3-light-grey w3-small">
+                        <a href="{{ route('article.preview', $article->id) }}" target="_blank" class="w3-button w3-light-grey w3-small">
                             {{ __('article.article_action.article-preview') }}
                         </a>
 

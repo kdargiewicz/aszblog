@@ -146,6 +146,15 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
     Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');
+
+    //podglad wersji bloga
+    Route::get('/preview/{name}', [\App\Web\Controllers\PreviewController::class, 'getPreviewBlogByBlogName'])->name('first.blog.preview');
+    Route::get('/article-preview/{articleId}', [\App\Web\Controllers\PreviewController::class, 'getPreviewArticle'])->name('article.preview');
+
+    //settings
+    Route::get('/settings', [\App\Cms\Controllers\SettingsController::class, 'getSettings'])->name('user.settings');
+    Route::post('/store-settings', [\App\Cms\Controllers\SettingsController::class, 'postStoreSettings'])->name('user_settings.store');
+    Route::post('/update-settings{settingsId}', [\App\Cms\Controllers\SettingsController::class, 'postUpdateSettings'])->name('user_settings.update');
 });
 
 
