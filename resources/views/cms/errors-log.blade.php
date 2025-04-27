@@ -14,13 +14,10 @@
                         <div class="w3-col l2"><b>File</b></div>
                         <div class="w3-col l1"><b>Line</b></div>
                         <div class="w3-col l1"><b>Created</b></div>
+                        <div class="w3-col l1"><b>Action</b></div>
                     </div>
-
                     @foreach($errors as $error)
-                        <a href="{{ route('error.show', $error->id) }}"
-                           class="w3-row w3-border-bottom w3-padding w3-hover-light-grey"
-                           style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
-
+                        <div class="w3-row w3-border-bottom w3-padding">
                             <div class="w3-col l1">{{ $error->id }}</div>
                             <div class="w3-col l1">{{ $error->level }}</div>
                             <div class="w3-col l1">{{ $error->code ?? '-' }}</div>
@@ -31,7 +28,14 @@
                             <div class="w3-col l1 w3-tiny">
                                 {{ $error->created_at ? \Illuminate\Support\Carbon::make($error->created_at)?->format('Y-m-d') : '-' }}
                             </div>
-                        </a>
+
+                            {{-- Nowy button --}}
+                            <div class="w3-col l12 w3-margin-top">
+                                <a href="{{ route('error.show', $error->id) }}" class="w3-button w3-blue w3-small w3-round">
+                                    {{ __('article.show_details') }}
+                                </a>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
                 <div class="w3-center w3-margin-top">
