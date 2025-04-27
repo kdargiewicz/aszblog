@@ -125,7 +125,7 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 //    Route::get('/editArticle', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
 
-    Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
+    Route::post('/restore/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.Restore');
 
 
 
@@ -149,6 +149,12 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
 
     Route::get('/articleList', [\App\Cms\Controllers\ArticleController::class, 'getArticleList'])->name('article.list');
+
+    Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.delete');
+
+
+
+    Route::post('/articleRestore', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
 
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
     Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');

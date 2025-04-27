@@ -40,5 +40,12 @@ class ImageRepository
                 ->update(['deleted' => Constants::DELETED]);
     }
 
+    public function restoreArticleImages($articleId, $userId)
+    {
+        return Image::where('article_id', $articleId)
+            ->where('user_id', $userId)
+            ->update(['deleted' => Constants::NOT_DELETED]);
+    }
+
 }
 

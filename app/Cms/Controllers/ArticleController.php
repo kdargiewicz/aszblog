@@ -113,17 +113,32 @@ class ArticleController extends Controller
         return view('cms.article.list', compact('articleList'));
     }
 
-    public function postArticleDelete($articleId)
+    public function getDeleteArticleList(): object
+    {
+        $deleteArticleList = app(ArticleRepository::class)->getDeleteArticleList(Auth::id());
+
+        return view('cms.article.delete-article-list', compact('deleteArticleList'));
+    }
+
+
+    public function postArticleDelete($articleId): \Illuminate\Http\RedirectResponse
     {
         app(ArticleRepository::class)->deleteArticle($articleId, Auth::id());
         app(ImageRepository::class)->deleteArticleImages($articleId, Auth::id());
 
         return redirect()
-            ->route('article.list') // lub inna nazwa Twojej trasy do listy artykułów
+            ->route('article.list')
             ->with('success', __('flash-messages.article-delete'));
+    }
 
-
-//        return $this->getArticleList()->with('success', __('flash-messages.article-delete'));
+    public function postArticleRestore($articleId): \Illuminate\Http\RedirectResponse
+    { dd($articleId);
+//        app(ArticleRepository::class)->restoreArticle($articleId, Auth::id());
+//        app(ImageRepository::class)->restoreArticleImages($articleId, Auth::id());
+//
+//        return redirect()
+//            ->route('article.list')
+//            ->with('success', __('flash-messages.article-restore'));
     }
 }
 

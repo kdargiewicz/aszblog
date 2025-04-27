@@ -39,5 +39,6 @@ return [
         'confirm-delete-message' => 'Artykuł zostanie usunięty z listy ale dalej będzie opcja jego przywrócenia - w tym celu skontaktuj się z administratorem',
         'confirm' => 'Usuń artykuł',
         'cancel' => 'Anuluj i wróć do listy',
+        'restore' => 'Przywróć artykuł',
     ]
 ];

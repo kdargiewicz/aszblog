@@ -16,16 +16,16 @@ class ArticleRepository
         $article = Article::firstOrCreate([
             'article_uuid' => $dto->article_uuid,
         ], [
-            'user_id'        => $userId,
-            'title'          => $dto->title,
-            'category_id'    => $categoryId,
-            'tags_id'        => $tagIds,
-            'latitude'       => $dto->latitude,
-            'longitude'      => $dto->longitude,
-            'content'        => $dto->content,
+            'user_id' => $userId,
+            'title' => $dto->title,
+            'category_id' => $categoryId,
+            'tags_id' => $tagIds,
+            'latitude' => $dto->latitude,
+            'longitude' => $dto->longitude,
+            'content' => $dto->content,
             'allow_comments' => $dto->allow_comments,
-            'created_at'     => now(),
-            'updated_at'     => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return $article;
@@ -34,12 +34,12 @@ class ArticleRepository
     public function update(Article $article, ArticleDTO $dto, ?int $categoryId, array $tagIds): void
     {
         $article->update([
-            'title'          => $dto->title,
-            'category_id'    => $categoryId,
-            'tags_id'        => $tagIds,
-            'latitude'       => $dto->latitude,
-            'longitude'      => $dto->longitude,
-            'content'        => $dto->content,
+            'title' => $dto->title,
+            'category_id' => $categoryId,
+            'tags_id' => $tagIds,
+            'latitude' => $dto->latitude,
+            'longitude' => $dto->longitude,
+            'content' => $dto->content,
             'allow_comments' => $dto->allow_comments,
         ]);
     }
@@ -62,6 +62,19 @@ class ArticleRepository
     public function deleteArticle($articleId, $userId): int
     {
         return DB::table('articles')->where('user_id', $userId)->where('id', $articleId)->update(['deleted' => Constants::DELETED]);
+    }
+
+    public function getDeleteArticleList(int $userId): \Illuminate\Pagination\LengthAwarePaginator
+    {
+        return DB::table('articles')
+            ->where('user_id', $userId)
+            ->where('deleted', Constants::DELETED)
+            ->paginate(config('blog.article_list.pagination'));
+    }
+
+    public function restoreArticle(int $articleId, $userId): int
+    {
+        return DB::table('articles')->where('user_id', $userId)->where('id', $articleId)->update(['deleted' => Constants::NOT_DELETED]);
     }
 
 }
