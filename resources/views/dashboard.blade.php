@@ -1,10 +1,7 @@
 @extends('cms-main')
 @section('content')
-    <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
-    </header>
 
-    <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-row-padding w3-margin-bottom" style="padding-top:22px">
         <div class="w3-quarter">
             <div class="w3-container w3-red w3-padding-16">
                 <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
@@ -23,7 +20,7 @@
                     <h3>@if(isset($visitCounter)){{ $visitCounter }} @else 0 @endif</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Views</h4>
+                <h4>liczba wszystkich odwiedzin, klikniej zeby szczegoly ogarnac</h4>
             </div>
         </div>
         <div class="w3-quarter">
@@ -33,7 +30,7 @@
                     <h3>23</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Shares</h4>
+                <h4>liczba komentarzy</h4>
             </div>
         </div>
         <div class="w3-quarter">
@@ -43,7 +40,7 @@
                     <h3>50</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h4>Users</h4>
+                <h4>chuj wie</h4>
             </div>
         </div>
     </div>
