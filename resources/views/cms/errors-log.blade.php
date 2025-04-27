@@ -1,4 +1,3 @@
-@ -0,0 +1,43 @@
 @extends('cms-main')
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
