@@ -14,7 +14,6 @@ use App\Cms\Models\Article;
 use App\Cms\Models\Category;
 
 use Illuminate\Support\Facades\DB;
-use JetBrains\PhpStorm\NoReturn;
 
 class ArticleController extends Controller
 {
@@ -120,7 +119,6 @@ class ArticleController extends Controller
         return view('cms.article.delete-article-list', compact('deleteArticleList'));
     }
 
-
     public function postArticleDelete($articleId): \Illuminate\Http\RedirectResponse
     {
         app(ArticleRepository::class)->deleteArticle($articleId, Auth::id());
@@ -132,13 +130,13 @@ class ArticleController extends Controller
     }
 
     public function postArticleRestore($articleId): \Illuminate\Http\RedirectResponse
-    { dd($articleId);
-//        app(ArticleRepository::class)->restoreArticle($articleId, Auth::id());
-//        app(ImageRepository::class)->restoreArticleImages($articleId, Auth::id());
-//
-//        return redirect()
-//            ->route('article.list')
-//            ->with('success', __('flash-messages.article-restore'));
+    {
+        app(ArticleRepository::class)->restoreArticle($articleId, Auth::id());
+        app(ImageRepository::class)->restoreArticleImages($articleId, Auth::id());
+
+        return redirect()
+            ->route('article.list')
+            ->with('success', __('flash-messages.article-restore'));
     }
 }
 

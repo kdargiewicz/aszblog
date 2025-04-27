@@ -79,17 +79,6 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
         ]);
     })->name('dashboard');
 
-//    Route::get('/errors-log', function (\App\Cms\Repositories\ErrorsRepository $errors) {
-//        return view('cms.errors-log', [
-//            'errors' => $errors->getErrors(),
-//        ]);
-//    })->middleware(['admin', \App\Http\Middleware\AdminMiddleware::class])->name('errors.log');
-//
-//    Route::get('/error/{id}', function ($id, \App\Cms\Repositories\ErrorsRepository $errors) {
-//        return view('cms.errors-log', [
-//            'errors' => $errors->getErrorById($id),
-//        ]);
-//    })->middleware(['auth', 'admin'])->name('error.show');
 
     // LISTA błędów
     Route::get('/errors', function (ErrorsRepository $errors) {
@@ -107,7 +96,7 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
         }
 
         return view('cms.error-details', [
-            'error' => $error, // pojedynczy błąd
+            'error' => $error,
         ]);
     })->middleware(['auth', 'admin'])->name('error.show');
 
@@ -122,12 +111,9 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
     Route::post('/storeArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreArticle'])->name('article.store');
 
     //tu jakiej id trzeba przekazac niejawnie?
-//    Route::get('/editArticle', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
 
-    Route::post('/restore/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.Restore');
-
-
+    Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
 
     //testy errorow
     Route::get('/test-error-500', function () {
@@ -150,11 +136,13 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
 
     Route::get('/articleList', [\App\Cms\Controllers\ArticleController::class, 'getArticleList'])->name('article.list');
 
-    Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.delete');
+    Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.list.delete');
 
 
 
-    Route::post('/articleRestore', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
+
+    Route::post('/articleRestore/{articleId}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
+
 
     Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
     Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');
