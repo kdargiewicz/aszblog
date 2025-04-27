@@ -8,7 +8,7 @@
             @csrf
 
             {{-- Avatar --}}
-            <label class="w3-text-grey"><b>{{ __('settings.user_settings.avatar') }}</b></label>
+            <label class="w3-text-grey"><b>@if(!empty($settings->avatar)) {{ __('settings.user_settings.current_avatar') }} @else {{ __('settings.user_settings.avatar') }} @endif</b></label>
             @if(!empty($settings->avatar))
                 <div class="w3-margin-bottom">
                     <img src="{{ asset($settings->avatar) }}"

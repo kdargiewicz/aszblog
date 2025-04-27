@@ -5,6 +5,7 @@ return [
         'add' => 'Ustawienia bloga',
         'edit' => 'Edytuj ustawienia bloga',
         'avatar' => 'Wybierz avatar',
+        'current_avatar' => 'Twój obecny avatar',
         'main_image' => 'Wybierz główne zdjęcia bloga',
         'about_me' => 'opis: O mnie',
         'my_motto' => 'Motto...',
