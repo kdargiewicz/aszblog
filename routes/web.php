@@ -76,6 +76,7 @@ Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
         return view('dashboard', [
             'visitCounter' => $tracker->getCountAllVisit(),
+            'articleCounter' => app(\App\Cms\Repositories\ArticleRepository::class)->getCountArticleFromUser(),
         ]);
     })->name('dashboard');
 

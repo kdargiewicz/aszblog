@@ -77,4 +77,9 @@ class ArticleRepository
         return DB::table('articles')->where('user_id', $userId)->where('id', $articleId)->update(['deleted' => Constants::NOT_DELETED]);
     }
 
+    public function getCountArticleFromUser(): int
+    {
+        return DB::table('articles')->where('user_id', auth()->id())->count();
+    }
+
 }
