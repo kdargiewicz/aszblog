@@ -40,7 +40,7 @@
         <img class="w3-image" src="https://www.w3schools.com/w3images/hamburger.jpg" alt="Hamburger Catering" width="1600" height="800">
     @endif
     <div class="w3-display-bottomleft w3-padding-large w3-opacity">
-        <h1 class="w3-xxlarge">Le Catering</h1>
+        <h1 class="w3-xxlarge">ASZBLOG</h1>
     </div>
 </header>
 
