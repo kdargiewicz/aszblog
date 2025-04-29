@@ -12,16 +12,15 @@ class PreviewController extends Controller
         return view('web.template.' . $name . '.main');
     }
 
-    public function getPreviewArticle($articleId): object
+    public function getPreviewArticle(int $articleId): object
     {
+        $blogSettings = app(UserSetting::class)->getBlogOwnerSettings();
 
-        $userSettings = app(UserSetting::class)->getUserSettings(auth()->id());
-
-        $blogTemplate = $userSettings->blog_template;
-
-        if (!$blogTemplate) {
+        if (!$blogSettings || !$blogSettings->blog_template) {
             return back()->with('error', __('flash-messages.error.no_blog_template_settings'));
         }
+
+        $blogTemplate = $blogSettings->blog_template;
 
         return view('web.template.' . $blogTemplate . '.main');
     }
