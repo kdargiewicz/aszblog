@@ -23,6 +23,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($data, $request->filled('remember'))) {
             $request->session()->regenerate();
+
+            if (!Auth::user()->hasVerifiedEmail()) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => __('Musisz potwierdzić swój adres e-mail przed zalogowaniem.'),
+                ])->withInput();
+            }
+
             return redirect()->intended('/dashboard');
         }
 

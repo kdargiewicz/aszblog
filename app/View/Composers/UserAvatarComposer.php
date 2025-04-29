@@ -10,11 +10,11 @@ class UserAvatarComposer
 {
     public function compose(View $view): void
     {
-        $user = Auth::user();
+        $userId = auth()->id();
         $avatar = null;
-        $settings = app(UserSetting::class)->getUserSettings($user->id);
+        $settings = app(UserSetting::class)->getUserSettings($userId);
 
-        if ($user && $settings) {
+        if ($userId && $settings) {
             $avatar = $settings->avatar;
         }
 

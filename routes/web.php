@@ -10,12 +10,10 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\LogVisitMiddleware;
+use App\Http\Middleware\ForcePasswordChangeMiddleware;
 
 //test error
-use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Cms\Repositories\ErrorsRepository;
 
 //tutaj daje routy do zliczania odwiedzin na blogu bez auth
@@ -71,7 +69,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 //Route::middleware(['auth', 'verified'])->group(function () { /// ----->> TEN ROUTE DAJ BO TYM NIZEJ MIERZE ODWIEDZINY A TO WYZEJ MAM MIERZYC ODWIEDZINY
-Route::middleware(['auth', LogVisitMiddleware::class])->group(function () {
+Route::middleware(['auth', ForcePasswordChangeMiddleware::class, LogVisitMiddleware::class])->group(function () {
 
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
         return view('dashboard', [
