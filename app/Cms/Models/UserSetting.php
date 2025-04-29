@@ -41,4 +41,17 @@ class UserSetting extends Model
             ->where('user_id', $userId)
             ->first();
     }
+
+    public function isBlogOwner($userId): bool
+    {
+        $userBlogOwnerId = DB::table('settings')
+            ->where('key', 'blog_owner_user_id')
+            ->value('value');
+
+        if ($userId == $userBlogOwnerId){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

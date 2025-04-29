@@ -11,8 +11,11 @@ class SettingsController extends Controller
     public function getSettings(): object
     {
         $settings = app(UserSetting::class)->getUserSettings(auth()->id());
+        $isBlogOwner = app(UserSetting::class)->isBlogOwner(auth()->id());
 
-        return view('cms.settings.main')->with('settings', $settings);
+        return view('cms.settings.main')
+            ->with('settings', $settings)
+            ->with('isBlogOwner', $isBlogOwner);
     }
 
     public function postStoreSettings(UserSettingsRequest $request)

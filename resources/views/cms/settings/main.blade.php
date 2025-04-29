@@ -21,7 +21,7 @@
                    name="avatar"
                    accept="image/*">
 
-            @if($blogSettings)
+            @if($isBlogOwner)
                 {{-- Main Image --}}
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.main_image') }}</b></label>
 

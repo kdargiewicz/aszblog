@@ -11,7 +11,7 @@ class SettingsTableSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'key' => 'blog_owner_user_id',
-            'value' => 1, // <-- tutaj ID użytkownika będącego właścicielem bloga
+            'value' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
