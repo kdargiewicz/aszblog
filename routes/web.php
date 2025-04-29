@@ -34,7 +34,9 @@ use App\Cms\Repositories\ErrorsRepository;
 
 Route::get('/email/verify', [VerificationController::class, 'show'])
     ->middleware('auth')
-    ->name('verification.show');
+    //->name('verification.show');
+    ->name('verification.notice');
+
 
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
     ->middleware(['auth', 'signed'])
@@ -67,9 +69,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 //Route::middleware(['auth', 'verified'])->group(function () { /// ----->> TEN ROUTE DAJ BO TYM NIZEJ MIERZE ODWIEDZINY A TO WYZEJ MAM MIERZYC ODWIEDZINY
-Route::middleware(['auth', ForcePasswordChangeMiddleware::class, LogVisitMiddleware::class])->group(function () {
+Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, LogVisitMiddleware::class])->group(function () {
 
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
         return view('dashboard', [
