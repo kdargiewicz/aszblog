@@ -2,6 +2,7 @@
 
 namespace App\Web\Controllers;
 
+use App\Cms\Models\Article;
 use App\Cms\Models\UserSetting;
 use App\Http\Controllers\Controller;
 
@@ -22,6 +23,8 @@ class PreviewController extends Controller
 
         $blogTemplate = $blogSettings->blog_template;
 
-        return view('web.template.' . $blogTemplate . '.main');
+        $article = app(Article::class)->getByArticleId($articleId);
+
+        return view('web.template.' . $blogTemplate . '/preview/article')->with('article', $article);
     }
 }

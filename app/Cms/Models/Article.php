@@ -3,6 +3,7 @@
 namespace App\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
@@ -31,6 +32,11 @@ class Article extends Model
     public function getArticleUuid(): string
     {
         return $this->getAttribute('article_uuid');
+    }
+
+    public function getByArticleId(int $articleId): object
+    {
+        return DB::table($this->table)->where('id', $articleId)->first();
     }
 
 }

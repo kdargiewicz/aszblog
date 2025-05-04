@@ -9,6 +9,7 @@ return [
     'try_again_later' => 'Spróbuj później odwiedzić ten zasób',
     '404_error' => 'Serwer działa, ale żądany zasób (strona, plik) nie został znaleziony.',
     '403_error' => 'Serwer rozumie Twoje żądanie, ale odmawia dostępu do żądanego zasobu. Masz zakaz wyświetlenia tej strony lub wykonania tej akcji.',
-    '419_error' => 'Twoje żądanie wygasło lub straciło ważność – najczęściej z powodu problemu z tokenem CSRF.'
+    '419_error' => 'Twoje żądanie wygasło lub straciło ważność – najczęściej z powodu problemu z tokenem CSRF.',
+    'no_title_article' => 'brak tytułu artykułu',
 
 ];
