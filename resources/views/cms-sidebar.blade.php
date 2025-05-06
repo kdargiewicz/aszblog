@@ -2,7 +2,7 @@
     <div class="w3-container w3-row">
         <div class="w3-col s4">
 
-            @if(!empty($userAvatar) && file_exists(public_path($userAvatar)))
+            @if(!empty($userAvatar))
                 <img src="{{ asset($userAvatar) }}"
                      class="w3-circle w3-margin-right"
                      style="width:90px; height:90px; object-fit: cover;"
