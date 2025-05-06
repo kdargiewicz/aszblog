@@ -102,7 +102,6 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     })->middleware(['auth', 'admin'])->name('error.show');
 
 
-    Route::get('/cms/image/test', [ImageController::class, 'form'])->name('image.form');
     Route::post('/cms/image/upload', [ImageController::class, 'upload'])->name('image.upload');
     Route::post('/tinymce/upload', [ImageController::class, 'uploadTinyMce'])->name('tiny-mce-upload.store');
 
