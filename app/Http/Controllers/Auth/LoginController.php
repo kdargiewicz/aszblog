@@ -21,7 +21,7 @@ class LoginController extends Controller
     {
         $data = $request->validated();
 
-        if (Auth::attempt($data, $request->filled('remember'))) {
+        if (Auth::attempt($data, $request->filled('remember'))) { dd('kurwa');
             $request->session()->regenerate();
 
             return redirect()->intended('/dashboard');
