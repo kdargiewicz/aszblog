@@ -21,6 +21,13 @@ class LoginController extends Controller
     {
         $data = $request->validated();
 
+        $user = \App\Models\User::where('email', $data['email'])->first();
+        $match = $user && \Illuminate\Support\Facades\Hash::check($data['password'], $user->password);
+        dd([
+            'hash_match' => $match,
+        ]);
+
+
         if (Auth::attempt($data, $request->filled('remember'))) {
             $request->session()->regenerate();
 
