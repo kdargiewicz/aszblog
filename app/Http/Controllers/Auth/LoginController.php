@@ -21,14 +21,14 @@ class LoginController extends Controller
     {
         $data = $request->validated();
 
-        $user = \App\Models\User::where('email', $data['email'])->first();
-        $match = $user && \Illuminate\Support\Facades\Hash::check($data['password'], $user->password);
-        dd([
-            'hash_match' => $match,
-        ]);
+        $credentials = [
+            'email'    => $data['email'],
+            'password' => $data['password'],
+        ];
 
 
-        if (Auth::attempt($data, $request->filled('remember'))) {
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            dd('udalo sie!');
             $request->session()->regenerate();
 
             return redirect()->intended('/dashboard');
