@@ -20,7 +20,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validated();
-
+        dd($data);
         if (Auth::attempt($data, $request->filled('remember'))) { dd('kurwa');
             $request->session()->regenerate();
 
