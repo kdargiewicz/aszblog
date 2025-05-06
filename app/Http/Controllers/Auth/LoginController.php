@@ -20,8 +20,8 @@ class LoginController extends Controller
     public function login(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validated();
-        dd($data);
-        if (Auth::attempt($data, $request->filled('remember'))) { dd('kurwa');
+
+        if (Auth::attempt($data, $request->filled('remember'))) {
             $request->session()->regenerate();
 
             return redirect()->intended('/dashboard');
