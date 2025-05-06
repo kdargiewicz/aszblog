@@ -27,9 +27,11 @@ class ImageService
         $basePath = $userId . "/images/{$folder}";
 
         if (!Storage::exists($basePath)) {
-            $oldUmask = umask(0);
-            Storage::makeDirectory($basePath, 0775, true);
-            umask($oldUmask);
+            $this->ensureDirectoryWritable($userId . "/images/{$folder}");
+
+//            $oldUmask = umask(0);
+//            Storage::makeDirectory($basePath, 0775, true);
+//            umask($oldUmask);
         }
 
         $originalName = $file->getClientOriginalName();
@@ -177,6 +179,18 @@ class ImageService
 
         return (float) $value;
     }
+
+    public function ensureDirectoryWritable(string $relativePath): void
+    {
+        $fullPath = storage_path('app/public/' . $relativePath);
+
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0775, true);
+        }
+
+        chmod($fullPath, 0775);
+    }
+
 
 
 }
