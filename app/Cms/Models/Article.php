@@ -2,6 +2,7 @@
 
 namespace App\Cms\Models;
 
+use App\Cms\Repositories\ArticleRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -34,9 +35,9 @@ class Article extends Model
         return $this->getAttribute('article_uuid');
     }
 
-    public function getByArticleId(int $articleId): object
+    public function getFullArticleById(int $articleId): object
     {
-        return DB::table($this->table)->where('id', $articleId)->first();
+        return app(ArticleRepository::class)->getArticleDTOByArticleId($articleId);
     }
 
 }

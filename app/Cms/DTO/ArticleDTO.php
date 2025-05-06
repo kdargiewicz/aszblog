@@ -4,6 +4,7 @@ namespace App\Cms\DTO;
 
 use App\Cms\Models\Article;
 use App\Cms\Services\CategoryTagResolverService;
+use Carbon\Carbon;
 
 class ArticleDTO
 {
@@ -17,8 +18,14 @@ class ArticleDTO
         public ?string $content,
         public ?bool $allow_comments,
         public ?int $category_id = null,
-        public ?array $tag_ids = []
-    ) {}
+        public ?array $tag_ids = [],
+        public ?string $firstImageFromArticle = null,
+        public ?string $created_at = null
+    ) {
+        if ($created_at) {
+            $this->created_at = Carbon::parse($created_at)->format('Y-m-d');
+        }
+    }
 
     public static function fromRequest(array $data): self
     {

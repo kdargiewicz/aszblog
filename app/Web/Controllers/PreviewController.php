@@ -23,7 +23,7 @@ class PreviewController extends Controller
 
         $blogTemplate = $blogSettings->blog_template;
 
-        $article = app(Article::class)->getByArticleId($articleId);
+        $article = app(Article::class)->getFullArticleById($articleId);
 
         return view('web.template.' . $blogTemplate . '/preview/article')->with('article', $article);
     }
