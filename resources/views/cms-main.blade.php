@@ -4,6 +4,7 @@
     <title>aszblog-beta</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @include('favicon')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href={{ asset('cms/css/w3.css') }}>
     <link rel="stylesheet" href={{ asset('cms/css/fonts.css') }}>

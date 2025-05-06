@@ -1,10 +1,10 @@
 @extends('cms-main')
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
-        <h2 class="w3-text-blue">{{ __('article.list') }}</h2>
+        <h2 class="w3-text-dark-grey w3-serif">{{ __('article.list') }}</h2>
 
         @forelse($deleteArticleList as $article)
-            <div class="w3-card w3-white w3-margin-bottom w3-padding">
+            <div class="w3-card w3-paper w3-margin-bottom w3-padding w3-round">
                 <div class="w3-row">
                     <div class="w3-col s12 m9">
                         <h4 class="w3-text-dark-grey">
@@ -29,7 +29,7 @@
                         <form method="POST" action="{{ route('article.restore', $article->id) }}"
                               style="display:inline;">
                             @csrf
-                            <button type="submit" class="w3-button w3-blue w3-small w3-margin-bottom">
+                            <button type="submit" class="w3-button w3-blue w3-small w3-round w3-margin-right">
                                 {{ __('article.article_action.restore') }}
                             </button>
                         </form>

@@ -2,13 +2,14 @@
 
 namespace App\Cms\Services;
 
+use App\Constants\Constants;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Cms\DTO\ImageDTO;
 use App\Cms\Repositories\ImageRepository;
+use JsonException;
 
 class ImageService
 {
@@ -21,17 +22,15 @@ class ImageService
         $this->manager = new ImageManager(new Driver());
     }
 
-//    public function saveImageVersions(UploadedFile $file, int $userId, string $folder = 'articles'): array
+    /**
+     * @throws JsonException
+     */
     public function saveImageVersions(UploadedFile $file, int $userId, string $folder, string $typeImage = 'other', $uuid = null): array
     {
         $basePath = $userId . "/images/{$folder}";
 
         if (!Storage::exists($basePath)) {
             $this->ensureDirectoryWritable($userId . "/images/{$folder}");
-
-//            $oldUmask = umask(0);
-//            Storage::makeDirectory($basePath, 0775, true);
-//            umask($oldUmask);
         }
 
         $originalName = $file->getClientOriginalName();
@@ -54,35 +53,14 @@ class ImageService
             $exif = is_array($rawExif) ? $this->sanitizeExif($rawExif) : [];
         }
 
-        //DB::table('system_debug')->insert(['json_data' => serialize($exif)]);//json_encode($exif, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
-       // dd(gettype($exif), $exif);
-
-        if (!empty($exif)) {
-           // dump($exif);
-            DB::table('system_debug')->insert([
-                'json_data' => json_encode($exif, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-            ]);
-           // dd($exif);
-        }
-
-//        try {
-//            $rawExif = $this->manager->read($file)->exif();
-//            $exif = is_array($rawExif) ? $this->sanitizeExif($rawExif) : [];
-//        } catch (\Throwable $e) {
-//            logger()->warning('Błąd odczytu EXIF', ['msg' => $e->getMessage()]);
-//        }
-
-        $rawImage = $this->manager->read($file)->scale(width: 5120);
+        $rawImage = $this->manager->read($file)->scale(width: Constants::RAW_IMG);
         Storage::put($rawPath, (string) $rawImage->encode());
 
-        $maxImage = $this->manager->read($file)->scale(width: 2560);
+        $maxImage = $this->manager->read($file)->scale(width: Constants::MAX_IMG);
         Storage::put($maxPath, (string) $maxImage->encode());
 
-        $minImage = $this->manager->read($file)->scale(width: 400);
+        $minImage = $this->manager->read($file)->scale(width: Constants::MIN_IMG);
         Storage::put($minPath, (string) $minImage->encode());
-
-
-
 
         $dto = new ImageDTO(
             user_id: $userId,
@@ -105,26 +83,6 @@ class ImageService
         ];
     }
 
-//    private function sanitizeExif(array $exif): array
-//    {
-//        return array_map(function ($value) {
-//            if (is_scalar($value) || is_null($value)) {
-//                return $value;
-//            }
-//
-//            if (is_array($value)) {
-//                return $this->sanitizeExif($value);
-//            }
-//
-//            return is_object($value) && method_exists($value, '__toString')
-//                ? (string)$value
-//                : gettype($value);
-//        }, $exif);
-//    }
-
-
-    //tu rozkminka exif mozna to dac do helperaExif:
-
     protected function sanitizeExif(array $exif): array
     {
         return [
@@ -140,7 +98,6 @@ class ImageService
             'gps_longitude'      => $this->extractGps($exif, 'GPSLongitude', 'GPSLongitudeRef'),
         ];
     }
-
 
     protected function extractGps(array $exif, string $coordKey, string $refKey): ?float
     {
@@ -190,9 +147,6 @@ class ImageService
 
         chmod($fullPath, 0775);
     }
-
-
-
 }
 
 

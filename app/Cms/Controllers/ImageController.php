@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function uploadTinyMce(Request $request, ImageService $imageService)
+    public function uploadTinyMce(Request $request, ImageService $imageService): \Illuminate\Http\JsonResponse
     {
         $userId = auth()->id();
 

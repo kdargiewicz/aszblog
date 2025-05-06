@@ -1,51 +1,85 @@
 @extends('cms-main')
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
-        <h2 class="w3-text-blue">{{ __('article.list') }}</h2>
+        <h2 class="w3-text-dark-grey w3-serif">{{ __('article.list') }}</h2>
 
         @forelse($articleList as $article)
-            <div class="w3-card w3-white w3-margin-bottom w3-padding">
-                <div class="w3-row">
-                    <div class="w3-col s12 m9">
-                        <h4 class="w3-text-dark-grey">
-                            {{ $article->title }}
-                            @if(!$article->is_published)
-                                <span class="w3-tag w3-yellow w3-small w3-margin-left">{{ __('article.article_action.not-published') }}</span>
+            <div class="w3-card w3-paper w3-margin-bottom w3-padding w3-round">
+                <div class="w3-row" style="display: flex; align-items: center; gap: 16px;">
+                    {{-- Obrazek --}}
+                    <div style="flex-shrink: 0;">
+                        <img class="w3-round" src="{{ asset($article->preview_url ?? 'img/aszblog_main.jpeg') }}"
+                             alt="Preview"
+                             style="width: 200px;">
+                    </div>
+
+                    <div style="flex-grow: 1;">
+                        <h4 class="w3-text-dark-grey" style="margin-top: 0; margin-bottom: 4px;">
+                            @if($article->title)
+                                {{ $article->title }}
                             @else
-                                <span class="w3-tag w3-green w3-small w3-margin-left">{{ __('article.article_action.published') }}</span>
+                                <span class="w3-text-red">{{ __('article.article_list.no_title') }}</span>
                             @endif
                         </h4>
-                        <p class="w3-text-grey w3-small">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($article->content), 120) }}
+
+                        <div class="w3-margin-bottom">
+                            @if(!$article->is_published)
+                                <span class="w3-tag w3-yellow w3-small w3-round-small">
+                                    {{ __('article.article_action.not-published') }}
+                                </span>
+                            @else
+                                <span class="w3-tag w3-light-green w3-small w3-round-small">
+                                    {{ __('article.article_action.published') }}
+                                </span>
+                            @endif
+                            @if(!$article->allow_comments)
+                                <span class="w3-tag w3-deep-orange w3-small w3-round-small">
+                                    {{ __('article.article_action.not_allow_comments') }}
+                                </span>
+                            @else
+                                <span class="w3-tag w3-light-green w3-small w3-round-small">
+                                    {{ __('article.article_action.allow_comments') }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <p class="w3-text-grey w3-small" style="margin-top: 4px;">
+                            @if(!empty(trim(strip_tags($article->content))))
+                                {{ \Illuminate\Support\Str::limit(strip_tags($article->content), 150) }}
+                            @else
+                                <span class="w3-text-red">{{ __('article.article_list.no_content') }}</span>
+                            @endif
                         </p>
-                        <p class="w3-text-gray w3-small">
-                            {{ \Carbon\Carbon::parse($article->created_at)->format('Y-m-d H:i') }}
+
+                        <p class="w3-text-gray w3-small" style="margin-top: 4px;">
+                            {{ __('article.article_list.add_date') }} {{ \Carbon\Carbon::parse($article->created_at)->format('Y-m-d H:i') }}
                         </p>
                     </div>
 
-                    <div class="w3-col s12 m3 w3-right-align w3-margin-top">
-                        <a href="{{ route('article.edit', $article->article_uuid) }}" class="w3-button w3-blue w3-small w3-margin-bottom">
+                    <div style="display: flex; flex-direction: column; justify-content: center; gap: 6px;">
+                        <a href="{{ route('article.edit', $article->article_uuid) }}"
+                           type="button" class="btn btn-primary btn-custom">
                             {{ __('article.article_action.article-edit') }}
                         </a>
-{{--                        <a href="{{ route('article.show', $article->id) }}" target="_blank" class="w3-button w3-light-grey w3-small">--}}
-                        <a href="{{ route('article.preview', $article->id) }}" target="_blank" class="w3-button w3-light-grey w3-small">
+                        <a href="{{ route('article.preview', $article->id) }}"
+                           target="_blank"
+                           type="button" class="btn btn-success btn-custom">
                             {{ __('article.article_action.article-preview') }}
                         </a>
-
-                        <button
-                            onclick="openDeleteModal('{{ route('article.delete', $article->id) }}')"
-                            class="w3-button w3-red w3-small">
+                        <button onclick="openDeleteModal('{{ route('article.delete', $article->id) }}')"
+                                type="button" class="btn btn-danger btn-custom">
                             {{ __('article.article_action.article-delete') }}
                         </button>
-
                     </div>
                 </div>
             </div>
+
         @empty
             <div class="w3-panel w3-pale-yellow w3-border">
                 <p>{{ __('article.empty_list') }}</p>
             </div>
         @endforelse
+
         <div class="w3-center w3-margin-top w3-margin-bottom">
             @include('pagination', ['paginator' => $articleList])
         </div>
@@ -61,8 +95,4 @@
             modal.style.display = 'block';
         }
     </script>
-
-
-
 @endsection
-

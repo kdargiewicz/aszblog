@@ -46,12 +46,31 @@ class ArticleRepository
 
     public function getArticleList(int $userId)
     {
+//        $articles = DB::table('articles')
+//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+//            ->where('articles.user_id', $userId)
+//            ->where('articles.deleted', Constants::NOT_DELETED)
+//            ->select('articles.*', 'categories.name as category_name')
+//            ->paginate(config('blog.article_list.pagination'));
+
+        $subImageQuery = DB::table('images')
+            ->select('url')
+            ->whereColumn('images.article_id', 'articles.id')
+            ->orderBy('id') // lub np. created_at, jeśli chcesz najnowsze/stare
+            ->limit(1);
+
         $articles = DB::table('articles')
             ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.user_id', $userId)
             ->where('articles.deleted', Constants::NOT_DELETED)
-            ->select('articles.*', 'categories.name as category_name')
+            ->select([
+                'articles.*',
+                'categories.name as category_name',
+                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
+            ])
+            ->mergeBindings($subImageQuery) // ważne, żeby subquery działało
             ->paginate(config('blog.article_list.pagination'));
+
 
         $tags = app(Tag::class)->getTagsNameForUserId($userId);
         $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);

@@ -40,5 +40,13 @@ return [
         'confirm' => 'Usuń artykuł',
         'cancel' => 'Anuluj i wróć do listy',
         'restore' => 'Przywróć artykuł',
+        'allow_comments' => 'Komentarze włączone',
+        'not_allow_comments' => 'Komentarze wyłączone',
+    ],
+
+    'article_list' => [
+        'no_title' => 'Brak tytułu',
+        'add_date' => 'data dodania: ',
+        'no_content' => 'Brak treści artykułu.',
     ]
 ];

@@ -1,7 +1,7 @@
 @extends('cms-main')
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
-        <h2 class="w3-text-blue">{{ isset($article) ? 'Edycja arta ID: ' . $article->id :  __('article.add') }}</h2>
+        <h2 class="w3-text-dark-grey w3-serif">{{ isset($article) ? 'Edycja arta ID: ' . $article->id :  __('article.add') }}</h2>
             <form method="POST" action="{{ isset($article) ? route('article.update', $article->id) : route('article.store') }}">
                 @csrf
                 <input type="hidden" id="article_uuid" name="article_uuid" value="{{ old('article_uuid', $article->article_uuid ?? (string) Str::uuid()) }}">
