@@ -26,6 +26,11 @@ class ImageService
     {
         $basePath = $userId . "/images/{$folder}";
 
+        if (!Storage::exists($basePath)) {
+            Storage::makeDirectory($basePath);
+            chmod(storage_path('app/public/' . $basePath), 0775);
+        }
+
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
         $filename = 'img_' . uniqid();
