@@ -4,10 +4,10 @@
             <div class="logo-and-title">
                 <img
                     class="w3-image topbar-logo"
-                    src="{{ asset('img/favicon.png') }}"
+                    src="{{ asset('img/aszblog_logo.png') }}"
                     alt="Logo"
                 >
-                <span class="blog-title">Aszblog</span>
+{{--                <span class="blog-title">Aszblog</span>--}}
             </div>
         </a>
 
