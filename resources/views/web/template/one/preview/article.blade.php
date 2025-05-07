@@ -1,26 +1,6 @@
 @extends('web.template.one.main')
 @section('content')
-    <div class="w3-top">
-        <div class="w3-bar w3-white w3-padding w3-card article-title">
-            <a href="#home" class="w3-bar-item w3-button">
-                @if($article->title)
-                    {{ $article->title }}
-                @else
-                    <span class="title-span">
-                        {{ __('errors.no_title_article') }}
-                    </span>
-                @endif
-            </a>
-
-            <div class="w3-right w3-hide-small">
-                <a href="#about" class="w3-bar-item w3-button">About</a>
-                <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-                <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-            </div>
-        </div>
-    </div>
-
-    <header class="w3-display-container w3-content w3-wide header-image" id="home">
+    <div class="w3-display-container w3-content w3-wide header-image" id="home">
         @if($article && $article->firstImageFromArticle)
             <img class="w3-image" src='{{ asset($article->firstImageFromArticle) }}' width="1600" height="800">
         @else
@@ -30,11 +10,9 @@
         <div class="w3-display-bottomleft w3-padding-large w3-opacity">
             <h1 class="w3-xxlarge w3-text-white">{{ $article->category }}</h1>
         </div>
-    </header>
+    </div>
 
     <div class="w3-content w3-content-width">
-
-
         <div class="w3-row w3-padding-64" id="about">
             <div class="w3-container w3-padding-large" style="max-width: 900px; margin: 0 auto;">
                 <h1 class="title w3-center">
@@ -56,5 +34,46 @@
                 </div>
             </div>
         </div>
+
+        @if($article->allow_comments)
+            <div class="w3-content w3-padding-64 comments-section">
+                {{--                <hr class="comments-separator">--}}
+
+                {{--                <h3 class="comments-header">{{ __('comments.comments') }}</h3>--}}
+                <p class="comments-subtitle">{{ __('comments.would_be_happy_if_you_leave_a_comment') }}</p>
+
+                <form method="POST" action="{{ route('comment.store') }}">
+                    <input type="hidden" name="article_id" value="{{ $article->article_id }}">
+                    @csrf
+                    <p><input class="w3-input w3-padding-16" type="text" placeholder="{{ __('comments.nick') }}"
+                              required name="author"></p>
+                    <p><input class="w3-input w3-padding-16" type="text" placeholder="{{ __('comments.content') }}"
+                              required name="content"></p>
+                    <p>
+                        <button class="w3-button w3-light-grey w3-section"
+                                type="submit">{{ __('comments.send') }}</button>
+                    </p>
+                </form>
+
+                <div class="comments-list">
+                    @if(count($article->comments) > 0)
+                        <h3 class="comments-header">{{ __('comments.comments') }}</h3>
+                        @foreach($article->comments as $comment)
+                            <div class="comment-header">
+                                <h5 class="comments-header"><strong>{{ $comment->author }}</strong></h5>
+                            </div>
+                            <div class="comment-body comments-subtitle">
+                                {!! nl2br(e($comment->content)) !!}
+                                <p class="comment-date">{{ $comment->add_date }}</p>
+                            </div>
+                            @if (! $loop->last)
+                                <hr class="comments-separator">
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
+

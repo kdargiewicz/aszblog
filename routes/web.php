@@ -1,5 +1,6 @@
 <?php
 
+use App\Web\Controllers\CommentsController;
 use Illuminate\Support\Facades\Route;
 use App\Cms\Controllers\ImageController;
 use App\Mail\Controllers\ContactController;
@@ -28,6 +29,7 @@ use App\Cms\Repositories\ErrorsRepository;
 //    ->middleware(LogVisitMiddleware::class);
 
 
+Route::post('/store-comment', [CommentsController::class, 'storeComment'])->name('comment.store');
 
 
 

@@ -5,31 +5,21 @@
     @include('favicon')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="stylesheet" href={{ asset('web/css/one-main.css') }}>
 </head>
 <body>
 
+@include('web.template.one.topbar')
 
-{{--TU NA CHWILE ZOSTAWIAM ZEBY MOZNA BYLO ZOBACZYC CALY BLOG--}}
+@include('web.template.one.flash')
+
+
 
 @if(isset($article))
     @yield('content')
 @else
-
-    <!-- Navbar (sit on top) -->
-    <div class="w3-top">
-        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-            <a href="#home" class="w3-bar-item w3-button">Gourmet au Catering</a>
-            <!-- Right-sided navbar links. Hide them on small screens -->
-            <div class="w3-right w3-hide-small">
-                <a href="#about" class="w3-bar-item w3-button">About</a>
-                <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-                <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-            </div>
-        </div>
-    </div>
-
     <!-- Header -->
     <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
 

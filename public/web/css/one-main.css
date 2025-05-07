@@ -1,38 +1,129 @@
-body {font-family: "Times New Roman", Georgia, Serif;}
+body {
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: "Playfair Display";
     letter-spacing: 5px;
 }
+
 .w3-content-width {
     max-width: 1100px;
 }
 
 .header-image {
-    max-width:1200px;
-    min-width:400px
+    max-width: 1200px;
+    min-width: 400px
 }
-    .article-title {
-        letter-spacing:4px;
-    }
-    .title-span {
-        color: red;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    .title {
-        color: #555;
-    }
-    .custom-article-text {
-        color: #555 !important;
-    }
-    .article-content {
-        line-height: 1.6;
-        font-size: 16px;
-    }
-    .article-content img {
-        display: block;
-        margin: 1rem auto;
-        max-width: 100%;
-        height: auto;
-    }
+
+.article-title {
+    letter-spacing: 4px;
 }
+
+.title-span {
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title {
+    color: #555;
+}
+
+.custom-article-text {
+    color: #555 !important;
+}
+
+.article-content {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.article-content img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.topbar-logo {
+    max-height: 50px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-and-title {
+    display: flex;
+    align-items: center;
+}
+
+.blog-title {
+    font-family: 'Bad Script', cursive;
+    font-size: 1.5rem;    /* dostosuj według potrzeb */
+    color: #555;
+    margin-left: 0.5rem;
+}
+
+.comments-separator {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 2rem 0;
+}
+
+.comments-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.comment-item {
+    /* możesz dodać flex, avatar itp. */
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.comment-form h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.flash-message {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    border-radius: 0.5rem;
+    z-index: 9999;
+    opacity: 0.95;
+    transition: opacity 0.3s;
+}
+
+.comments-header {
+    margin-bottom: 0.25rem;
+}
+
+.comments-subtitle {
+    margin-top: 0;
+    opacity: 0.6;
+}
+
+.comment-date {
+    font-size: 0.7rem;
+    color: #555;
+}
+
+.comments-list {
+    padding-top: 35px;
+}
+
+
+
+
+

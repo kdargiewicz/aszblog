@@ -50,9 +50,9 @@ class ArticleRepository
         return DB::table('articles')->where('id', $articleId)->first();
     }
 
-    public function getArticleAndCategoryName(int $articleId): Object
+    public function getArticleWithComments(int $articleId): Object
     {
-        return DB::table('articles')
+        $article = DB::table('articles')
             ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.id', $articleId)
             ->where('articles.deleted', Constants::NOT_DELETED)
@@ -61,11 +61,21 @@ class ArticleRepository
                 'categories.name as category_name',
             ])
             ->first();
+
+        $comments = DB::table('comments')
+            ->where('article_id', $articleId)
+            ->where('accepted', true)
+            ->where('deleted', Constants::NOT_DELETED)
+            ->get();
+
+        $article->comments = $comments;
+
+        return $article;
     }
 
     public function getArticleDTOByArticleId(int $articleId): null|ArticleDTO
     {
-        $article = $this->getArticleAndCategoryName($articleId);
+        $article = $this->getArticleWithComments($articleId);
         if ( !$article) {
             return null;
         }
@@ -87,6 +97,8 @@ class ArticleRepository
             allow_comments: $article->allow_comments ?? false,
             firstImageFromArticle: $image->url ?? null,
             created_at: $article->created_at ?? null,
+            article_id: $articleId,
+            comments: $article->comments ?? null,
         );
     }
 

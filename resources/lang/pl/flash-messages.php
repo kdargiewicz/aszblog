@@ -8,5 +8,7 @@ return [
 
     'error' => [
         'no_blog_template_settings' => "Nie wybrałeś stylu bloga. Wybierz go w zakładce 'settings -> Wybierz styl bloga'"
-    ]
+    ],
+
+    'add_comment' => 'Dziękujemy za komentarz!',
 ];
