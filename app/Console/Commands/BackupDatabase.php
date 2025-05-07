@@ -20,7 +20,7 @@ class BackupDatabase extends Command
         $folder = storage_path('backups');
         $filename = $db . '_backup_' . now()->format('Y-m-d_H-i-s') . '.sql';
         $path = $folder . '/' . $filename;
-        
+
         if (!File::exists($folder)) {
             File::makeDirectory($folder, 0755, true);
             $this->info("Utworzono katalog: $folder");
@@ -29,8 +29,7 @@ class BackupDatabase extends Command
         $this->info("Tworzenie kopii bazy do: $path");
 
         $command = sprintf(
-            'mysqldump --no-tablespaces -h %s -u%s -p%s %s > %s',
-            escapeshellarg($host),
+            'docker exec db mysqldump --no-tablespaces -u%s -p%s %s > %s',
             escapeshellarg($user),
             escapeshellarg($pass),
             escapeshellarg($db),
