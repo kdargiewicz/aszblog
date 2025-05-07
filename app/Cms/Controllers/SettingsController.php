@@ -18,11 +18,11 @@ class SettingsController extends Controller
             ->with('isBlogOwner', $isBlogOwner);
     }
 
-    public function postStoreSettings(UserSettingsRequest $request)
+    public function postStoreSettings(UserSettingsRequest $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validated();
 
-        $userId = auth()->id(); // lub $request->user()->id
+        $userId = auth()->id();
         $folder = 'settings';
         $type = 'user-settings';
 
@@ -32,7 +32,6 @@ class SettingsController extends Controller
         $avatarPaths = null;
         $mainImagePaths = null;
 
-        // Jeśli jest avatar — zapisujemy
         if ($request->hasFile('avatar')) {
             $avatarPaths = $imageService->saveImageVersions(
                 $request->file('avatar'),
@@ -42,7 +41,6 @@ class SettingsController extends Controller
             );
         }
 
-        // Jeśli jest main_image — zapisujemy
         if ($request->hasFile('main_image')) {
             $mainImagePaths = $imageService->saveImageVersions(
                 $request->file('main_image'),
@@ -52,42 +50,21 @@ class SettingsController extends Controller
             );
         }
 
-        // Tworzymy lub aktualizujemy user_settings
         $settings = \App\Cms\Models\UserSetting::updateOrCreate(
             ['user_id' => $userId],
-            [
-                'avatar' => $avatarPaths['max'] ?? null,
-                'main_image' => $mainImagePaths['max'] ?? null,
-                'about_me' => $validated['about_me'] ?? null,
-                'my_motto' => $validated['my_motto'] ?? null,
-                'blog_template' => $validated['blog_template'] ?? null,
-            ]
+                [
+                    'avatar' => $avatarPaths['max'] ?? null,
+                    'main_image' => $mainImagePaths['max'] ?? null,
+                    'about_me' => $validated['about_me'] ?? null,
+                    'my_motto' => $validated['my_motto'] ?? null,
+                    'blog_template' => $validated['blog_template'] ?? null,
+                ]
         );
 
         return redirect()
             ->route('user.settings')
             ->with('success', __('flash-messages.user-settings-updated'));
     }
-
-
-//    public function postStoreSettings(UserSettingsRequest $request)
-//    {
-//        $validated = $request->validated();
-//
-//
-//        "avatar" =>
-//
-// {#1266 ▶}
-//     "main_image" =>
-//
-// {#1267 ▶}
-//     "about_me" => "aaa"
-//  "my_motto" => "bbb"
-//  "blog_template" => "one"
-//
-//
-//        dd($validated);
-//    }
 
     public function postUpdateSettings(UserSettingsRequest $request, $id): \Illuminate\Http\RedirectResponse
     {

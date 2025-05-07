@@ -39,6 +39,22 @@
     <!-- Page content -->
     <div class="w3-content" style="max-width:1100px">
 
+        @foreach($articles as $article)
+            <div class="w3-row w3-padding-64" id="about">
+                <div class="w3-col m6 w3-padding-large w3-hide-small">
+                    <img src="{{ asset($article->preview_url) }}" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+                </div>
+
+                <div class="w3-col m6 w3-padding-large">
+                    <h1 class="w3-center">{{ $article->title }}</h1><br>
+                    <h5 class="w3-center">{{ $article->category_name }}</h5>
+                    <p class="w3-large" style="text-align: justify;">{!! \Illuminate\Support\Str::limit(strip_tags($article->content), 540) !!}</p>
+                </div>
+            </div>
+            <hr class="comments-separator">
+        @endforeach
+    </div>
+
         <!-- About Section -->
         <div class="w3-row w3-padding-64" id="about">
             <div class="w3-col m6 w3-padding-large w3-hide-small">

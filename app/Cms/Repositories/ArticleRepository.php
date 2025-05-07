@@ -8,7 +8,7 @@ use App\Cms\Models\Article;
 use App\Cms\Models\Tag;
 use App\Constants\Constants;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Object_;
+use Illuminate\Database\Query\Builder;
 
 class ArticleRepository
 {
@@ -48,6 +48,53 @@ class ArticleRepository
     public function getArticleById(int $articleId): Object
     {
         return DB::table('articles')->where('id', $articleId)->first();
+    }
+
+    public function baseArticleQuery(int $userId): Builder
+    {
+        $subImageQuery = DB::table('images')
+            ->select('url')
+            ->whereColumn('images.article_id', 'articles.id')
+            ->orderBy('id')
+            ->limit(1);
+
+        return DB::table('articles')
+            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+            ->where('articles.user_id', $userId)
+            ->where('articles.deleted', Constants::NOT_DELETED)
+            ->select([
+                'articles.*',
+                'categories.name as category_name',
+                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
+            ])
+            ->mergeBindings($subImageQuery);
+    }
+
+    public function getPublishedArticlesFromUser(int $userId): object
+    {
+        return $this->baseArticleQuery($userId)
+            ->where('articles.is_published', Constants::PUBLISHED)
+            ->get();
+    }
+
+    public function getArticleList(int $userId)
+    {
+        $articles = $this->baseArticleQuery($userId)
+            ->paginate(config('blog.article_list.pagination'));
+
+        $tags = app(Tag::class)->getTagsNameForUserId($userId);
+
+        return app(CmsHelper::class)->transformWithTagNames($articles, $tags);
+    }
+
+    public function getArticleOwnerMailAndTitle(int $articleId): Object
+    {
+        return DB::table('articles')
+            ->join('users', 'articles.user_id', '=', 'users.id')
+            ->where('articles.id', $articleId)
+            ->where('articles.deleted', Constants::NOT_DELETED)
+            ->select('users.email', 'articles.title')
+            ->first();
     }
 
     public function getArticleWithComments(int $articleId): Object
@@ -102,32 +149,56 @@ class ArticleRepository
         );
     }
 
-    public function getArticleList(int $userId)
-    {
-        $subImageQuery = DB::table('images')
-            ->select('url')
-            ->whereColumn('images.article_id', 'articles.id')
-            ->orderBy('id')
-            ->limit(1);
-
-        $articles = DB::table('articles')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.user_id', $userId)
-            ->where('articles.deleted', Constants::NOT_DELETED)
-            ->select([
-                'articles.*',
-                'categories.name as category_name',
-                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
-            ])
-            ->mergeBindings($subImageQuery)
-            ->paginate(config('blog.article_list.pagination'));
-
-
-        $tags = app(Tag::class)->getTagsNameForUserId($userId);
-        $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);
-
-        return $articlesWithTagNames;
-    }
+//    public function getPublishedArticlesFromUser(int $userId): object
+//    {
+//        $subImageQuery = DB::table('images')
+//            ->select('url')
+//            ->whereColumn('images.article_id', 'articles.id')
+//            ->orderBy('id')
+//            ->limit(1);
+//
+//        $articles = DB::table('articles')
+//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+//            ->where('articles.user_id', $userId)
+//            ->where('articles.deleted', Constants::NOT_DELETED)
+//            ->where('articles.is_published', Constants::PUBLISHED)
+//            ->select([
+//                'articles.*',
+//                'categories.name as category_name',
+//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
+//            ])
+//            ->mergeBindings($subImageQuery)
+//            ->get();
+//
+//        return $articles;
+//    }
+//
+//    public function getArticleList(int $userId)
+//    {
+//        $subImageQuery = DB::table('images')
+//            ->select('url')
+//            ->whereColumn('images.article_id', 'articles.id')
+//            ->orderBy('id')
+//            ->limit(1);
+//
+//        $articles = DB::table('articles')
+//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+//            ->where('articles.user_id', $userId)
+//            ->where('articles.deleted', Constants::NOT_DELETED)
+//            ->select([
+//                'articles.*',
+//                'categories.name as category_name',
+//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
+//            ])
+//            ->mergeBindings($subImageQuery)
+//            ->paginate(config('blog.article_list.pagination'));
+//
+//
+//        $tags = app(Tag::class)->getTagsNameForUserId($userId);
+//        $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);
+//
+//        return $articlesWithTagNames;
+//    }
 
     public function deleteArticle($articleId, $userId): int
     {

@@ -45,7 +45,7 @@
 
                         <p class="w3-text-grey w3-small" style="margin-top: 4px;">
                             @if(!empty(trim(strip_tags($article->content))))
-                                {{ \Illuminate\Support\Str::limit(strip_tags($article->content), 150) }}
+                                {!! \Illuminate\Support\Str::limit(strip_tags($article->content), 150) !!}
                             @else
                                 <span class="w3-text-red">{{ __('article.article_list.no_content') }}</span>
                             @endif

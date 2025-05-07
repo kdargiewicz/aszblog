@@ -1,6 +1,6 @@
 <?php
 
-use App\Web\Controllers\CommentsController;
+use App\Web\Controllers\WebCommentsController;
 use Illuminate\Support\Facades\Route;
 use App\Cms\Controllers\ImageController;
 use App\Mail\Controllers\ContactController;
@@ -29,7 +29,7 @@ use App\Cms\Repositories\ErrorsRepository;
 //    ->middleware(LogVisitMiddleware::class);
 
 
-Route::post('/store-comment', [CommentsController::class, 'storeComment'])->name('comment.store');
+Route::post('/store-comment', [WebCommentsController::class, 'storeComment'])->name('comment.store');
 
 
 
@@ -157,6 +157,11 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     Route::get('/settings', [\App\Cms\Controllers\SettingsController::class, 'getSettings'])->name('user.settings');
     Route::post('/store-settings', [\App\Cms\Controllers\SettingsController::class, 'postStoreSettings'])->name('user_settings.store');
     Route::post('/update-settings{settingsId}', [\App\Cms\Controllers\SettingsController::class, 'postUpdateSettings'])->name('user_settings.update');
+
+    //komentarze
+    Route::get('/comments', [\App\Cms\Controllers\CommentsController::class, 'getComments'])->name('comments.list');
+    Route::post('/comment-accept/{id}', [\App\Cms\Controllers\CommentsController::class, 'toggleAccept'])->name('comment.accept');
+
 });
 
 

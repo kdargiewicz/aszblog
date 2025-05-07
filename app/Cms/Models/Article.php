@@ -4,7 +4,6 @@ namespace App\Cms\Models;
 
 use App\Cms\Repositories\ArticleRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
@@ -38,6 +37,16 @@ class Article extends Model
     public function getFullArticleById(int $articleId): object
     {
         return app(ArticleRepository::class)->getArticleDTOByArticleId($articleId);
+    }
+
+    public function getArticleOwnerInfo($articleId)
+    {
+        return app(ArticleRepository::class)->getArticleOwnerMailAndTitle($articleId);
+    }
+
+    public function getAllForUser($userId): object
+    {
+        return app(ArticleRepository::class)->getPublishedArticlesFromUser($userId);
     }
 
 }

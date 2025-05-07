@@ -26,22 +26,14 @@
         </div>
     </div>
     <hr>
-    <div class="w3-container">
-        <a href="{{ route('dashboard') }}" class="w3-bar-item">
-            <h5>Dashboard</h5>
-        </a>
-    </div>
-
-    <div class="w3-container">
-        <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
-
-    </div>
 
     <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+        <a href="{{ route('dashboard') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tachometer w3-margin-right"></i>Pulpit</a>
         <a href="{{ route('article.create') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square w3-margin-right"></i>Utwórz artykuł</a>
         <a href="{{ route('article.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Lista artykułów</a>
         <a href="{{ route('article.list.delete') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Lista usuniętych artykułów</a>
+        <a href="{{ route('comments.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Komentarze</a>
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open w3-margin-right"></i>Kategorie</a>--}}
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tags w3-margin-right"></i>Tagi</a>--}}
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>--}}
@@ -59,6 +51,14 @@
             </a>
             <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>
             <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>
+            <p>  ładne linki url !</p>
+            <p>  zahaszowane adresy img</p>
+            <p>  zakładka galeria ! !</p>
+
+            <div class="w3-container">
+                <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
+
+            </div>
         @endif
     </div>
 </nav>

@@ -10,7 +10,9 @@ class PreviewController extends Controller
 {
     public function getPreviewBlogByBlogName($name): object
     {
-        return view('web.template.' . $name . '.main');
+        $articles = app(Article::class)->getAllForUser(auth()->id());
+
+        return view('web.template.' . $name . '.main', compact('articles'));
     }
 
     public function getPreviewArticle(int $articleId): object
@@ -25,6 +27,6 @@ class PreviewController extends Controller
 
         $article = app(Article::class)->getFullArticleById($articleId);
 
-        return view('web.template.' . $blogTemplate . '/preview/article')->with('article', $article);
+        return view('web.template.' . $blogTemplate . '/preview/article', compact('article'));
     }
 }

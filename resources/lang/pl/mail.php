@@ -19,4 +19,9 @@ return [
         'line_2'      => 'Jeśli to nie Ty zakładałeś konto, możesz zignorować tę wiadomość.',
         'salutation'  => 'Pozdrawiamy, Zespół AszBlog',
     ],
+
+    'notification' => [
+        'see_comment' => 'Zobacz komentarz',
+        'message_generated_automatically' => 'Wiadomość wygenerowana automatycznie przez system ASZBLOG.',
+    ]
 ];

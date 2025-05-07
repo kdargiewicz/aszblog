@@ -2,8 +2,6 @@
 
 namespace App\Mail;
 
-namespace App\Mail;
-
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Mail\DTO\ContactMessageDTO;
