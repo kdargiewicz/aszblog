@@ -29,7 +29,8 @@ class BackupDatabase extends Command
         $this->info("Tworzenie kopii bazy do: $path");
 
         $command = sprintf(
-            'docker exec db mysqldump --no-tablespaces -u%s -p%s %s > %s',
+            'mysqldump --no-tablespaces -h %s -u%s -p%s %s > %s',
+            escapeshellarg($host),
             escapeshellarg($user),
             escapeshellarg($pass),
             escapeshellarg($db),
