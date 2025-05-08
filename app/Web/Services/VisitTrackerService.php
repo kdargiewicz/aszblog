@@ -11,6 +11,41 @@ class VisitTrackerService
     {
         return app(VisitModel::class)->getAll();
     }
+
+
+    //te funkcje nizej wrzucic do jednego obiektu dot charts
+    public function getAllData()
+    {
+        return app(VisitModel::class)->getAllData();
+    }
+
+    public function getBrowserStats()
+    {
+        return app(VisitModel::class)->getBrowserStats();
+    }
+
+    public function getWeekdayStats()
+    {
+        return app(VisitModel::class)->getWeekdayStats();
+    }
+
+    public function getTypeStats()
+    {
+        return app(VisitModel::class)->getTypeStats();
+    }
+
+
+    public function getUrlStats()
+    {
+        return app(VisitModel::class)->getUrlStats();
+    }
+
+    public function getBrowserStatsByTopUrls()
+    {
+        return app(VisitModel::class)->getBrowserStatsByTopUrls();
+    }
+    //te funkcje WYŻEJ wrzucic do jednego obiektu dot charts
+
     public function logVisit(Request $request, ?string $type = null, ?int $modelId = null): void
     {
         $agent = $request->userAgent();

@@ -76,11 +76,33 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, LogVisitMiddleware::class])->group(function () {
 
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
+        $browserStatsData = $tracker->getBrowserStatsByTopUrls();
+
         return view('dashboard', [
             'visitCounter' => $tracker->getCountAllVisit(),
+            'dailyVisits' => $tracker->getAllData(),
+            'browserStats' => $tracker->getBrowserStats(),
+            'weekdayStats' => $tracker->getWeekdayStats(),
+            'typeStats' => $tracker->getTypeStats(),
+            'urlStats' => $tracker->getUrlStats(),
+            'topUrls' => $browserStatsData['topUrls'],
+            'browserStatsByUrl' => $browserStatsData['browserStatsByUrl'],
             'articleCounter' => app(\App\Cms\Repositories\ArticleRepository::class)->getCountArticleFromUser(),
         ]);
     })->name('dashboard');
+//    Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
+//        return view('dashboard', [
+//            'visitCounter' => $tracker->getCountAllVisit(), //to i nizej jako jedno zapytanie zrobic do wykresow chart
+//            'dailyVisits' => $tracker->getAllData(),
+//            'browserStats' => $tracker->getBrowserStats(),
+//            'weekdayStats' => $tracker->getWeekdayStats(),
+//            'typeStats' => $tracker->getTypeStats(),
+//            'urlStats' => $tracker->getUrlStats(),
+//            'topUrls' => $tracker->getBrowserStatsByTopUrls()['topUrls'],
+//            'browserStatsByUrl' => $tracker->getBrowserStatsByTopUrls()['browserStatsByUrl'],
+//            'articleCounter' => app(\App\Cms\Repositories\ArticleRepository::class)->getCountArticleFromUser(),
+//        ]);
+//    })->name('dashboard');
 
 
     // LISTA błędów
