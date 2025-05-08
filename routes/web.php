@@ -77,7 +77,6 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
 
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
         $browserStatsData = $tracker->getBrowserStatsByTopUrls();
-
         return view('dashboard', [
             'visitCounter' => $tracker->getCountAllVisit(),
             'dailyVisits' => $tracker->getAllData(),
@@ -90,20 +89,6 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
             'articleCounter' => app(\App\Cms\Repositories\ArticleRepository::class)->getCountArticleFromUser(),
         ]);
     })->name('dashboard');
-//    Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
-//        return view('dashboard', [
-//            'visitCounter' => $tracker->getCountAllVisit(), //to i nizej jako jedno zapytanie zrobic do wykresow chart
-//            'dailyVisits' => $tracker->getAllData(),
-//            'browserStats' => $tracker->getBrowserStats(),
-//            'weekdayStats' => $tracker->getWeekdayStats(),
-//            'typeStats' => $tracker->getTypeStats(),
-//            'urlStats' => $tracker->getUrlStats(),
-//            'topUrls' => $tracker->getBrowserStatsByTopUrls()['topUrls'],
-//            'browserStatsByUrl' => $tracker->getBrowserStatsByTopUrls()['browserStatsByUrl'],
-//            'articleCounter' => app(\App\Cms\Repositories\ArticleRepository::class)->getCountArticleFromUser(),
-//        ]);
-//    })->name('dashboard');
-
 
     // LISTA błędów
     Route::get('/errors', function (ErrorsRepository $errors) {

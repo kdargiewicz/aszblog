@@ -5,9 +5,13 @@ namespace App\Web\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @method static VisitModel create(array $values = [])
+ */
 class VisitModel extends Model
 {
     protected $table = 'visits_logger';
+
     protected $fillable = [
         'ip',
         'user_agent',
@@ -18,16 +22,20 @@ class VisitModel extends Model
         'model_id',
     ];
 
+    public function scopeGroupByDate($query)
+    {
+        return $query->selectRaw('DATE(created_at) as date, COUNT(*) as total')
+            ->groupBy('date');
+    }
+
     public function getAll(): int
     {
-        return DB::table($this->table)->get()->count();
+        return $this->count();
     }
 
     public function getAllData()
     {
-        return DB::table($this->table)
-            ->selectRaw('DATE(created_at) as date, COUNT(*) as total')
-            ->groupBy('date')
+        return $this->groupByDate()
             ->orderBy('date', 'desc')
             ->limit(30)
             ->get()
@@ -36,8 +44,7 @@ class VisitModel extends Model
 
     public function getBrowserStats()
     {
-        return  DB::table($this->table)
-            ->select('browser', DB::raw('count(*) as total'))
+        return $this->select('browser', DB::raw('count(*) as total'))
             ->groupBy('browser')
             ->orderByDesc('total')
             ->limit(7)
@@ -46,16 +53,14 @@ class VisitModel extends Model
 
     public function getWeekdayStats()
     {
-        return DB::table('visits_logger')
-            ->selectRaw('DAYNAME(created_at) as day, COUNT(*) as total')
+        return $this->selectRaw('DAYNAME(created_at) as day, COUNT(*) as total')
             ->groupBy('day')
             ->get();
     }
 
     public function getTypeStats()
     {
-        return DB::table('visits_logger')
-            ->select('type', DB::raw('count(*) as total'))
+        return $this->select('type', DB::raw('count(*) as total'))
             ->groupBy('type')
             ->orderByDesc('total')
             ->get();
@@ -63,26 +68,22 @@ class VisitModel extends Model
 
     public function getUrlStats()
     {
-        return DB::table('visits_logger')
-            ->select('url', DB::raw('count(*) as total'))
+        return $this->select('url', DB::raw('count(*) as total'))
             ->groupBy('url')
             ->orderByDesc('total')
-            ->limit(10) // ogranicz do najczęściej odwiedzanych (dla czytelności wykresu)
+            ->limit(10)
             ->get();
-
     }
 
     public function getBrowserStatsByTopUrls(int $limit = 5): array
     {
-        $topUrls = DB::table('visits_logger')
-            ->select('url')
+        $topUrls = $this->select('url')
             ->groupBy('url')
             ->orderByRaw('COUNT(*) DESC')
             ->limit($limit)
             ->pluck('url');
 
-        $browserStatsByUrl = DB::table('visits_logger')
-            ->select('url', 'browser', DB::raw('count(*) as total'))
+        $browserStatsByUrl = $this->select('url', 'browser', DB::raw('count(*) as total'))
             ->whereIn('url', $topUrls)
             ->groupBy('url', 'browser')
             ->get()

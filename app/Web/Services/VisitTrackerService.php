@@ -7,44 +7,42 @@ use Illuminate\Http\Request;
 
 class VisitTrackerService
 {
-    public function getCountAllVisit()
-    {
-        return app(VisitModel::class)->getAll();
-    }
+    public function __construct(private VisitModel $visitModel) {}
 
-
-    //te funkcje nizej wrzucic do jednego obiektu dot charts
     public function getAllData()
     {
-        return app(VisitModel::class)->getAllData();
+        return $this->visitModel->getAllData();
     }
 
     public function getBrowserStats()
     {
-        return app(VisitModel::class)->getBrowserStats();
+        return $this->visitModel->getBrowserStats();
     }
 
     public function getWeekdayStats()
     {
-        return app(VisitModel::class)->getWeekdayStats();
+        return $this->visitModel->getWeekdayStats();
     }
 
     public function getTypeStats()
     {
-        return app(VisitModel::class)->getTypeStats();
+        return $this->visitModel->getTypeStats();
     }
-
 
     public function getUrlStats()
     {
-        return app(VisitModel::class)->getUrlStats();
+        return $this->visitModel->getUrlStats();
     }
 
     public function getBrowserStatsByTopUrls()
     {
-        return app(VisitModel::class)->getBrowserStatsByTopUrls();
+        return $this->visitModel->getBrowserStatsByTopUrls();
     }
-    //te funkcje WYŻEJ wrzucic do jednego obiektu dot charts
+
+    public function getCountAllVisit(): int
+    {
+        return $this->visitModel->getAll();
+    }
 
     public function logVisit(Request $request, ?string $type = null, ?int $modelId = null): void
     {
@@ -58,8 +56,6 @@ class VisitTrackerService
             'url'        => $request->fullUrl(),
             'type'       => $type,
             'model_id'   => $modelId,
-//            'type'       => $request->get('visit_type'), //rozwiazanie tego mam w middleware LogVisitMiddleware
-//            'model_id'   => $request->get('visit_model_id'),
         ]);
     }
 
