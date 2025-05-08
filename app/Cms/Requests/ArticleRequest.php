@@ -15,7 +15,6 @@ class ArticleRequest extends FormRequest
     {
         return [
             'article_uuid'   => ['required', 'uuid'],
-         //   'article_uuid'   => ['required', 'uuid', 'exists:articles,article_uuid'],
             'title' => ['nullable', 'string', 'max:255'],
             'tags' => ['nullable', 'string', 'max:255'],
             'category' => ['nullable', 'string', 'max:255'],
@@ -23,6 +22,10 @@ class ArticleRequest extends FormRequest
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'content' => ['nullable', 'string'],
             'allow_comments' => ['nullable', 'boolean'],
+            'created_at' => [
+                'nullable',
+                'date_format:Y-m-d\TH:i',
+            ],
         ];
     }
 

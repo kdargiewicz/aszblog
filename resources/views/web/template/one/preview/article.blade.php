@@ -24,7 +24,7 @@
                         @if(!empty($article->category) && !empty($article->created_at))
                             &nbsp;&bull;&nbsp;
                         @endif
-                        {{ $article->created_at ?? '' }}
+                        {{ $article->created_at ? \Carbon\Carbon::parse($article->created_at)->format('Y-m-d') : '' }}
                     </p>
                 @endif
 

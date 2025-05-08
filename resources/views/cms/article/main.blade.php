@@ -53,6 +53,17 @@
                           placeholder="{{ __('article.create-form.content-placeholder') }}"
                 >{{ old('content', $article->content ?? '') }}</textarea>
 
+                @if(isset($article) && $article->created_at)
+                    <label class="w3-text-grey">
+                        <b>{{ __('article.create-form.date_time') }}</b>
+                    </label>
+                    <input type="datetime-local"
+                           id="created_at"
+                           name="created_at"
+                           class="w3-input w3-border w3-round w3-margin-bottom"
+                           value="{{ old('created_at', \Carbon\Carbon::parse($article->created_at)->format('Y-m-d\TH:i')) }}">
+                @endif
+
                 <label class="w3-text-grey">
                     <b>{{ __('article.create-form.allow-comments') }}</b>
                 </label>

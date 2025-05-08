@@ -5,6 +5,17 @@ namespace App\Cms\Models;
 use App\Cms\Repositories\ArticleRepository;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string|null $article_uuid
+ * @property string|null $title
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @property string|null $content
+ * @property bool|null $allow_comments
+ * @property int|null $category_id
+ * @property array|null $tags_id
+ * @method static Article firstOrCreate(array $attributes, array $values = [])
+ */
 class Article extends Model
 {
     protected $table = 'articles';
@@ -18,6 +29,7 @@ class Article extends Model
         'longitude',
         'content',
         'allow_comments',
+        'created_at',
     ];
 
     protected $casts = [

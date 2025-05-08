@@ -22,6 +22,7 @@ return [
         'allow-comments-no' => 'Nie',
         'allow-comments-select' => 'Wybierz opcję',
         'set-map-location' => 'Wybierz lokalizację na mapie',
+        'date_time' => 'Edytuj datę publikacji (z godziną)',
     ],
 
     'requests' => [

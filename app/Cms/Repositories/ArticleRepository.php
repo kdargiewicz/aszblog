@@ -14,22 +14,20 @@ class ArticleRepository
 {
     public function store(ArticleDTO $dto, ?int $categoryId, array $tagIds, int $userId): Article
     {
-        $article = Article::firstOrCreate([
+        return Article::firstOrCreate([
             'article_uuid' => $dto->article_uuid,
-        ], [
-            'user_id' => $userId,
-            'title' => $dto->title,
-            'category_id' => $categoryId,
-            'tags_id' => $tagIds,
-            'latitude' => $dto->latitude,
-            'longitude' => $dto->longitude,
-            'content' => $dto->content,
-            'allow_comments' => $dto->allow_comments,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        return $article;
+            ], [
+                'user_id' => $userId,
+                'title' => $dto->title,
+                'category_id' => $categoryId,
+                'tags_id' => $tagIds,
+                'latitude' => $dto->latitude,
+                'longitude' => $dto->longitude,
+                'content' => $dto->content,
+                'allow_comments' => $dto->allow_comments,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
     }
 
     public function update(Article $article, ArticleDTO $dto, ?int $categoryId, array $tagIds): void
@@ -42,6 +40,7 @@ class ArticleRepository
             'longitude' => $dto->longitude,
             'content' => $dto->content,
             'allow_comments' => $dto->allow_comments,
+            'created_at' => $dto->created_at,
         ]);
     }
 
@@ -148,57 +147,6 @@ class ArticleRepository
             comments: $article->comments ?? null,
         );
     }
-
-//    public function getPublishedArticlesFromUser(int $userId): object
-//    {
-//        $subImageQuery = DB::table('images')
-//            ->select('url')
-//            ->whereColumn('images.article_id', 'articles.id')
-//            ->orderBy('id')
-//            ->limit(1);
-//
-//        $articles = DB::table('articles')
-//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-//            ->where('articles.user_id', $userId)
-//            ->where('articles.deleted', Constants::NOT_DELETED)
-//            ->where('articles.is_published', Constants::PUBLISHED)
-//            ->select([
-//                'articles.*',
-//                'categories.name as category_name',
-//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
-//            ])
-//            ->mergeBindings($subImageQuery)
-//            ->get();
-//
-//        return $articles;
-//    }
-//
-//    public function getArticleList(int $userId)
-//    {
-//        $subImageQuery = DB::table('images')
-//            ->select('url')
-//            ->whereColumn('images.article_id', 'articles.id')
-//            ->orderBy('id')
-//            ->limit(1);
-//
-//        $articles = DB::table('articles')
-//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-//            ->where('articles.user_id', $userId)
-//            ->where('articles.deleted', Constants::NOT_DELETED)
-//            ->select([
-//                'articles.*',
-//                'categories.name as category_name',
-//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
-//            ])
-//            ->mergeBindings($subImageQuery)
-//            ->paginate(config('blog.article_list.pagination'));
-//
-//
-//        $tags = app(Tag::class)->getTagsNameForUserId($userId);
-//        $articlesWithTagNames = app(CmsHelper::class)->transformWithTagNames($articles, $tags);
-//
-//        return $articlesWithTagNames;
-//    }
 
     public function deleteArticle($articleId, $userId): int
     {

@@ -25,9 +25,6 @@ class ArticleDTO
         public ?int $article_id = null,
         public Collection|null $comments = null,
     ) {
-        if ($created_at) {
-            $this->created_at = Carbon::parse($created_at)->format('Y-m-d');
-        }
     }
 
     public static function fromRequest(array $data): self
@@ -41,6 +38,7 @@ class ArticleDTO
             longitude: isset($data['longitude']) ? floatval($data['longitude']) : null,
             content: $data['content'] ?? null,
             allow_comments: isset($data['allow_comments']) ? boolval($data['allow_comments']) : null,
+            created_at: !empty($data['created_at']) ? \Carbon\Carbon::parse($data['created_at']) : null,
         );
     }
 
@@ -59,20 +57,4 @@ class ArticleDTO
             tag_ids: $article->tags_id
         );
     }
-
-
-//    public static function fromModel(Article $article): self
-//    {
-//        return new self(
-//            title: $article->title,
-//            tags: $article->tags->pluck('name')->implode(', '), // zakładamy relację
-//            category: $article->category?->name, // jeśli masz relację belongsTo
-//            latitude: $article->latitude,
-//            longitude: $article->longitude,
-//            content: $article->content,
-//            allow_comments: $article->allow_comments,
-//            category_id: $article->category_id,
-//            tag_ids: $article->tags->pluck('id')->toArray()
-//        );
-//    }
 }
