@@ -31,7 +31,7 @@ class Image extends Model
 
     public function getAllImagesToGallery(): array
     {
-        return self::query()->where('user_id', 8)->whereNotNull('article_id')->get()->toArray();
+        return self::query()->whereNotNull('article_id')->get()->toArray();
     }
 
 
