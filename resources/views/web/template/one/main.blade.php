@@ -16,9 +16,15 @@
 @include('web.template.one.flash')
 
 
-
-@if(isset($article))
-    @yield('content')
+{{--TU PROTEZA DO PREVIEW BLOGA KOLO MANOLO--}}
+@if(isset($article) || isset($images) || Route::currentRouteName() === 'about-me')
+{{--    @yield('content')--}}
+<div class="page-content">
+    <!-- header, content, itp. -->
+    <div class="main-content">
+        @yield('content')
+    </div>
+</div>
 @else
     <!-- Header -->
     <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
@@ -118,6 +124,8 @@
 @endif
 
 @include('web.template.one.footer')
+
+<script src="{{ asset('web/js/one-main.js') }}"></script>
 
 </body>
 </html>

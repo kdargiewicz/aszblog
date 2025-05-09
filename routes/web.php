@@ -159,6 +159,8 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     //podglad wersji bloga
     Route::get('/preview/{name}', [\App\Web\Controllers\PreviewController::class, 'getPreviewBlogByBlogName'])->name('first.blog.preview');
     Route::get('/article-preview/{articleId}', [\App\Web\Controllers\PreviewController::class, 'getPreviewArticle'])->name('article.preview');
+    Route::get('/gallery', [\App\Web\Controllers\PreviewController::class, 'getGallery'])->name('gallery.preview');
+    Route::get('/about-me', [\App\Web\Controllers\PreviewController::class, 'getAboutMe'])->name('about-me');
 
     //settings
     Route::get('/settings', [\App\Cms\Controllers\SettingsController::class, 'getSettings'])->name('user.settings');

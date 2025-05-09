@@ -100,7 +100,6 @@
         <h5>test charts</h5>
         <div class="w3-container w3-light-grey w3-margin">
             <h2 class="w3-text-dark-grey w3-serif">Statystyki odwiedzin</h2>
-
             <canvas id="visitsChart" style="max-height: 400px;"></canvas>
         </div>
 
