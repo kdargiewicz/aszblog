@@ -13,5 +13,11 @@ return [
         'blog_template_select' => 'Wybierz z listy:',
         'my_motto_placeholder' => 'Świat jest zbyt piękny, by odkrywać go tylko w marzeniach...',
         'about_me_placeholder' => 'Cześć! Jestem osobą która uwielbia podróże i wierzę, że każda podróż — mała czy duża — zmienia nas na zawsze....',
+        'about_me_title' => 'Ustawienia zakładki "O mnie"',
+        'about_me_main_image' => 'Zdjęcie w zakładce "O mnie"',
+        'no_photo' => 'Brak zdjęcia',
+        'select_avatar_image' => 'Wybierz avatar',
+        'select_main_image' => 'Główne zdjęcie bloga',
+        'no_main_image' => 'Brak głównego zdjęcia'
     ]
 ];

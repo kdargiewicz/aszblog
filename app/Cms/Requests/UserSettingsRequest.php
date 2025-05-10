@@ -19,6 +19,7 @@ class UserSettingsRequest extends FormRequest
             'about_me' => ['nullable', 'string', 'max:5000'],
             'my_motto' => ['nullable', 'string', 'max:255'],
             'blog_template' => ['nullable', 'string', 'in:one,two,minimalist'],
+            'about_me_image' => ['nullable', 'image', 'max:40960'],
         ];
     }
 
@@ -32,6 +33,7 @@ class UserSettingsRequest extends FormRequest
             'about_me.max' => __('validation.custom.about_me.max'),
             'my_motto.max' => __('validation.custom.my_motto.max'),
             'blog_template.in' => __('validation.custom.blog_template.in'),
+            'about_me_image.image' => __('validation.custom.main_image.image'),
         ];
     }
 }

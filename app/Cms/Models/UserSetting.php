@@ -2,10 +2,13 @@
 
 namespace App\Cms\Models;
 
-use App\Constants\Constants;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @method static UserSetting updateOrCreate(array $attributes, array $values = [])
+ * @method static UserSetting where(array $attributes, array $values = [])
+ */
 class UserSetting extends Model
 {
     protected $fillable = [
@@ -15,6 +18,7 @@ class UserSetting extends Model
         'about_me',
         'my_motto',
         'blog_template',
+        'about_me_image'
     ];
 
     public function getUserSettings($userId): object|null
