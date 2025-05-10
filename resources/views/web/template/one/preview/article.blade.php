@@ -2,7 +2,7 @@
 @section('content')
     <div class="w3-display-container w3-content w3-wide header-image" id="home">
         @if($article && $article->firstImageFromArticle)
-            <img class="w3-image" src='{{ asset($article->firstImageFromArticle) }}' width="1600" height="800">
+            <img class="w3-image" src='{{ asset($article->firstImageFromArticle) }}' width="1600" height="800" alt="firstImageFromArticle">
         @else
             <img class="w3-image" src="https://www.w3schools.com/w3images/hamburger.jpg" alt="Hamburger Catering"
                  width="1600" height="800">

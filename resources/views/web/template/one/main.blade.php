@@ -17,7 +17,7 @@
 
 
 {{--TU PROTEZA DO PREVIEW BLOGA KOLO MANOLO--}}
-@if(isset($article) || isset($images) || Route::currentRouteName() === 'about-me')
+@if(isset($article) || isset($images) || Route::currentRouteName() === 'about-me' || Route::currentRouteName() === 'contact')
 {{--    @yield('content')--}}
 <div class="page-content">
     <!-- header, content, itp. -->
