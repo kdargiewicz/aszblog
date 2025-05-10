@@ -23,7 +23,7 @@ class PreviewController extends Controller
         return $this->viewWithBlogTemplate('preview/article', compact('article'));
     }
 
-    public function getGallery()
+    public function getGallery() //tu powinienem zwracac zdjecia z opubikowanych artykułów? ewentualnie zrobić edycje które sie mają wyświetlac
     {
         $images = app(Image::class)->getAllImagesToGallery();
 
