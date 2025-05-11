@@ -18,6 +18,7 @@ return [
         'no_photo' => 'Brak zdjęcia',
         'select_avatar_image' => 'Wybierz avatar',
         'select_main_image' => 'Główne zdjęcie bloga',
-        'no_main_image' => 'Brak głównego zdjęcia'
+        'no_main_image' => 'Brak głównego zdjęcia',
+        'user-settings-updated' => 'Ustawienia zostały zapisane',
     ]
 ];

@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @method static UserSetting updateOrCreate(array $attributes, array $values = [])
- * @method static UserSetting where(array $attributes, array $values = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSetting where(string $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
+ * @method static UserSetting|null first()
+ * @method static UserSetting firstOrFail()
+ * @method static UserSetting find($id)
+ * @method static \Illuminate\Database\Eloquent\Collection|UserSetting[] all()
+ * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class UserSetting extends Model
 {

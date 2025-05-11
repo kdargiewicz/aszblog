@@ -194,6 +194,26 @@ html, body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+#blog-map {
+    height: 80vh;
+    width: 100%;
+}
+
+/*likwiduje X w info nad markerami w mapie google*/
+.gm-style-iw-c button.gm-ui-hover-effect {
+    display: none !important;
+}
+
+.infowindow-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 20px;
+    padding-left: 10px;
+}
+
+
+
 
 
 

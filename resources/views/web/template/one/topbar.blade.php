@@ -11,6 +11,7 @@
             <a href="{{ route('about-me') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.about') }}</a>
             <a href="{{ route('gallery.preview') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.gallery') }}</a>
             <a href="{{ route('contact') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.contact') }}</a>
+            <a href="{{ route('blog.map') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.map') }}</a>
         </div>
 
         <a href="javascript:void(0);" class="w3-bar-item w3-button w3-right w3-hide-medium w3-hide-large"

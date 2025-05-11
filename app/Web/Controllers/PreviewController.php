@@ -16,31 +16,31 @@ class PreviewController extends Controller
         return view("web.template.{$name}.main", compact('articles'));
     }
 
-    public function getPreviewArticle(int $articleId)
+    public function getPreviewArticle(int $articleId): object
     {
         $article = app(Article::class)->getFullArticleById($articleId);
 
         return $this->viewWithBlogTemplate('preview/article', compact('article'));
     }
 
-    public function getGallery() //tu powinienem zwracac zdjecia z opubikowanych artykułów? ewentualnie zrobić edycje które sie mają wyświetlac
+    public function getGallery(): object //tu powinienem zwracac zdjecia z opubikowanych artykułów? ewentualnie zrobić edycje które sie mają wyświetlac
     {
         $images = app(Image::class)->getAllImagesToGallery();
 
         return $this->viewWithBlogTemplate('preview/gallery', compact('images'));
     }
 
-    public function getAboutMe()
+    public function getAboutMe(): object
     {
         return $this->viewWithBlogTemplate('preview/about-me');
     }
 
-    public function getContact()
+    public function getContact(): object
     {
         return $this->viewWithBlogTemplate('preview/contact');
     }
 
-    private function viewWithBlogTemplate(string $subview, array $data = [])
+    private function viewWithBlogTemplate(string $subview, array $data = []): object
     {
         $blogTemplate = $this->getBlogTemplate();
 
@@ -61,5 +61,13 @@ class PreviewController extends Controller
         }
 
         return $blogSettings->blog_template;
+    }
+
+    public function getBlogMap()
+    {
+        $articles = app(Article::class)->getAllForBlogMap(auth()->id());
+
+
+        return view('web.template.one.preview.blog-map', compact('articles'));
     }
 }

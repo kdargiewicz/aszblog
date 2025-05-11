@@ -171,4 +171,15 @@ class ArticleRepository
         return DB::table('articles')->where('user_id', auth()->id())->count();
     }
 
+    public function getAllForBlogMap(): object
+    {
+        //tu musze zmienic pobieranie z modelu + artykuły generalnie opublikowane
+        $articles = Article::select('id', 'title', 'latitude', 'longitude')
+            ->whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->get();
+
+        return $articles;
+    }
+
 }

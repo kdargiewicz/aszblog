@@ -162,6 +162,7 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     Route::get('/gallery', [\App\Web\Controllers\PreviewController::class, 'getGallery'])->name('gallery.preview');
     Route::get('/about-me', [\App\Web\Controllers\PreviewController::class, 'getAboutMe'])->name('about-me');
     Route::get('/contact', [\App\Web\Controllers\PreviewController::class, 'getContact'])->name('contact');
+    Route::get('/blog-map', [\App\Web\Controllers\PreviewController::class, 'getBlogMap'])->name('blog.map');
 
     //settings
     Route::get('/settings', [\App\Cms\Controllers\SettingsController::class, 'getSettings'])->name('user.settings');

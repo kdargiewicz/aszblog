@@ -19,7 +19,7 @@
 
 
 {{--TU PROTEZA DO PREVIEW BLOGA KOLO MANOLO--}}
-@if(isset($article) || isset($images) || Route::currentRouteName() === 'about-me' || Route::currentRouteName() === 'contact')
+@if(isset($article) || isset($images) || Route::currentRouteName() === 'about-me' || Route::currentRouteName() === 'contact' || Route::currentRouteName() === 'blog.map')
 {{--    @yield('content')--}}
 <div class="page-content">
     <!-- header, content, itp. -->
@@ -126,8 +126,6 @@
 @endif
 
 @include('web.template.one.footer')
-
-<script src="{{ asset('web/js/one-main.js') }}"></script>
 
 </body>
 </html>

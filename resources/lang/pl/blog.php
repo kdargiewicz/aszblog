@@ -5,6 +5,7 @@ return [
         'about' => 'O mnie',
         'gallery' => 'Galeria',
         'contact' => 'Kontakt',
+        'map' => 'Mapa',
     ],
 
     'gallery' => 'Galeria zdjęć',
