@@ -1,4 +1,7 @@
+
 body {
+    background-image: url('/img/background/so-white.png');
+    background-repeat: repeat;
     font-family: "Times New Roman", Georgia, Serif;
 }
 
