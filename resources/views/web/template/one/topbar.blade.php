@@ -2,7 +2,7 @@
     <div class="w3-bar w3-white w3-padding w3-card article-title" style="position: relative;">
         <a href="#home" class="w3-bar-item w3-button">
             <div class="logo-and-title">
-                <img class="w3-image topbar-logo" src="{{ asset('img/aszblog_logo.png') }}" alt="Logo">
+                <img class="w3-image topbar-logo no-modal" src="{{ asset('img/aszblog_logo.png') }}" alt="Logo">
             </div>
         </a>
 

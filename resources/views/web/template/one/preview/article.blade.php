@@ -75,5 +75,6 @@
             </div>
         @endif
     </div>
+    @include('web.template.one.preview.image-modal.modal')
 @endsection
 
