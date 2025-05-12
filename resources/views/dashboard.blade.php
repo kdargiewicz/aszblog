@@ -4,7 +4,7 @@
     <div class="w3-row-padding w3-margin-top">
 
         <div class="w3-quarter">
-            <div class="w3-container w3-red w3-padding-16" style="height: 100%; min-height: 170px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); filter: brightness(90%);">
+            <div class="w3-container w3-olive w3-padding-16 dashboard-card">
                 <div class="w3-row">
                     <div class="w3-col s4">
                         <i class="fa fa-comment w3-xxxlarge"></i>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="w3-quarter">
-            <div class="w3-container w3-blue w3-padding-16" style="height: 100%; min-height: 170px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); filter: brightness(90%);">
+            <div class="w3-container w3-info w3-padding-16 dashboard-card">
                 <div class="w3-row">
                     <div class="w3-col s4">
                         <i class="fa fa-eye w3-xxxlarge"></i>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="w3-quarter">
-            <div class="w3-container w3-teal w3-padding-16" style="height: 100%; min-height: 170px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); filter: brightness(90%);">
+            <div class="w3-container w3-lime w3-padding-16 dashboard-card">
                 <div class="w3-row">
                     <div class="w3-col s4">
                         <i class="fa fa-share-alt w3-xxxlarge"></i>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="w3-quarter">
-            <div class="w3-container w3-orange w3-padding-16" style="height: 100%; min-height: 170px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); filter: brightness(90%);">
+            <div class="w3-container w3-taupe w3-padding-16 dashboard-card">
                 <div class="w3-row">
                     <div class="w3-col s4">
                         <i class="fa fa-users w3-xxxlarge"></i>

@@ -110,4 +110,12 @@
     outline: none !important;
 }
 
+.dashboard-card {
+    height: 100%;
+    min-height: 170px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    filter: brightness(90%);
+}
+
 
