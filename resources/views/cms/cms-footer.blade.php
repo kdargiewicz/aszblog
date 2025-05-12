@@ -1,5 +1,5 @@
-<footer class="w3-container w3-padding-16" style="flex-shrink: 0; background-color: #e0e0e0;">
-    <p style="text-align: center; color: #333; margin: 0;">
-        © {{ date('Y') }} {{ __('footer.main') }}
+<footer class="w3-container w3-padding-16 footer-main">
+    <p class="footer-p">
+        {{ date('Y') }} {{ __('footer.main') }} <span class="footer-span">{{ __('footer.author') }}</span>
     </p>
 </footer>

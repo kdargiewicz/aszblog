@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'main' => 'ARTRA-software',
+    'main' => 'ASZBLOG',
+    'author' => 'by ARTRA Software',
 ];
