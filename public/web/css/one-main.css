@@ -212,6 +212,45 @@ html, body {
     padding-left: 10px;
 }
 
+figure.image {
+    display: inline-block;
+    margin: 1.5em auto;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+figure.image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+figure.image figcaption {
+    margin-top: 8px;
+    font-size: 0.95em;
+    color: #555;
+    font-style: italic;
+    line-height: 1.4;
+}
+ /*ramka dla zdjęcia bez podpisu dla ujednolicenia wyglądu elementu img*/
+img:not(figure img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin: 1.5em auto;
+}
+
+
+
 
 
 

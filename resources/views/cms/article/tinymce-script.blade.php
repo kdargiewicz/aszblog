@@ -16,6 +16,8 @@
         relative_urls: false,
         remove_script_host: false,
         convert_urls: false,
+        image_caption: true,
+        image_title: true,
         images_upload_handler: function (blobInfo, progress) {
             return new Promise(function (resolve, reject) {
                 const xhr = new XMLHttpRequest();
