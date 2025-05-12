@@ -53,13 +53,21 @@ class ArticleController extends Controller
             if ($article) {
                 $categoryId = $categoryTagResolver->resolveCategoryId($dto->category, $userId);
                 $tagIds = $categoryTagResolver->resolveTagIds($dto->tags, $userId);
+
                 $articleRepository->update($article, $dto, $categoryId, $tagIds);
                 $this->imageRepository->assignArticleIdByUuid($article->getArticleUuid(), $article->getArticleId(), $userId);
 
-                return redirect()
-                    ->route('article.edit', $article->article_uuid)
+                $action = $request->input('action');
+
+                if ($action === 'preview') {
+                    return redirect()->route('article.preview', $article->getArticleId())
+                        ->with('success', __('flash-messages.article-update-success-preview'));
+                }
+
+                return redirect()->route('article.edit', $article->article_uuid)
                     ->with('success', __('flash-messages.article-update-success'));
             }
+
         } catch (\Exception $e) {
             Log::error(__('log.log-error-update-article') . $e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
@@ -67,6 +75,7 @@ class ArticleController extends Controller
                 'data' => $request->all(),
             ]);
         }
+
         return redirect()
             ->back()
             ->withInput()

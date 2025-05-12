@@ -80,35 +80,16 @@
                     </option>
                 </select>
 
-                <button class="w3-button w3-blue w3-round w3-margin-top" type="submit">
+                <button class="btn btn-primary" type="submit" name="action" value="save">
                     {{ isset($article) ? __('buttons.update') : __('buttons.save') }}
                 </button>
 
+                @if (isset($article))
+                    <button type="submit" class="btn btn-success" name="action" value="preview" formtarget="_blank">
+                        {{ __('buttons.update_and_preview') }}
+                    </button>
+                @endif
             </form>
-
-        @if(Auth::user()->is_admin)
-            </br></br></br></br>
-        TO ZOSTAJE DO TESTOW ! ! !
-
-        <h2>Upload zdjęcia testowego</h2>
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-            <p><strong>Wersja max:</strong> <a href="{{ session('max') }}" target="_blank">{{ session('max') }}</a></p>
-            <p><strong>Wersja min:</strong> <a href="{{ session('min') }}" target="_blank">{{ session('min') }}</a></p>
-            <img src="{{ session('min') }}" style="max-width: 200px; margin-top: 10px;">
-        @endif
-
-        <form method="POST" action="{{ route('image.upload') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="image" class="form-label">Wybierz zdjęcie:</label>
-                <input type="file" class="form-control" id="image" name="image" required accept="image/*">
-            </div>
-            <button type="submit" class="btn btn-primary">Wyślij</button>
-        </form>
-        @endif
-
     </div>
 
     @include('cms.article.tinymce-script')
