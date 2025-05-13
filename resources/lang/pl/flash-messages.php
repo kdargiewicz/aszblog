@@ -13,4 +13,5 @@ return [
     ],
 
     'add_comment' => 'Dziękujemy za komentarz!',
+    'email_send' => 'Wiadomość email została wysłana',
 ];

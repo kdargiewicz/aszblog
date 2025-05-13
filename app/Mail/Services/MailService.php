@@ -4,6 +4,7 @@ namespace App\Mail\Services;
 
 use App\Cms\Models\Article;
 use App\Cms\Models\Comments;
+use App\Mail\BlogContactMail;
 use App\Mail\ContactMessageMail;
 use App\Mail\DTO\ContactMessageDTO;
 use App\Mail\DTO\SendNotificationDTO;
@@ -38,6 +39,12 @@ class MailService
     {
         Mail::to($dto->email)->send(new NotificationMail($dto));
     }
+
+    public function submitContactEmail(SendNotificationDTO $dto): void
+    {
+        Mail::to($dto->email)->send(new BlogContactMail($dto));
+    }
+
     public function submit(ContactMessageDTO $dto): void
     {
         ContactMessage::create((array) $dto);

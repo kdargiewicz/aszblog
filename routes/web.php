@@ -1,5 +1,6 @@
 <?php
 
+use App\Web\Controllers\MailContactController;
 use App\Web\Controllers\WebCommentsController;
 use Illuminate\Support\Facades\Route;
 use App\Cms\Controllers\ImageController;
@@ -30,6 +31,9 @@ use App\Cms\Repositories\ErrorsRepository;
 
 
 Route::post('/store-comment', [WebCommentsController::class, 'storeComment'])->name('comment.store');
+
+Route::post('/contact/send', [MailContactController::class, 'sendMailFromReader'])->name('contact.send');
+
 
 
 

@@ -269,6 +269,22 @@ figure.image figcaption {
     border-radius:8px;
 }
 
+.footer-main {
+    flex-shrink: 0;
+    background-color: #e0e0e0;
+}
+
+.footer-p {
+    text-align: center;
+    color: #333; margin: 0;
+    font-size: 16px;
+}
+
+.footer-span {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
 
 
 
