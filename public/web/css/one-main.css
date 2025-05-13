@@ -285,6 +285,21 @@ figure.image figcaption {
     opacity: 0.7;
 }
 
+.article-preview-block {
+    background-color: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 48px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+.article-preview-block > .w3-col {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+
+
 
 
 
