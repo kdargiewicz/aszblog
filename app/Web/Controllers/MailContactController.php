@@ -13,6 +13,7 @@ class MailContactController extends Controller
     public function sendMailFromReader(MailContactRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validated();
+        session()->forget('captcha_sum');
 
         $dto = new SendNotificationDTO(
             name: __('blog.contact.contact_subject', ['name' => $data['contact_name']]),

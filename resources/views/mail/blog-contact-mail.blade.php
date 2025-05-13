@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>{{ __('messages.mail.notification_mail') }}</title>
+    <title>{{ __('messages.mail.contact_email') }}</title>
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 2rem;">
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 720px; margin: auto; background-color: #ffffff; padding: 2rem; border-radius: 8px;">

@@ -26,5 +26,7 @@ return [
         'from_email' => 'Wiadomość od: :email',
         'no_email' => 'adres e-mail nie został podany',
         'contact_subject' => 'Wiadomość kontaktowa od :name',
+        'math_question' => 'Podaj wynik działania :a + :b ?',
+        'enter_result' => 'Podaj wynik',
     ]
 ];

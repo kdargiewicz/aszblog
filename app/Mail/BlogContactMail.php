@@ -19,7 +19,7 @@ class BlogContactMail extends Mailable
 
     public function build(): static
     {
-        return $this->subject(__('messages.mail.notification_mail'))
+        return $this->subject(__('messages.mail.contact_email'))
             ->view('mail.blog-contact-mail')
             ->with(['dto' => $this->dto]);
     }
