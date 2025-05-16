@@ -13,6 +13,7 @@
     }
 
     function initMap() {
+        // Początkowe centrum (Polska) – zostaje na wypadek braku artykułów
         const defaultCenter = { lat: 52.2297, lng: 21.0122 };
 
         const map = new google.maps.Map(document.getElementById('blog-map'), {
@@ -22,7 +23,10 @@
             mapId: '8d4f0950e892b8c5'
         });
 
-        const infoWindow = new google.maps.InfoWindow(); // 👈 pojedynczy infowindow
+        const infoWindow = new google.maps.InfoWindow();
+
+        // Nowość: obiekt bounds
+        const bounds = new google.maps.LatLngBounds();
 
         articles.forEach(article => {
             const position = {
@@ -46,27 +50,39 @@
                 }
             });
 
-            // Po kliknięciu – redirect
             marker.addListener('click', () => {
                 window.location.href = `/article-preview/${article.id}`;
             });
 
-            // Po najechaniu – pokaż tytuł
             marker.addListener('mouseover', () => {
                 infoWindow.setContent(`
                     <div class="infowindow-content">
                         ${article.title}
                     </div>
                 `);
-
                 infoWindow.open(map, marker);
             });
 
-            // Opcjonalnie: zamknij dymek po zjechaniu myszką
             marker.addListener('mouseout', () => {
                 infoWindow.close();
             });
+
+            // Rozszerz granice mapy o ten punkt
+            bounds.extend(position);
         });
+
+        // Dopasuj widok do wszystkich markerów
+        if (articles.length > 0) {
+            map.fitBounds(bounds);
+        }
+
+        google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
+            if (map.getZoom() > 10) {
+                map.setZoom(10); // Maksymalny zoom np. 10
+            }
+        });
+
+
     }
 
     function loadGoogleMapsApi() {
