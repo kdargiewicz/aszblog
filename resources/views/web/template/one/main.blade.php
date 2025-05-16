@@ -61,7 +61,9 @@
                     <p class="w3-large" style="text-align: justify;">{!! \Illuminate\Support\Str::limit(strip_tags($article->content), 540) !!}</p>
                 </div>
             </div>
-            <hr class="comments-separator">
+            @if (! $loop->last)
+                <hr class="comments-separator">
+            @endif
         @endforeach
     </div>
 @endif
