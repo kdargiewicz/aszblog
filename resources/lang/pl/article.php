@@ -32,7 +32,9 @@ return [
 
     'article_action' => [
         'published' => 'Publikowany',
+        'test-published' => 'Publikowany-testy',
         'not-published' => 'Nie publikowany',
+        'change-publish-status' => 'Zmień status publikacji',
         'article-edit' => 'Edytuj artykuł',
         'article-preview' => 'Podgląd artykułu',
         'article-delete' => 'Usuń artykuł',

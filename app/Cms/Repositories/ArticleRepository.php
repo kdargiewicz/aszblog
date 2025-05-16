@@ -72,7 +72,7 @@ class ArticleRepository
     public function getPublishedArticlesFromUser(int $userId): object
     {
         return $this->baseArticleQuery($userId)
-            ->where('articles.is_published', Constants::PUBLISHED)
+            ->where('articles.is_published', Constants::TEST_PUBLISHED)
             ->get();
     }
 
@@ -180,6 +180,11 @@ class ArticleRepository
             ->get();
 
         return $articles;
+    }
+
+    public function updatePublishedArticle($articleId, $userId, $publishedStatus): int
+    {
+        return DB::table('articles')->where('id', $articleId)->where('user_id', $userId)->update(['is_published' => $publishedStatus]);
     }
 
 }

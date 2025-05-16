@@ -10,5 +10,6 @@ class Constants
     public const MAX_IMG = 2560;
     public const MIN_IMG = 400;
     public const NOT_PUBLISHED = 0;
-    public const PUBLISHED = 1;
+    public const TEST_PUBLISHED = 1;
+    public const PUBLISHED = 2;
 }

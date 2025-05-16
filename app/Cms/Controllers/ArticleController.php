@@ -4,6 +4,7 @@ namespace App\Cms\Controllers;
 
 use App\Cms\Repositories\ArticleRepository;
 use App\Cms\Repositories\ImageRepository;
+use App\Cms\Requests\ArticlePublishRequest;
 use App\Cms\Requests\ArticleRequest;
 use App\Cms\Services\CategoryTagResolverService;
 use App\Http\Controllers\Controller;
@@ -146,6 +147,15 @@ class ArticleController extends Controller
         return redirect()
             ->route('article.list')
             ->with('success', __('flash-messages.article-restore'));
+    }
+
+    public function postUpdatePublishedArticle(ArticlePublishRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $validated = $request->validated();
+
+        app(ArticleRepository::class)->updatePublishedArticle($validated['article_id'], auth()->id(), $validated['new_status']);
+
+        return response()->json(['success' => true, 'status' => $validated['new_status']]);
     }
 }
 

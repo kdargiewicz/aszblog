@@ -6,6 +6,7 @@ return [
         'gallery' => 'Galeria',
         'contact' => 'Kontakt',
         'map' => 'Mapa',
+        'cms' => 'CMS',
     ],
 
     'gallery' => 'Galeria zdjęć',

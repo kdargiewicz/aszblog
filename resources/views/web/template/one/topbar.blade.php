@@ -1,13 +1,16 @@
 <div class="w3-top">
     <div class="w3-bar w3-white w3-padding w3-card article-title" style="position: relative;">
-        <a href="#home" class="w3-bar-item w3-button">
+        <a href="{{ route('first.blog.preview', ['name' => 'one']) }}" class="w3-bar-item w3-button">
             <div class="logo-and-title">
                 <img class="w3-image topbar-logo no-modal" src="{{ asset('img/aszblog_logo.png') }}" alt="Logo">
             </div>
         </a>
 
         <div class="w3-right w3-hide-small topbar-links w3-margin-top w3-margin-bottom">
-            <a href="#about" class="w3-bar-item w3-button">{{ __('blog.topbar.home') }}</a>
+            @auth
+                <a href="{{ route('dashboard') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.cms') }}</a>
+            @endauth
+            <a href="{{ route('first.blog.preview', ['name' => 'one']) }}" class="w3-bar-item w3-button">{{ __('blog.topbar.home') }}</a>
             <a href="{{ route('about-me') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.about') }}</a>
             <a href="{{ route('gallery.preview') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.gallery') }}</a>
             <a href="{{ route('contact') }}" class="w3-bar-item w3-button">{{ __('blog.topbar.contact') }}</a>

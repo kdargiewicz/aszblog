@@ -23,15 +23,19 @@
                         </h4>
 
                         <div class="w3-margin-bottom">
-                            @if(!$article->is_published)
-                                <span class="w3-tag w3-yellow w3-small w3-round-small">
-                                    {{ __('article.article_action.not-published') }}
-                                </span>
-                            @else
-                                <span class="w3-tag w3-light-green w3-small w3-round-small">
+
+                            <span onclick="openStatusModal({{ $article->id }}, {{ $article->is_published }})"
+                                  class="w3-tag {{ $article->is_published === 2 ? 'w3-green' : ($article->is_published === \App\Constants\Constants::TEST_PUBLISHED ? 'w3-yellow' : 'w3-red') }} w3-small w3-round-small w3-hover-shadow"
+                                  style="cursor: pointer;">
+                                @if($article->is_published === \App\Constants\Constants::PUBLISHED)
                                     {{ __('article.article_action.published') }}
-                                </span>
-                            @endif
+                                @elseif($article->is_published === \App\Constants\Constants::TEST_PUBLISHED)
+                                    {{ __('article.article_action.test-published') }}
+                                @else
+                                    {{ __('article.article_action.not-published') }}
+                                @endif
+                            </span>
+
                             @if(!$article->allow_comments)
                                 <span class="w3-tag w3-deep-orange w3-small w3-round-small">
                                     {{ __('article.article_action.not_allow_comments') }}
@@ -86,13 +90,6 @@
     </div>
 
     @include('cms.modals.article-delete-modal')
-
-    <script>
-        function openDeleteModal(url) {
-            const modal = document.getElementById('deleteModal');
-            const form = document.getElementById('deleteForm');
-            form.action = url;
-            modal.style.display = 'block';
-        }
-    </script>
+    @include('cms.modals.published-status-modal')
+    @include('cms.modals.script')
 @endsection

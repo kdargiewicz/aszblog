@@ -151,6 +151,8 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
 
     Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.list.delete');
 
+    Route::post('updatePublishedArticle', [\App\Cms\Controllers\ArticleController::class, 'postUpdatePublishedArticle'])->name('article.update.published');
+
 
 
 
