@@ -16,6 +16,12 @@
             <input type="email" name="email" required autofocus style="width: 100%; padding: 8px; margin: 8px 0;">
             <label class="form-label">{{ __('auth.password') }}</label>
             <input type="password" name="password" required style="width: 100%; padding: 8px; margin: 8px 0;">
+            <div style="margin: 10px 0;">
+                <label class="link-muted">
+                    <input type="checkbox" name="remember" class="link-muted">
+                    {{ __('auth.remember_me') }}
+                </label>
+            </div>
             <button type="submit"
                     style="width: 100%; padding: 10px; background: #2196f3; color: white; border: none; cursor: pointer; margin-top: 10px;">
                 {{ __('auth.log_in') }}

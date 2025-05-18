@@ -21,4 +21,5 @@ return [
     'check_your_inbox' => 'Sprawdź swoją skrzynkę — wysłaliśmy link weryfikacyjny na adres:',
     'resend_link' => 'Wyślij link ponownie',
     'logout' => 'Wyloguj',
+    'remember_me' => 'zapamiętaj mnie',
 ];
