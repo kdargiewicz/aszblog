@@ -16,6 +16,7 @@ return [
                     Uwielbiam podróże — zarówno te dalekie, jak i te tuż za rogiem. Fascynują mnie nie tylko nowe miejsca, ale także ludzie, ich historie i smaki, które niosą ze sobą lokalne kuchnie.<br><br>
                     Ten blog to moje miejsce, gdzie dzielę się emocjami, zdjęciami i opowieściami z podróży, które na długo zostają w sercu. Znajdziesz tu trochę przygód, trochę inspiracji i dużo autentyczności.<br><br>
                     Jeśli kochasz wolność, naturę i ciepły klimat opowieści z duszą — zostań ze mną na dłużej! ✨',
+    'cookie_info' => 'Ta strona używa plików cookie do celów statystycznych. Korzystając z niej, wyrażasz zgodę lub możesz odmówić.',
 
     'contact' => [
         'title' => 'Kontakt',

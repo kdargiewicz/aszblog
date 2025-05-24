@@ -83,6 +83,7 @@
     });
 </script>
 
+@include('web.template.cookie')
 
 </body>
 </html>
