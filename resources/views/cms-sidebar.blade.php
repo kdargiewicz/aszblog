@@ -54,6 +54,7 @@
             </a>
             <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>
             <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>
+            <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga blogy</a>
             <p>  ładne linki url !</p>
             <p>  zahaszowane adresy img</p>
             <p>  zakładka galeria ! !</p>
