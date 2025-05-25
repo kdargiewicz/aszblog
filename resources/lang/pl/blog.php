@@ -1,5 +1,6 @@
 <?php
 return [
+    'app-name' => 'Aszblog-beta',
     'topbar' => [
         'home' => 'Strona główna',
         'about' => 'O mnie',

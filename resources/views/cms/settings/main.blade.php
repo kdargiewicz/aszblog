@@ -143,6 +143,10 @@
                             {{ old('blog_template', $settings->blog_template ?? '') === 'two' ? 'selected' : '' }} disabled>
                         Two
                     </option>
+                    <option value="blogy"
+                            {{ old('blog_template', $settings->blog_template ?? '') === 'blogy' ? 'selected' : '' }}>
+                        blogy
+                    </option>
                     <option value="minimalist"
                             {{ old('blog_template', $settings->blog_template ?? '') === 'minimalist' ? 'selected' : '' }} disabled>
                         Minimalist

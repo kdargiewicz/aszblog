@@ -9258,7 +9258,7 @@ textarea.form-control-lg {
 .site-nav {
   position: relative;
   width: 100%;
-  background-color: #214252;
+  background-color: #556b2f;
   padding: 10px 0; }
 
 .site-nav h1, .site-nav .h1 {
@@ -10452,7 +10452,7 @@ textarea {
       color: #000; }
 
 .site-footer {
-  background: #214252;
+  background: #556b2f;
   font-size: 14px;
   padding: 70px 0;
   color: white; }
@@ -10503,3 +10503,38 @@ textarea {
       .site-footer .social li a:hover {
         background: #fff;
         color: #214252; }
+
+.footer-p {
+    text-align: center;
+    color: #333; margin: 0;
+    font-size: 16px;
+}
+
+.footer-span {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.about-me-image {
+    float: left;
+    width: 40%;
+    max-width: 350px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.about-me-text {
+    text-align: justify;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .about-me-image {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+
