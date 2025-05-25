@@ -10606,4 +10606,11 @@ textarea {
     }
 }
 
+.placeholder-soft::placeholder {
+    color: #6c757d;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+
 

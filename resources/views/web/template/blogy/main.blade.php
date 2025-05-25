@@ -54,6 +54,8 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
 <section class="section bg-light">
     <div class="container">
 
+        @include('web.template.one.flash')
+
         @yield('content')
 
 {{--        <br>--}}

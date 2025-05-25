@@ -31,5 +31,6 @@ return [
         'contact_subject' => 'Wiadomość kontaktowa od :name',
         'math_question' => 'Podaj wynik działania :a + :b ?',
         'enter_result' => 'Podaj wynik',
+        'captcha_placeholder' => 'Podaj wynik',
     ]
 ];

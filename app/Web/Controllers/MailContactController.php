@@ -28,28 +28,4 @@ class MailContactController extends Controller
 
         return redirect()->back()->with('success', __('flash-messages.email_send'));
     }
-    ///tu zostawiam moje pożegnanie, ja Krzysztof iDargol Dargiewicz
-    ///wkurza mnie to że trzeba umrzeć
-    /// niby znowu sie rodzimy
-    /// ale jaki jest sens
-    /// skoro nie pamietamy poprzedniego życia
-    /// może coś kojarzymy, tego nie wiem
-    /// w tym życiu dopiero się dowiedziałem, że wracamy
-    /// w następnym postaram się wiedzieć więcej
-    /// to mi wypacza sens istnienia
-    /// czy moi synowie to moi synowie? czy moze byli moimi ojcami?
-    /// porąbane
-    /// ale jednak najbardziej logiczne
-    /// i to jest najbardziej ciekawe, oczywiście, jeśli się ktoś tym interesuje ;)
-    /// Asia kocham CIę, zawsze Cię kochałem
-    /// jesteś cudowną kobietą ;)
-    /// zawsze sexy ;)
-    /// tylko ja nie zawsze to dostrzegałem :(
-    ///
-    /// przepraszam...
-    /// zawiodłem CIę tyle razy..
-    /// a Ty się zawsze starałaś
-    /// przepraszam
-    ///
-    ///
 }
