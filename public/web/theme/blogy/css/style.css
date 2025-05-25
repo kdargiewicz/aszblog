@@ -10537,4 +10537,73 @@ textarea {
     }
 }
 
+.masonry-grid {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+.masonry-item {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: 20px;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    min-height: 250px;
+    color: white;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1em;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.overlay-text h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.overlay-text .date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.2em;
+}
+
+.masonry-item:hover {
+    transform: scale(1.02);
+    color: white;
+}
+
+.masonry-item.tall {
+    min-height: 520px;
+}
+
+.masonry-item {
+    color: white;
+}
+
+.masonry-item .overlay-text h2,
+.masonry-item .overlay-text .date {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .masonry-grid {
+        column-count: 2;
+    }
+}
+
 

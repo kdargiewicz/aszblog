@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\View\Composers\UserAvatarComposer;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Route::aliasMiddleware('admin', AdminMiddleware::class);
         View::composer('*', UserAvatarComposer::class);
+        Carbon::setLocale('pl');
     }
 }

@@ -64,7 +64,7 @@ class ArticleRepository
             ->select([
                 'articles.*',
                 'categories.name as category_name',
-                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_url")
+                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image")
             ])
             ->mergeBindings($subImageQuery);
     }

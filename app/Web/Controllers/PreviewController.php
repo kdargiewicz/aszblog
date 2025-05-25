@@ -6,12 +6,20 @@ use App\Cms\Models\Article;
 use App\Cms\Models\Image;
 use App\Cms\Models\UserSetting;
 use App\Http\Controllers\Controller;
+use App\Web\Helpers\BlogHelper;
 
 class PreviewController extends Controller
 {
     public function getPreviewBlogByBlogName($name): object
     {
         $articles = app(Article::class)->getAllForUser(auth()->id());
+
+        if ($name == 'blogy') { //tu protezka do nowego theme bloga, trzeba to ujednolicic?
+
+            $marked = app(BlogHelper::class)->markTallArticles($articles);
+
+            return view("web.template.{$name}.articles", ['articles' => $marked]);
+        }
 
         return view("web.template.{$name}.main", compact('articles'));
     }

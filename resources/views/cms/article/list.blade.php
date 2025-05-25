@@ -8,7 +8,7 @@
                 <div class="w3-row" style="display: flex; align-items: center; gap: 16px;">
                     {{-- Obrazek --}}
                     <div style="flex-shrink: 0;">
-                        <img class="w3-round" src="{{ asset($article->preview_url ?? 'img/aszblog_main.jpeg') }}"
+                        <img class="w3-round" src="{{ asset($article->preview_image ?? 'img/aszblog_main.jpeg') }}"
                              alt="Preview"
                              style="width: 200px;">
                     </div>

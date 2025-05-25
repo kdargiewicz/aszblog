@@ -52,7 +52,7 @@
             data-href="{{ route('article.preview', $article->id) }}"
             id="about">
                 <div class="w3-col m6 w3-padding-large w3-hide-small">
-                    <img src="{{ asset($article->preview_url) }}" class="w3-round-large w3-image" alt="Table Setting" width="600" height="750">
+                    <img src="{{ asset($article->preview_image) }}" class="w3-round-large w3-image" alt="Table Setting" width="600" height="750">
                 </div>
 
                 <div class="w3-col m6 w3-padding-large">
