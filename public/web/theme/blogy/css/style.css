@@ -76,6 +76,13 @@
   :root {
     scroll-behavior: smooth; } }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -10611,6 +10618,138 @@ textarea {
     font-size: 0.9rem;
     opacity: 0.9;
 }
+
+/* Styl dla figure */
+figure.image {
+    display: inline-block;
+    margin: 1.5em auto;
+    text-align: center;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+figure.image figcaption {
+    margin-top: 8px;
+    font-style: italic;
+    color: #666;
+}
+
+figure.image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 🔥 Nowy styl dla wszystkich obrazków w artykule */
+.post-content-body img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+
+/*figure.image {*/
+/*    display: inline-block;*/
+/*    margin: 1.5em auto;*/
+/*    text-align: center;*/
+/*    padding: 0;*/
+/*    border: none;*/
+/*    background-color: transparent;*/
+/*    box-shadow: none;*/
+/*}*/
+
+/*figure.image figcaption {*/
+/*    margin-top: 8px;*/
+/*    font-style: italic;*/
+/*    color: #666;*/
+/*}*/
+
+/*figure.image img {*/
+/*    max-width: 100%;*/
+/*    height: auto;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+.imageModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* gwarantuje max viewport width */
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.modalImage {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 0 20px #000;
+    border-radius: 8px;
+}
+
+/*obramowanie div content*/
+.shadow-box {
+    border-left: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    border-radius: 0;
+    padding: 1.5rem;
+    background: #fff;
+}
+/* Wyłącz obramowanie i cień na mobilkach */
+@media (max-width: 768px) {
+    .shadow-box {
+        border: none;
+        box-shadow: none;
+        padding: 1rem;
+        border-radius: 0;
+    }
+}
+
+h1.article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+.meta-serif {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #333; /* text-white, jeśli na ciemnym tle */
+}
+
+/* modal w trybie mobilnym */
+@media (max-width: 768px) {
+    .modalImage {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        max-height: 100vh;
+        border-radius: 4px;
+    }
+
+    .imageModal {
+        padding: 0.5rem;
+    }
+}
+
+
+
+
+
 
 
 

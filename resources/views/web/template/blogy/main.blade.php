@@ -22,7 +22,7 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/fonts/icomoon/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/fonts/flaticon/font/flaticon.css') }}">
@@ -50,13 +50,17 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
 
 @include('web.template.blogy.navbar')
 
+@include('web.template.one.flash')
+
+@yield('content')
+
 <!-- Start retroy layout blog posts -->
-<section class="section bg-light">
-    <div class="container">
+{{--<section class="section bg-light">--}}
+{{--    <div class="container">--}}
 
-        @include('web.template.one.flash')
+{{--        @include('web.template.one.flash')--}}
 
-        @yield('content')
+{{--        @yield('content')--}}
 
 {{--        <br>--}}
 {{--        <br><br>--}}
@@ -118,8 +122,8 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
 {{--                </a>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-    </div>
-</section>
+{{--    </div>--}}
+{{--</section>--}}
 <!-- End retroy layout blog posts -->
 
 
