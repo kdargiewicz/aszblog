@@ -10,6 +10,8 @@ return [
         'cms' => 'CMS',
     ],
 
+    'author_name' => 'Aszun',
+
     'gallery' => 'Galeria zdjęć',
     'go_to_article' => 'Przejdź do artykułu',
     'about_me' => 'O mnie',
