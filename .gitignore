@@ -21,3 +21,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+docker-compose.yml
+Dockerfile
+entrypoint.sh
+nginx/default.conf
+

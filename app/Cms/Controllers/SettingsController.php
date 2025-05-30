@@ -43,7 +43,7 @@ class SettingsController extends Controller
 
         return redirect()
             ->route('user.settings')
-            ->with('success', __('flash-messages.user-settings-updated'));
+            ->with('success', __('settings.user_settings.user-settings-updated'));
     }
 
     /**
@@ -70,7 +70,7 @@ class SettingsController extends Controller
 
         return redirect()
             ->route('user.settings')
-            ->with('success', __('flash-messages.user-settings-updated'));
+            ->with('success', __('settings.user_settings.user-settings-updated'));
     }
 
     /**

@@ -6,7 +6,7 @@
 	var siteMenuClone = function() {
 		var jsCloneNavs = document.querySelectorAll('.js-clone-nav');
 		var siteMobileMenuBody = document.querySelector('.site-mobile-menu-body');
-		
+
 
 
 		jsCloneNavs.forEach(nav => {
@@ -21,7 +21,7 @@
 
 			var counter = 0;
 			hasChildrens.forEach( hasChild => {
-				
+
 				var refEl = hasChild.querySelector('a');
 
 				var newElSpan = document.createElement('span');
@@ -83,8 +83,20 @@
 
 		});
 
-	}; 
+	};
 	siteMenuClone();
 
 
 })()
+
+
+// mobilne menu, tzw hamburger :P Krzychu wiesz o co kaman
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    toggleBtn.addEventListener('click', function () {
+        const isVisible = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isVisible ? 'none' : 'block';
+    });
+});

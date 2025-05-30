@@ -6,6 +6,10 @@
         session(['captcha_sum' => $a + $b]);
     @endphp
 
+
+
+
+
     <div class="comment-form-wrap pt-5">
         <form class="p-5 bg-light" action="{{ route('contact.send') }}" method="POST">
             @csrf
@@ -45,4 +49,5 @@
             </div>
         </form>
     </div>
+</div>
 @endsection
