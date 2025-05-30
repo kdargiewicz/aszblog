@@ -34,5 +34,9 @@ return [
         'math_question' => 'Podaj wynik działania :a + :b ?',
         'enter_result' => 'Podaj wynik',
         'captcha_placeholder' => 'Podaj wynik',
-    ]
+    ],
+
+    'content' => [
+        'read_the_author' => 'Czytaj więcej',
+    ],
 ];
