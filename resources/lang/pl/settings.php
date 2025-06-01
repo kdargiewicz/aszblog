@@ -20,5 +20,9 @@ return [
         'select_main_image' => 'Główne zdjęcie bloga',
         'no_main_image' => 'Brak głównego zdjęcia',
         'user-settings-updated' => 'Ustawienia zostały zapisane',
+        'menu-footer-color' => 'Wybierz kolor tła menu i footera:',
+        'body-bg-color' => 'Wybierz kolor tła:',
+        'background_pattern' => 'Wzór tła:',
+        'pattern_color' => 'Kolor wzoru:',
     ]
 ];

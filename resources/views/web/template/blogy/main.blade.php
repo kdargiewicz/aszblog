@@ -48,6 +48,8 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
     <div class="site-mobile-menu-body"></div>
 </div>
 
+@include('web.template.blogy.preview.custom_colors')
+
 @include('web.template.blogy.navbar')
 
 @include('web.template.one.flash')

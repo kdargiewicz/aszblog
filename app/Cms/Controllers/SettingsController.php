@@ -38,6 +38,7 @@ class SettingsController extends Controller
                 'about_me' => $validated['about_me'] ?? null,
                 'my_motto' => $validated['my_motto'] ?? null,
                 'blog_template' => $validated['blog_template'] ?? null,
+                'main_colors' => $validated['main_colors'] ?? [],
             ]
         );
 
@@ -64,6 +65,7 @@ class SettingsController extends Controller
             'about_me' => $validated['about_me'] ?? $settings->about_me,
             'my_motto' => $validated['my_motto'] ?? $settings->my_motto,
             'blog_template' => $validated['blog_template'] ?? $settings->blog_template,
+            'main_colors' => $validated['main_colors'] ?? [],
         ];
 
         app(UserSetting::class)->postUpdateSettings($userId, $insert);

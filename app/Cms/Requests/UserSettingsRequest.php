@@ -13,14 +13,31 @@ class UserSettingsRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        $colorFields = ['topbar-footer', 'body', 'body_pattern_color'];
+
+        $colorRules = [];
+        foreach ($colorFields as $field) {
+            $colorRules["main_colors.$field"] = ['nullable', $this->colorRegex()];
+        }
+
+        return array_merge([
             'avatar' => ['nullable', 'image', 'max:40960'],
             'main_image' => ['nullable', 'image', 'max:40960'],
             'about_me' => ['nullable', 'string', 'max:5000'],
             'my_motto' => ['nullable', 'string', 'max:255'],
             'blog_template' => ['nullable', 'string', 'in:one,two,blogy,minimalist'],
             'about_me_image' => ['nullable', 'image', 'max:40960'],
-        ];
+            'main_colors.body_pattern' => [
+                'nullable',
+                'in:diagonal,dots,grid,circles,overlapping_circles,diamonds,fractals'
+            ],
+        ], $colorRules);
+    }
+
+
+    protected function colorRegex(): string
+    {
+        return 'regex:/^#[0-9A-Fa-f]{6}$/';
     }
 
     public function messages(): array

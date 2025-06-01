@@ -94,8 +94,8 @@
                         <div style="text-align: center;">
                             <i class="fa fa-user-circle fa-2x" aria-hidden="true" style="display: block;"></i>
                             <span style="display: block; margin-top: 4px;">
-                <i>{{ __('settings.user_settings.no_photo') }}</i>
-            </span>
+                                <i>{{ __('settings.user_settings.no_photo') }}</i>
+                            </span>
                         </div>
                     </div>
                 @endif
@@ -152,6 +152,18 @@
                         Minimalist
                     </option>
                 </select>
+
+                <label for="color_topbar">{{ __('settings.user_settings.menu-footer-color') }}</label>
+                <input type="color"
+                       name="main_colors[topbar-footer]"
+                       value="{{ $settings->main_colors['topbar-footer'] ?? '#333333' }}"
+                       style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
+
+                <label for="color_body">{{ __('settings.user_settings.body-bg-color') }}</label>
+                <input type="color"
+                       name="main_colors[body]"
+                       value="{{ $blogSettings->main_colors['body'] ?? '#ffffff' }}"
+                       style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
             @endif
 
             <button type="submit" class="w3-button w3-blue w3-round w3-margin-top">

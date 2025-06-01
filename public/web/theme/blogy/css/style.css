@@ -10702,6 +10702,13 @@ h1.article-title {
     letter-spacing: 0.05em;
 }
 
+h2.article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
 .meta-serif {
     font-family: 'Playfair Display', serif;
     font-style: italic;

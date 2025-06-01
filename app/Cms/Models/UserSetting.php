@@ -2,17 +2,18 @@
 
 namespace App\Cms\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 /**
  * @method static UserSetting updateOrCreate(array $attributes, array $values = [])
- * @method static \Illuminate\Database\Eloquent\Builder|UserSetting where(string $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
+ * @method static Builder|UserSetting where(string $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
  * @method static UserSetting|null first()
  * @method static UserSetting firstOrFail()
  * @method static UserSetting find($id)
  * @method static \Illuminate\Database\Eloquent\Collection|UserSetting[] all()
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin Builder
  */
 class UserSetting extends Model
 {
@@ -23,12 +24,17 @@ class UserSetting extends Model
         'about_me',
         'my_motto',
         'blog_template',
-        'about_me_image'
+        'about_me_image',
+        'main_colors',
     ];
 
-    public function getUserSettings($userId): object|null
+    protected $casts = [
+        'main_colors' => 'array',
+    ];
+
+    public function getUserSettings($userId): ?UserSetting
     {
-        return DB::table('user_settings')->where('user_id', $userId)->first();
+        return UserSetting::where('user_id', $userId)->first();
     }
 
     public function postUpdateSettings($userId, $update): int
@@ -46,9 +52,7 @@ class UserSetting extends Model
             return null;
         }
 
-        return DB::table('user_settings')
-            ->where('user_id', $userId)
-            ->first();
+        return UserSetting::where('user_id', $userId)->first();
     }
 
     public function isBlogOwner($userId): bool
