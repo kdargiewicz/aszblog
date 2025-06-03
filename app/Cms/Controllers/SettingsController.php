@@ -52,6 +52,11 @@ class SettingsController extends Controller
      */
     public function postUpdateSettings(UserSettingsRequest $request, $id): \Illuminate\Http\RedirectResponse
     {
+        if ($request->input('action') === 'restore_colors') {
+            app(UserSetting::class)->postRestoreColors(auth()->id());
+            return redirect()->back()->with('success', __('settings.user_settings.restore_colors'));
+        }
+
         $userId = auth()->id();
         $validated = $request->validated();
         $settings = UserSetting::where('user_id', $userId)->firstOrFail();

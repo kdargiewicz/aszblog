@@ -44,17 +44,17 @@
                 <div class="col-md-12 col-lg-8 main-content">
 
 {{--                    <div class="post-content-body">--}}
-                    <div class="post-content-body shadow-box">
+                    <div class="post-content-body shadow-box custom-user-color">
                         {!! $article->content !!}
-                    </div>
+{{--                    </div>--}}
 
 
-                    <div class="pt-5">
+{{--                    <div class="pt-5 custom-user-color">--}}
                         <p>Categories:  <a href="#">Food</a>, <a href="#">Travel</a>  Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
-                    </div>
+{{--                    </div>--}}
 
 
-                    <div class="pt-5 comment-wrap">
+{{--                    <div class="pt-5 comment-wrap custom-user-color">--}}
                         <h3 class="mb-5 heading">6 Comments</h3>
                         <ul class="comment-list">
                             <li class="comment">
@@ -164,21 +164,22 @@
 
                             </form>
                         </div>
-                    </div>
+{{--                    </div>--}}
 
+                </div>
                 </div>
 
                 <!-- END main-content -->
 
                 <div class="col-md-12 col-lg-4 sidebar">
-                    <div class="sidebar-box search-form-wrap">
+                    <div class="sidebar-box search-form-wrap custom-user-color custom-user-color-padding">
                         <form action="#" class="sidebar-search-form">
                             <span class="bi-search"></span>
                             <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
                         </form>
                     </div>
                     <!-- END sidebar-box -->
-                    <div class="sidebar-box">
+                    <div class="sidebar-box custom-user-color custom-user-color-padding">
                         <div class="text-center avatar-wrapper">
                             <img src="{{ asset($blogSettings->about_me_image ?? 'web/theme/blogy/images/img_7_sq.jpg') }}"
                                  alt="Avatar"
@@ -198,7 +199,7 @@
                         </div>
                     </div>
                     <!-- END sidebar-box -->
-                    <div class="sidebar-box">
+                    <div class="sidebar-box custom-user-color custom-user-color-padding">
                         <h3 class="heading">Popular Posts</h3>
                         <div class="post-entry-sidebar">
                             <ul>
@@ -240,7 +241,7 @@
                     </div>
                     <!-- END sidebar-box -->
 
-                    <div class="sidebar-box">
+                    <div class="sidebar-box custom-user-color custom-user-color-padding">
                         <h3 class="heading">Categories</h3>
                         <ul class="categories">
                             <li><a href="#">Food <span>(12)</span></a></li>
@@ -252,7 +253,7 @@
                     </div>
                     <!-- END sidebar-box -->
 
-                    <div class="sidebar-box">
+                    <div class="sidebar-box custom-user-color custom-user-color-padding">
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
                             <li><a href="#">Travel</a></li>

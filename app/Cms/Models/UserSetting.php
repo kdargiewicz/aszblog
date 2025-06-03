@@ -42,6 +42,15 @@ class UserSetting extends Model
         return DB::table('user_settings')->where('user_id', $userId)->update($update);
     }
 
+    public function postRestoreColors($userId): int
+    {
+        return DB::table('user_settings')
+            ->where('user_id', $userId)
+            ->update([
+                'main_colors' => json_encode(config('blog.default_colors')),
+            ]);
+    }
+
     public function getBlogOwnerSettings(): ?object
     {
         $userId = DB::table('settings')

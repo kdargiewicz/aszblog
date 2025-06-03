@@ -24,5 +24,7 @@ return [
         'body-bg-color' => 'Wybierz kolor tła:',
         'background_pattern' => 'Wzór tła:',
         'pattern_color' => 'Kolor wzoru:',
+        'restore_colors' => 'Kolory przywrócone',
+        'restore_colors_button' => 'Wyzeruj kolory',
     ]
 ];

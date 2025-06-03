@@ -166,6 +166,12 @@
                        style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
             @endif
 
+            @if(isset($settings))
+                <button type="submit" name="action" value="restore_colors" class="w3-button w3-red w3-round w3-margin-top">
+                    {{ __('settings.user_settings.restore_colors_button') }}
+                </button>
+            @endif
+
             <button type="submit" class="w3-button w3-blue w3-round w3-margin-top">
                 {{ isset($settings) ? __('buttons.update') : __('buttons.save') }}
             </button>
