@@ -44,7 +44,7 @@
                 <div class="col-md-12 col-lg-8 main-content">
 
 {{--                    <div class="post-content-body">--}}
-                    <div class="post-content-body shadow-box custom-user-color">
+                    <div class="post-content-body shadow-box custom-user-color custom-font-color">
                         {!! $article->content !!}
 {{--                    </div>--}}
 

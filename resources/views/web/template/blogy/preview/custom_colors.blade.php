@@ -40,38 +40,17 @@
                 background-clip: padding-box;
             }
 
-
             .custom-user-color-padding {
                 padding: 10px;
             }
-
-{{--            @php--}}
-{{--//                $pattern = $blogSettings->main_colors['body_pattern'] ?? null;--}}
-{{--                $patternColor = ($blogSettings->main_colors['body_pattern_color'] ?? '#ccc') . '80'; // 50% opacity--}}
-{{--            @endphp--}}
-
-{{--            @if($pattern)--}}
-{{--                @switch($pattern)--}}
-{{--                    @case('diagonal')--}}
-{{--                        background-image: repeating-linear-gradient(45deg, {{ $patternColor }} 0px, {{ $patternColor }} 2px, transparent 2px, transparent 10px--}}
-{{--                    );--}}
-{{--                    @break--}}
-
-{{--                    @case('dots')--}}
-{{--                        background-image: radial-gradient({{ $patternColor }} 1px, transparent 1px--}}
-{{--                    );--}}
-{{--                    background-size: 20px 20px;--}}
-{{--                    @break--}}
-
-{{--                    @case('grid')--}}
-{{--                        background-image: linear-gradient({{ $patternColor }} 1px, transparent 1px),--}}
-{{--                                   linear-gradient(90deg, {{ $patternColor }} 1px, transparent 1px);--}}
-{{--                                   background-size: 20px 20px;--}}
-{{--                    @break--}}
-{{--                @endswitch--}}
-{{--            @endif--}}
-
         }
         @endif
+
+        @if(!empty($blogSettings->main_colors['font-color']))
+            .custom-font-color {
+            color: {{ $blogSettings->main_colors['font-color'] }}
+        }
+        @endif
+
     </style>
 @endif

@@ -13,7 +13,7 @@ class UserSettingsRequest extends FormRequest
 
     public function rules(): array
     {
-        $colorFields = ['topbar-footer', 'body', 'body_pattern_color'];
+        $colorFields = ['topbar-footer', 'body', 'body_pattern_color', 'font-color'];
 
         $colorRules = [];
         foreach ($colorFields as $field) {

@@ -164,6 +164,12 @@
                        name="main_colors[body]"
                        value="{{ $blogSettings->main_colors['body'] ?? '#ffffff' }}"
                        style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
+
+                <label for="color_font">{{ __('settings.user_settings.font-color') }}</label>
+                <input type="color"
+                       name="main_colors[font-color]"
+                       value="{{ $blogSettings->main_colors['font-color'] ?? '#ffffff' }}"
+                       style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
             @endif
 
             @if(isset($settings))

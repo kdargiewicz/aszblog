@@ -26,5 +26,6 @@ return [
         'pattern_color' => 'Kolor wzoru:',
         'restore_colors' => 'Kolory przywrócone',
         'restore_colors_button' => 'Wyzeruj kolory',
+        'font-color' => 'Kolor czcionki:',
     ]
 ];
