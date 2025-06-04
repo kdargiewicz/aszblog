@@ -2,6 +2,7 @@
 
 namespace App\Cms\Models;
 
+use App\Constants\Constants;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,15 @@ class Comments extends Model
                 'comments.*',
                 'articles.title as article_title'
             )
+            ->get();
+    }
+
+    public function getAcceptedCommentsFromArticle($articleId): \Illuminate\Support\Collection
+    {
+        return DB::table('comments')
+            ->where('article_id', $articleId)
+            ->where('accepted', true)
+            ->where('deleted', Constants::NOT_DELETED)
             ->get();
     }
 }

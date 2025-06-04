@@ -42,19 +42,29 @@
             <div class="row blog-entries element-animate">
 
                 <div class="col-md-12 col-lg-8 main-content">
-
-{{--                    <div class="post-content-body">--}}
                     <div class="post-content-body shadow-box custom-user-color custom-font-color">
+                        <h1 class="text-center">
+                            {{ $article->title ?? __('article.article_list.no_title') }}
+                        </h1>
+                        @if(!empty($article->category) || !empty($article->created_at))
+                            <p class="text-center" style="font-style: italic; color: #555;">
+                                {{ $article->category ?? '' }}
+                                @if(!empty($article->category) && !empty($article->created_at))
+                                    &nbsp;&bull;&nbsp;
+                                @endif
+                                {{ $article->created_at ? \Carbon\Carbon::parse($article->created_at)->format('Y-m-d') : '' }}
+                            </p>
+                        @endif
                         {!! $article->content !!}
-{{--                    </div>--}}
 
+                        <p>{{ __('article.create-form.category') }}:  <a href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}:
+                            @foreach ($article->tags as $tag)
+{{--                                tu trzeba uzupełnić route żeby klikająć w taga kierować do tej przestrzeni tagów--}}
+{{--                                <a href="{{ route('tag.show', ['id' => $tag->id]) }}">#{{ $tag->name }}</a>@if (!$loop->last), @endif--}}
+                                <a href="">#{{ $tag->name }}</a>@if (!$loop->last), @endif
+                            @endforeach
+                        </p>
 
-{{--                    <div class="pt-5 custom-user-color">--}}
-                        <p>Categories:  <a href="#">Food</a>, <a href="#">Travel</a>  Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
-{{--                    </div>--}}
-
-
-{{--                    <div class="pt-5 comment-wrap custom-user-color">--}}
                         <h3 class="mb-5 heading">6 Comments</h3>
                         <ul class="comment-list">
                             <li class="comment">

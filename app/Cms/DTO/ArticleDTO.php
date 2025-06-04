@@ -12,7 +12,7 @@ class ArticleDTO
     public function __construct(
         public ?string $article_uuid = null,
         public ?string $title,
-        public ?string $tags,
+        public string|array|null $tags,
         public ?string $category,
         public ?float $latitude,
         public ?float $longitude,

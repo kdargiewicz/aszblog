@@ -5,6 +5,7 @@ namespace App\Cms\Repositories;
 use App\Cms\CmsHelper;
 use App\Cms\DTO\ArticleDTO;
 use App\Cms\Models\Article;
+use App\Cms\Models\Comments;
 use App\Cms\Models\Tag;
 use App\Constants\Constants;
 use Illuminate\Support\Facades\DB;
@@ -109,13 +110,29 @@ class ArticleRepository
             ])
             ->first();
 
-        $comments = DB::table('comments')
-            ->where('article_id', $articleId)
-            ->where('accepted', true)
-            ->where('deleted', Constants::NOT_DELETED)
-            ->get();
+        if ($article) {
+            $tagIds = json_decode($article->tags_id, true);
 
-        $article->comments = $comments;
+            $tags = app(Tag::class)->getTagsFromArticle($tagIds)->toArray();
+
+//            DB::table('tags')
+//                ->whereIn('id', $tagIds)
+//                ->where('deleted', Constants::NOT_DELETED)
+//                ->select('id', 'name')
+//                ->get();
+
+            $article->tags = $tags;
+
+            $comments = app(Comments::class)->getAcceptedCommentsFromArticle($articleId);
+
+//            DB::table('comments')
+//                ->where('article_id', $articleId)
+//                ->where('accepted', true)
+//                ->where('deleted', Constants::NOT_DELETED)
+//                ->get();
+
+            $article->comments = $comments;
+        }
 
         return $article;
     }
