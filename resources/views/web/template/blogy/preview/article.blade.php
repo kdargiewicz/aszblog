@@ -43,11 +43,11 @@
 
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="post-content-body shadow-box custom-user-color custom-font-color">
-                        <h1 class="text-center">
+                        <h1 class="text-center article-title">
                             {{ $article->title ?? __('article.article_list.no_title') }}
                         </h1>
                         @if(!empty($article->category) || !empty($article->created_at))
-                            <p class="text-center" style="font-style: italic; color: #555;">
+                            <p class="meta-serif text-center text-black">
                                 {{ $article->category ?? '' }}
                                 @if(!empty($article->category) && !empty($article->created_at))
                                     &nbsp;&bull;&nbsp;
