@@ -7,7 +7,7 @@
                      alt="About Me"
                      class="about-me-image img-fluid rounded">
 
-                <div class="about-me-text">
+                <div class="about-me-text custom-font-color">
                     {!! $blogSettings->about_me ?? __('blog.about_me_text') !!}
                 </div>
             </div>

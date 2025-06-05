@@ -12,4 +12,5 @@ class Constants
     public const NOT_PUBLISHED = 0;
     public const TEST_PUBLISHED = 1;
     public const PUBLISHED = 2;
+    public const PUBLISHED_STATES = [self::TEST_PUBLISHED, self::PUBLISHED];
 }

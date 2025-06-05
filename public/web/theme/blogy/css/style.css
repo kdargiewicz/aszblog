@@ -10655,7 +10655,7 @@ figure.image img {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* gwarantuje max viewport width */
+    width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.9);
     z-index: 9999;
@@ -10713,7 +10713,7 @@ h2.article-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1rem;
-    color: #333; /* text-white, jeśli na ciemnym tle */
+    color: #333;
 }
 
 /* modal w trybie mobilnym */
@@ -10740,9 +10740,71 @@ h2.article-title {
     margin: 0 auto;
 }
 
+/*sidebar category mac-dock-effects*/
+.category-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 
+ul.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+ul.clean-list li {
+    padding: 4px 0;
+    transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+}
 
+ul.clean-list li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s ease, filter 0.2s ease;
+    display: inline-block;
+}
+
+ul.clean-list li:hover {
+    transform: scale(1.05) translateX(4px);
+}
+
+ul.clean-list li:hover a {
+    color: #3f3f3f;
+    filter: brightness(1.1);
+}
+/*end sidebar category mac-dock-effects*/
+
+/*nowe tagi*/
+.tag-html-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 4px;
+    line-height: 1;
+}
+
+.tag-html-item {
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.tag-html-item:hover {
+    transform: scale(1.3);
+    filter: brightness(1.2);
+    z-index: 1;
+}
+/*end nowe tagi*/
 
 
 

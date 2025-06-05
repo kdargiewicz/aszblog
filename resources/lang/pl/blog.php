@@ -39,4 +39,9 @@ return [
     'content' => [
         'read_the_author' => 'Czytaj więcej',
     ],
+
+    'sidebar' => [
+        'categories' => 'Kategorie',
+        'tags' => 'Tagi',
+    ],
 ];
