@@ -185,6 +185,6 @@
         </form>
     </div>
 
-    @include('web.template.tinymce')
+    @include('cms.settings.tinymce')
 
 @endsection

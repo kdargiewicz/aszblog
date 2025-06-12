@@ -4,6 +4,7 @@ namespace App\Cms\Services;
 
 use App\Constants\Constants;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -75,6 +76,8 @@ class ImageService
         );
 
         $this->repository->store($dto);
+
+        DB::table('system_debug')->insert(['value' => Storage::url($maxPath)]);
 
         return [
             'raw' => Storage::url($rawPath),

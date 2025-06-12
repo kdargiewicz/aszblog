@@ -1,0 +1,5 @@
+use Illuminate\Support\Facades\Storage;
+
+Storage::disk('public')->put('test_check.txt', 'To jest test zapisu');
+
+exit

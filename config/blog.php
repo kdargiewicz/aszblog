@@ -10,10 +10,10 @@ return [
 
     /*
      * Ustawienia gridu .tall dla widoku głównego listy artykułów.
-     * Kluczem jest liczba artykułów (1–10), a wartością – tablica indeksów, które powinny być rozciągnięte.
+     * Kluczem jest liczba artykułów (1–12), a wartością – tablica indeksów, które powinny być rozciągnięte.
      * Dzięki temu layout jest dopasowany do liczby artykułów i wygląda spójnie.
      * np dla ilości art = 6 art 1, 2 i 5 są rozciągniete w pionie
-     * max liczba artykułow na chwile obecna to 10 ! ! !
+     * max liczba artykułow na chwile obecna to 12
      */
     'articles_grid' => [
         1 => [],
@@ -33,6 +33,7 @@ return [
     'default_colors' => [
         'body' => '#dedede',
         'topbar-footer' => '#333333',
+        'font-color' => '#666666',
     ],
 
 ];

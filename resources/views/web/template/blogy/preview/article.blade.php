@@ -55,7 +55,10 @@
                                             {{ $article->created_at ? \Carbon\Carbon::parse($article->created_at)->format('Y-m-d') : '' }}
                                         </p>
                                     @endif
-                                    {!! $article->content !!}
+{{--                                    {!! $article->content !!}--}}
+                                    <div class="tinymce-content">
+                                        {!! $article->content !!}
+                                    </div>
 
                                     <p>{{ __('article.create-form.category') }}: <a
                                             href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}:
@@ -70,12 +73,31 @@
 
                                     @if($article->allow_comments)
                                         <hr>
-                                        <h3 class="mb-4">6 Comments</h3>
+                                        @php
+                                            $commentsCount = count($article->comments);
+                                            if ($commentsCount === 1) {
+                                                $label = __('comments.comment');
+                                            } elseif ($commentsCount % 10 >= 2 && $commentsCount % 10 <= 4 && ($commentsCount % 100 < 10 || $commentsCount % 100 >= 20)) {
+                                                $label = __('comments.comments');
+                                            } else {
+                                                $label = __('comments.many_comments');
+                                            }
+                                        @endphp
+
+                                        <h3 class="mb-4">{{ $commentsCount }} {{ $label }}</h3>
+
+                                        {{--                                        @if(count($article->comments) == 1)--}}
+{{--                                            <h3 class="mb-4">{{ count($article->comments) }} Komentarz</h3>--}}
+{{--                                        @elseif(count($article->comments) > 1 && count($article->comments) <= 4)--}}
+{{--                                            <h3 class="mb-4">{{ count($article->comments) }} Komentarze</h3>--}}
+{{--                                        @elseif(count($article->comments) > 4 && count($article->comments) <= 4)--}}
+{{--                                            <h3 class="mb-4">{{ count($article->comments) }} Komentarzy</h3>--}}
+{{--                                        @else--}}
+{{--                                            <h3 class="mb-4">6 Comments</h3>--}}
+{{--                                        @endif--}}
 
                                         @if(count($article->comments) > 0)
                                             <div class="mt-5">
-                                                <h4>{{ __('comments.comments') }}</h4>
-
                                                 @foreach($article->comments as $comment)
                                                     <div class="mt-4 p-3">
                                                         <h5 class="mb-1"><b>{{ $comment->author }}</b></h5>

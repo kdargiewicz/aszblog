@@ -36,8 +36,12 @@
                 background-color: {{ $lighterColor }};
                 border-radius: 8px;
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+
                 overflow: hidden;
-                background-clip: padding-box;
+                /*background-clip: padding-box;*/
+                background-clip: border-box;
+
             }
 
             .custom-user-color-padding {

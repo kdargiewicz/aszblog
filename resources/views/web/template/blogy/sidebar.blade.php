@@ -86,27 +86,28 @@
         </h3>
 
         <div class="tag-html-cloud">
-            @php
-                $grayColors = [];
-                for ($i = 0; $i < 1000; $i++) {
-                    $val = dechex(round($i * (255 / 999)));
-                    $hex = str_pad($val, 2, '0', STR_PAD_LEFT);
-                    $grayColors[] = "#{$hex}{$hex}{$hex}";
-                }
-            @endphp
-
-            @foreach($tags as $tag)
+            @if(isset($tags))
                 @php
-                    $color = $grayColors[array_rand($grayColors)];
-                    $size = rand(12, 30);
+                    $grayColors = [];
+                    for ($i = 0; $i < 1000; $i++) {
+                        $val = dechex(round($i * (255 / 999)));
+                        $hex = str_pad($val, 2, '0', STR_PAD_LEFT);
+                        $grayColors[] = "#{$hex}{$hex}{$hex}";
+                    }
                 @endphp
-                <a href=""
-                   class="tag-html-item"
-                   style="font-size: {{ $size }}px; color: {{ $color }};">
-                    {{ $tag->name }}
-                </a>
-            @endforeach
 
+                @foreach($tags as $tag)
+                    @php
+                        $color = $grayColors[array_rand($grayColors)];
+                        $size = rand(12, 30);
+                    @endphp
+                    <a href=""
+                       class="tag-html-item"
+                       style="font-size: {{ $size }}px; color: {{ $color }};">
+                        {{ $tag->name }}
+                    </a>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>
