@@ -1,8 +1,8 @@
 <div class="col-md-12 col-lg-4 sidebar">
-    <div class="sidebar-box search-form-wrap custom-user-color custom-user-color-padding">
+    <div class="sidebar-box search-form-wrap custom-user-color custom-user-color-padding" style="background-color: darkred">
         <form action="#" class="sidebar-search-form">
             <span class="bi-search"></span>
-            <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+            <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter" disabled>
         </form>
     </div>
     <!-- END sidebar-box -->

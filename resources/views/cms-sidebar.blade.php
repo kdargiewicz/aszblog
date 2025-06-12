@@ -36,7 +36,7 @@
         <a href="{{ route('comments.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Komentarze</a>
         <a href="{{ route('user.settings') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Ustawienia</a>
         <hr>
-        <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>  Podgląd bloga</a>
+        <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>  Podgląd bloga</a>
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open w3-margin-right"></i>Kategorie</a>--}}
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tags w3-margin-right"></i>Tagi</a>--}}
 {{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>--}}
