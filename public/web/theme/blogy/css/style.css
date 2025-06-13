@@ -10806,6 +10806,156 @@ ul.clean-list li:hover a {
 }
 /*end nowe tagi*/
 
+/*gallery*/
+.gallery-grid {
+    column-count: 4;
+    column-gap: 15px;
+    padding: 20px;
+}
+
+@media (max-width: 1200px) {
+    .gallery-grid {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 15px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    padding-top: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    display: block;
+    margin: 0 auto;
+    max-width: 90%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+#caption {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#caption a.button-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#caption a.button-link:hover {
+    background-color: #00ffff;
+    color: #000;
+}
+
+.close {
+    position: absolute;
+    top: 30px;
+    right: 45px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.gallery-title {
+    text-align: center;
+    font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
+    color: #2c2c2c;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+/*end gallery*/
+
+/* Nagłówek galerii */
+.gallery-title {
+    text-align: center;
+    font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
+    color: #2c2c2c;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Formularz kontaktowy - minimalistyczny */
+.contact-form-custom {
+    background-color: transparent !important;
+    padding: 2rem;
+}
+
+.contact-form-custom input[type="text"],
+.contact-form-custom input[type="email"],
+.contact-form-custom input[type="number"],
+.contact-form-custom textarea {
+    background-color: transparent;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #222;
+    width: 100%;
+    padding: 10px 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    box-shadow: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form-custom input:focus,
+.contact-form-custom textarea:focus {
+    border-color: #2c2c2c;
+    box-shadow: none;
+}
+
+.contact-form-custom label {
+    color: #2c2c2c;
+    font-weight: 500;
+}
+
 
 
 
