@@ -73,6 +73,10 @@ Route::get('/api/check-verification', function () {
 
 //Blog official
 Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
+//tu trzeba przyjazne linki ogarnac we w urlu
+Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
+
+Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
 
 
 //Auth::routes(['verify' => true]);
