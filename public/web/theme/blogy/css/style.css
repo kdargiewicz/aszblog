@@ -10910,18 +10910,6 @@ ul.clean-list li:hover a {
 }
 /*end gallery*/
 
-/* Nagłówek galerii */
-.gallery-title {
-    text-align: center;
-    font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
-    color: #2c2c2c;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    font-weight: 500;
-    margin-bottom: 40px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-}
-
 /* Formularz kontaktowy - minimalistyczny */
 .contact-form-custom {
     background-color: transparent !important;
@@ -10955,6 +10943,44 @@ ul.clean-list li:hover a {
     color: #2c2c2c;
     font-weight: 500;
 }
+
+/*mapa google*/
+#blog-map {
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#blog-map:hover {
+    transform: scale(1.01);
+}
+
+/*likwiduje X w info nad markerami w mapie google*/
+.gm-style-iw-c button.gm-ui-hover-effect {
+    display: none !important;
+}
+/* Styl tekstu wewnątrz okienka InfoWindow */
+.gm-style-iw {
+    color: #333333; /* tutaj wybierasz dowolny kolor */
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styl zawartości (opcjonalny, jeśli masz klasę jak u Ciebie: infowindow-content) */
+.infowindow-content {
+    text-align: center;
+    color: #555;
+    font-size: 15px;
+    padding: 5px 10px;
+    white-space: nowrap;
+}
+
+
+/*end mapa google*/
 
 
 

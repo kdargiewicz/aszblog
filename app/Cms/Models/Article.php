@@ -61,6 +61,11 @@ class Article extends Model
         return app(ArticleRepository::class)->getPublishedArticlesFromUser($userId);
     }
 
+    public function getAllPublishedArticles(): object
+    {
+        return app(ArticleRepository::class)->getAllPublishedArticles();
+    }
+
     public function getAllForBlogMap($userId): object
     {
         return app(ArticleRepository::class)->getAllForBlogMap($userId);

@@ -75,7 +75,11 @@ class PreviewController extends Controller
     {
         $articles = app(Article::class)->getAllForBlogMap(auth()->id());
 
+        return $this->viewWithBlogTemplate('preview/blog-map', compact('articles'));
 
-        return view('web.template.one.preview.blog-map', compact('articles'));
+
+
+
+        //return view('web.template.one.preview.blog-map', compact('articles'));
     }
 }

@@ -50,7 +50,7 @@ class ArticleRepository
         return DB::table('articles')->where('id', $articleId)->first();
     }
 
-    public function baseArticleQuery(int $userId): Builder
+    protected function buildArticleQuery(?int $userId = null): Builder
     {
         $subImageQuery = DB::table('images')
             ->select('url')
@@ -58,9 +58,8 @@ class ArticleRepository
             ->orderBy('id')
             ->limit(1);
 
-        return DB::table('articles')
+        $query = DB::table('articles')
             ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.user_id', $userId)
             ->where('articles.deleted', Constants::NOT_DELETED)
             ->select([
                 'articles.*',
@@ -69,12 +68,78 @@ class ArticleRepository
                 DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
             ])
             ->mergeBindings($subImageQuery);
+
+        if ($userId !== null) {
+            $query->where('articles.user_id', $userId);
+        }
+
+        return $query;
     }
+
+    public function baseArticleQuery(int $userId): Builder
+    {
+        return $this->buildArticleQuery($userId);
+    }
+
+    public function getPublishedArticles(): Builder
+    {
+        return $this->buildArticleQuery();
+    }
+
+
+
+//    public function baseArticleQuery(int $userId): Builder
+//    {
+//        $subImageQuery = DB::table('images')
+//            ->select('url')
+//            ->whereColumn('images.article_id', 'articles.id')
+//            ->orderBy('id')
+//            ->limit(1);
+//
+//        return DB::table('articles')
+//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+//            ->where('articles.user_id', $userId)
+//            ->where('articles.deleted', Constants::NOT_DELETED)
+//            ->select([
+//                'articles.*',
+//                'categories.name as category_name',
+//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image"),
+//                DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
+//            ])
+//            ->mergeBindings($subImageQuery);
+//    }
+//
+//    public function getPublishedArticles()
+//    {
+//        $subImageQuery = DB::table('images')
+//            ->select('url')
+//            ->whereColumn('images.article_id', 'articles.id')
+//            ->orderBy('id')
+//            ->limit(1);
+//
+//        return DB::table('articles')
+//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+//            ->where('articles.deleted', Constants::NOT_DELETED)
+//            ->select([
+//                'articles.*',
+//                'categories.name as category_name',
+//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image"),
+//                DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
+//            ])
+//            ->mergeBindings($subImageQuery);
+//    }
 
     public function getPublishedArticlesFromUser(int $userId): object
     {
         return $this->baseArticleQuery($userId)
             ->where('articles.is_published', Constants::TEST_PUBLISHED)
+            ->get();
+    }
+
+    public function getAllPublishedArticles(): object
+    {
+        return $this->getPublishedArticles()
+            ->where('articles.is_published', Constants::PUBLISHED)
             ->get();
     }
 

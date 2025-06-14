@@ -15,5 +15,12 @@ class SettingsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('settings')->insert([
+            'key' => 'the_blog_is_public',
+            'value' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

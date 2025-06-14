@@ -71,9 +71,9 @@ Route::get('/api/check-verification', function () {
 })->middleware('auth')->name('api.check-verification');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Blog official
+Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
+
 
 //Auth::routes(['verify' => true]);
 //Route::middleware(['auth', 'verified'])->group(function () { /// ----->> TEN ROUTE DAJ BO TYM NIZEJ MIERZE ODWIEDZINY A TO WYZEJ MAM MIERZYC ODWIEDZINY

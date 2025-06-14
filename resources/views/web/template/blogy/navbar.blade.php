@@ -52,7 +52,9 @@
                             <li><a href="{{ route('gallery.preview') }}">{{ __('blog.topbar.gallery') }}</a></li>
                             <li><a href="{{ route('contact') }}">{{ __('blog.topbar.contact') }}</a></li>
                             <li><a href="{{ route('blog.map') }}">{{ __('blog.topbar.map') }}</a></li>
-                            <li><a href="#">ZDJECIA KRZYSKA :P</a></li>
+                            @if(Auth::user()->is_admin)
+                                <li><a href="#">ZDJECIA KRZYSKA :P</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

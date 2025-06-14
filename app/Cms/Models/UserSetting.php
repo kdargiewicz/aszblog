@@ -64,6 +64,19 @@ class UserSetting extends Model
         return UserSetting::where('user_id', $userId)->first();
     }
 
+    public function getBlogPublishedStatus(): ?int
+    {
+        $publishedStatusBlog = DB::table('settings')
+            ->where('key', 'the_blog_is_public')
+            ->value('value');
+
+        if (!$publishedStatusBlog) {
+            return null;
+        }
+
+        return $publishedStatusBlog;
+    }
+
     public function isBlogOwner($userId): bool
     {
         $userBlogOwnerId = DB::table('settings')

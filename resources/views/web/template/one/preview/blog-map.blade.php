@@ -5,5 +5,5 @@
             <div class="w3-margin-top" id="blog-map"></div>
         </div>
     </div>
-    @include('web.template.one.preview.google-map-script')
+    @include('web.template.google-map-script')
 @endsection
