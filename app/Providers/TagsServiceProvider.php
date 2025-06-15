@@ -10,7 +10,7 @@ class TagsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        View::composer(['web.template.*'], function ($view) {
+        View::composer(['blog.template.*', 'web.template.*'], function ($view) {
             $tags = app(Tag::class)->getTagsFromPublishedArticles();
             $view->with('tags', $tags);
         });

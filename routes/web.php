@@ -77,6 +77,11 @@ Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('
 Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
 
 Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
+Route::get('/blog-gallery', [\App\Web\Controllers\BlogController::class, 'getGallery'])->name('blog.gallery');
+Route::get('/blog-about-me', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
+Route::get('/blog-contact', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
+Route::get('/blog-map-point', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
+//END BLOG OFFICIAL ROUTES
 
 
 //Auth::routes(['verify' => true]);

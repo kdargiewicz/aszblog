@@ -10,7 +10,7 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        View::composer(['web.template.*', 'cms.settings.main'], function ($view) {
+        View::composer(['blog.template.*', 'web.template.*', 'cms.settings.main'], function ($view) {
             $settings = app(UserSetting::class)->getBlogOwnerSettings();
             $view->with('blogSettings', $settings);
         });

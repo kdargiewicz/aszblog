@@ -1,4 +1,4 @@
-@extends('web.template.blogy.main')
+@extends('blog.template.blogy.main')
 @section('content')
 
     @if($article && $article->firstImageFromArticle)
@@ -60,6 +60,9 @@
                                         {!! $article->content !!}
                                     </div>
 
+{{--                                    {{ dd($article->tags) }}--}}
+
+{{--                                    to są info pod artykułem debilu ! ! !--}}
                                     <p>{{ __('article.create-form.category') }}: <a
                                             href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}:
                                         @foreach ($article->tags as $tag)
@@ -71,12 +74,12 @@
                                         @endforeach
                                     </p>
 
-                                    @include('web.template.blogy.preview.comments')
+                                    @include('blog.template.blogy.comments')
 
                                 </div>
                             </div>
 
-                            @include('web.template.blogy.sidebar')
+                            @include('blog.template.blogy.sidebar')
 
                         </div>
                     </div>

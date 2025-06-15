@@ -1,4 +1,4 @@
-@extends('web.template.blogy.main')
+@extends('blog.template.blogy.main')
 @section('content')
     <div class="container py-5">
         <div class="masonry-grid">

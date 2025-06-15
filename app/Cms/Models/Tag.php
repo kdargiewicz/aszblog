@@ -30,30 +30,31 @@ class Tag extends Model
             ->get();
     }
 
-    public function getTagsFromPublishedArticles(): \Illuminate\Support\Collection
+    public function getTagsFromPublishedArticles(): \Illuminate\Support\Collection|null
     {
-        return DB::table('tags')
-            ->join('articles', function ($join) {
-                $join->on(DB::raw('JSON_CONTAINS(articles.tags_id, JSON_QUOTE(CAST(tags.id AS CHAR)))'), '=', DB::raw('1'))
-                    ->whereIn('articles.is_published', Constants::PUBLISHED_STATES)
-                    ->where('articles.deleted', Constants::NOT_DELETED);
-            })
-            ->where('tags.deleted', Constants::NOT_DELETED)
-            ->select('tags.id', 'tags.name')
-            ->distinct()
+        $allTagIds = [];
+        $publishedArticles =  DB::table('articles')
+            ->where('articles.is_published', Constants::PUBLISHED)
+            ->where('articles.deleted', Constants::NOT_DELETED)
             ->get();
 
-//        return DB::table($this->getTable())
-//            ->where('tags.deleted', Constants::NOT_DELETED)
-//            ->whereExists(function ($query) {
-//                $query->select(DB::raw(1))
-//                    ->from('articles')
-//                    ->whereIn('articles.is_published', Constants::PUBLISHED_STATES)
-//                    ->where('articles.deleted', Constants::NOT_DELETED)
-//                    ->whereRaw("JSON_CONTAINS(articles.tags_id, CAST(tags.id AS JSON))");
-//            })
-//            ->select('tags.id', 'tags.name')
-//            ->distinct()
-//            ->get();
+        if ($publishedArticles) {
+            foreach ($publishedArticles as $article) {
+                $tagIds = json_decode($article->tags_id);
+                if (is_array($tagIds)) {
+                    foreach ($tagIds as $tagId) {
+                        $allTagIds[] = $tagId;
+                    }
+                }
+            }
+
+            $allTagIds = array_unique($allTagIds);
+
+            return DB::table('tags')
+                ->whereIn('id', $allTagIds)
+                ->get();
+        }
+
+        return null;
     }
 }

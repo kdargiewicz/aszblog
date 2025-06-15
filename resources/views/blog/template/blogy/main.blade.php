@@ -9,7 +9,7 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
 */ -->
 <!doctype html>
 <html lang="pl">
-@include('web.template.blogy.header')
+@include('blog.template.blogy.header')
 <body>
 
 <div class="site-mobile-menu site-navbar-target">
@@ -21,19 +21,19 @@ TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
     <div class="site-mobile-menu-body"></div>
 </div>
 
-@include('web.template.blogy.preview.custom_colors')
+@include('blog.template.blogy.custom_colors')
 
-@include('web.template.blogy.navbar')
+@include('blog.template.blogy.navbar')
 
-@include('web.template.blogy.flash')
+@include('blog.template.blogy.flash')
 
 @yield('content')
 
-@include('web.template.blogy.footer')
+@include('blog.template.blogy.footer')
 
-@include('web.template.blogy.scripts')
+@include('blog.template.blogy.scripts')
 
-@include('web.template.cookie')
+@include('blog.template.blogy.cookie')
 
 </body>
 </html>

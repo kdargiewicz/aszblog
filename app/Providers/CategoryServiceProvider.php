@@ -10,7 +10,7 @@ class CategoryServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        View::composer(['web.template.*'], function ($view) {
+        View::composer(['blog.template.*', 'web.template.*'], function ($view) {
             $categories = app(Category::class)->getCategoriesFromPublishedArticles();
             $view->with('categories', $categories);
         });
