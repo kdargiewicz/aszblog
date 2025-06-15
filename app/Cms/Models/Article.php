@@ -71,4 +71,9 @@ class Article extends Model
         return app(ArticleRepository::class)->getAllForBlogMap($userId);
     }
 
+    public function getArticlesForFooter(): object
+    {
+        return app(ArticleRepository::class)->getArticlesForFooter();
+    }
+
 }

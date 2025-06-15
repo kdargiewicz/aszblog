@@ -270,4 +270,12 @@ class ArticleRepository
         return DB::table('articles')->where('id', $articleId)->where('user_id', $userId)->update(['is_published' => $publishedStatus]);
     }
 
+    public function getArticlesForFooter(): \Illuminate\Support\Collection
+    {
+        return $this->getPublishedArticles()
+            ->where('articles.is_published', Constants::PUBLISHED)
+            ->orderBy('updated_at', 'desc')
+            ->limit(Constants::NUMBER_FOOTER_ARTICLES)
+            ->get();
+    }
 }

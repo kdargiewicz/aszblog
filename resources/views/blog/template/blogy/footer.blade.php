@@ -42,6 +42,12 @@
             <div class="col-lg-4">
                 <div class="widget">
                     <h3 class="mb-4">Recent Post Entry</h3>
+
+
+
+                    {{ dd($footerArticles) }}
+
+
                     <div class="post-entry-footer">
                         <ul>
                             <li>

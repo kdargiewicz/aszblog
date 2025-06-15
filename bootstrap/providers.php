@@ -6,4 +6,5 @@ return [
     App\Providers\CategoryServiceProvider::class,
     App\Providers\TagsServiceProvider::class,
     App\Providers\PopularPostServiceProvider::class,
+    App\Providers\FooterServiceProvider::class,
 ];

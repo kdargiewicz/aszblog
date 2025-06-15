@@ -13,4 +13,5 @@ class Constants
     public const TEST_PUBLISHED = 1;
     public const PUBLISHED = 2;
     public const PUBLISHED_STATES = [self::TEST_PUBLISHED, self::PUBLISHED];
+    public const NUMBER_FOOTER_ARTICLES = 3;
 }
