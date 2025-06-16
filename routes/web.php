@@ -81,6 +81,7 @@ Route::get('/blog-gallery', [\App\Web\Controllers\BlogController::class, 'getGal
 Route::get('/blog-about-me', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
 Route::get('/blog-contact', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
 Route::get('/blog-map-point', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
+Route::get('/blog-privacy-policy', [\App\Web\Controllers\BlogController::class, 'getPrivacyPolicy'])->name('blog.privacy-policy');
 //END BLOG OFFICIAL ROUTES
 
 

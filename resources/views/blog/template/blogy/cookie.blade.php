@@ -9,14 +9,40 @@
 
     <script>
         function acceptCookies() {
+            document.cookie = "cookie_consent=accepted; max-age=604800; path=/";
             document.getElementById('cookie-banner').style.display = 'none';
-            // Ustaw cookie na 7 dni (7 * 24 * 60 * 60 = 604800)
-            document.cookie = "cookie_consent=1; max-age=604800; path=/";
         }
 
         function declineCookies() {
+            document.cookie = "cookie_consent=declined; max-age=604800; path=/";
             document.getElementById('cookie-banner').style.display = 'none';
-            // NIE ustawiamy żadnego ciasteczka
         }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const consent = getCookie('cookie_consent');
+            if (consent === 'accepted' || consent === 'declined') {
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        });
     </script>
+
+
+    {{--    <script>--}}
+{{--        function acceptCookies() {--}}
+{{--            document.getElementById('cookie-banner').style.display = 'none';--}}
+{{--            // Ustaw cookie na 7 dni (7 * 24 * 60 * 60 = 604800)--}}
+{{--            document.cookie = "cookie_consent=1; max-age=604800; path=/";--}}
+{{--        }--}}
+
+{{--        function declineCookies() {--}}
+{{--            document.getElementById('cookie-banner').style.display = 'none';--}}
+{{--            // NIE ustawiamy żadnego ciasteczka--}}
+{{--        }--}}
+{{--    </script>--}}
 @endif

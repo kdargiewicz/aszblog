@@ -15,13 +15,13 @@
             <div class="bio-body">
                 <h2 class="custom-font-color">{{ __('blog.author_name') }}</h2>
                 <p class="mb-4 custom-font-color">{!! Str::limit(strip_tags($blogSettings->about_me ?? __('blog.about_me_text')), 100) !!}</p>
-                <p><a href="{{ route('about-me') }}" class="btn btn-primary btn-sm rounded px-2 py-2">{{ __('blog.content.read_the_author') }}</a></p>
-                <p class="social">
-                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
-                </p>
+                <p><a href="{{ route('blog.about-me') }}" class="btn btn-primary btn-sm rounded px-2 py-2">{{ __('blog.content.read_the_author') }}</a></p>
+{{--                <p class="social">--}}
+{{--                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>--}}
+{{--                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>--}}
+{{--                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>--}}
+{{--                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>--}}
+{{--                </p>--}}
             </div>
         </div>
     </div>

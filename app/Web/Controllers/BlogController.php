@@ -62,9 +62,7 @@ class BlogController extends Controller
         //to trzeba zrefaktoryzowac krzychu ! ! !
         //$selectedBlogName = app(UserSetting::class)->getBlogOwnerSettings()->blog_template;
 
-        //return view("blog.template.{$selectedBlogName}.article", compact('article'));
         return $this->viewWithBlogTemplate('article', compact('article'));
-
 
     }
 
@@ -90,5 +88,10 @@ class BlogController extends Controller
         $articles = app(Article::class)->getAllPublishedArticles();
 
         return $this->viewWithBlogTemplate('blog-map', compact('articles'));
+    }
+
+    public function getPrivacyPolicy(): object
+    {
+        return $this->viewWithBlogTemplate('privacy_policy');
     }
 }
