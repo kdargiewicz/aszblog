@@ -170,6 +170,23 @@
                        name="main_colors[font-color]"
                        value="{{ $blogSettings->main_colors['font-color'] ?? '#ffffff' }}"
                        style="width: 100%; height: 3rem; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;">
+
+                <label class="w3-text-grey"><b>{{ __('settings.user_settings.showArticleSidebar') }}</b></label>
+                <select class="w3-select w3-border w3-round w3-margin-bottom" name="show_article_sidebar">
+                    <option
+                        value="" {{ old('show_article_sidebar', $settings->show_article_sidebar ?? '') === '' ? 'selected' : '' }}>
+                        {{ __('settings.user_settings.blog_template_select') }}
+                    </option>
+                    <option
+                        value="{{ \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_YES }}" {{ old('show_article_sidebar', $settings->show_article_sidebar ?? '') === \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_YES ? 'selected' : '' }}>
+                        {{ __('settings.user_settings.yes') }}
+                    </option>
+                    <option
+                        value="{{ \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_NO }}" {{ old('show_article_sidebar', $settings->show_article_sidebar ?? '') === \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_NO ? 'selected' : '' }}>
+                        {{ __('settings.user_settings.no') }}
+                    </option>
+                </select>
+
             @endif
 
             @if(isset($settings))

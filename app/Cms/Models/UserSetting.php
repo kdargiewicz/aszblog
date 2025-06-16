@@ -26,6 +26,7 @@ class UserSetting extends Model
         'blog_template',
         'about_me_image',
         'main_colors',
+        'show_article_sidebar',
     ];
 
     protected $casts = [

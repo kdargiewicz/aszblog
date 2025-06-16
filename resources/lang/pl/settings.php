@@ -2,6 +2,8 @@
 
 return [
     'user_settings' => [
+        'yes' => 'Tak',
+        'no' => 'Nie',
         'add' => 'Ustawienia bloga',
         'edit' => 'Edytuj ustawienia bloga',
         'avatar' => 'Wybierz avatar',
@@ -27,5 +29,6 @@ return [
         'restore_colors' => 'Kolory przywrócone',
         'restore_colors_button' => 'Wyzeruj kolory',
         'font-color' => 'Kolor czcionki:',
+        'showArticleSidebar' => 'Pokazuj boczny sidebar w podglądzie pojedynczego artykułu'
     ]
 ];
