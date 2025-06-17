@@ -5,7 +5,7 @@
         <h2 class="w3-xlarge">{{ __('errors.403_error') }}</h2>
         <p class="w3-large">{{ __('errors.try_again_later') }}</p>
 
-        <a href="{{ route('dashboard') }}" class="w3-button w3-blue w3-margin-top">
+        <a href="{{ route('welcome') }}" class="w3-button w3-blue w3-margin-top">
             {{ __('errors.back_to_dashboard') }}
         </a>
     </div>
