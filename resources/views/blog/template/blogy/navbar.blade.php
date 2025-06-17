@@ -50,9 +50,11 @@
                             <li><a href="{{ route('blog.gallery') }}">{{ __('blog.topbar.gallery') }}</a></li>
                             <li><a href="{{ route('blog.contact') }}">{{ __('blog.topbar.contact') }}</a></li>
                             <li><a href="{{ route('blog.google-map') }}">{{ __('blog.topbar.map') }}</a></li>
-                            @if(Auth::user()->is_admin)
-                                <li><a href="#">ZDJECIA KRZYSKA :P</a></li>
-                            @endif
+                            @auth
+                                @if(Auth::user()->is_admin)
+                                    <li><a href="#">ZDJECIA KRZYSKA :P</a></li>
+                                @endif
+                            @endauth
                         </ul>
                     </div>
                 </div>

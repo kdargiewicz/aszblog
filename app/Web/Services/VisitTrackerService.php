@@ -4,6 +4,7 @@ namespace App\Web\Services;
 
 use App\Web\Models\VisitModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class VisitTrackerService
 {
@@ -34,7 +35,7 @@ class VisitTrackerService
         return $this->visitModel->getUrlStats();
     }
 
-    public function getBrowserStatsByTopUrls()
+    public function getBrowserStatsByTopUrls(): array
     {
         return $this->visitModel->getBrowserStatsByTopUrls();
     }
@@ -46,17 +47,27 @@ class VisitTrackerService
 
     public function logVisit(Request $request, ?string $type = null, ?int $modelId = null): void
     {
-        $agent = $request->userAgent();
+        $ip = $request->ip();
+        $userAgent = $request->userAgent();
+        $url = $request->fullUrl();
+
+        $cacheKey = 'visit_' . md5($ip . $userAgent . $url);
+
+        if (Cache::has($cacheKey)) {
+            return;
+        }
 
         VisitModel::create([
-            'ip'         => $request->ip(),
-            'user_agent' => $agent,
-            'platform'   => $this->getPlatform($agent),
-            'browser'    => $this->getBrowser($agent),
-            'url'        => $request->fullUrl(),
+            'ip'         => $ip,
+            'user_agent' => $userAgent,
+            'platform'   => $this->getPlatform($userAgent),
+            'browser'    => $this->getBrowser($userAgent),
+            'url'        => $url,
             'type'       => $type,
             'model_id'   => $modelId,
         ]);
+
+        Cache::put($cacheKey, true, now()->addMinutes(10));
     }
 
     private function getPlatform(string $agent): string

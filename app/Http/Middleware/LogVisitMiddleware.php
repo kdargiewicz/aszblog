@@ -5,47 +5,47 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Cms\Models\Article;
 
 class LogVisitMiddleware
 {
     /**
-     * @param Request $request
-     * @param Closure $next
-     * @return mixed
+     * Obsługuje logowanie wizyty dla wybranych tras, z wykluczeniem botów i nieistotnych żądań.
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if (Str::contains(strtolower($request->userAgent()), ['bot', 'crawl', 'spider'])) {
+        if ($this->isSkippable($request)) {
             return $next($request);
         }
 
-        $route = $request->route();
-        $type = null;
-        $modelId = null;
+        $routeName = $request->route()?->getName();
 
-        //if ($route && in_array($route->getName(), ['article.create', 'article.show', 'article.edit'])) {
+        $routesToLog = [
+            'welcome',
+            'article.view',
+            'blog.article',
+            'blog.gallery',
+            'blog.google-map',
+        ];
 
-        // LUB:
-        //if ($route && str_starts_with($route->getName(), 'article.')) {
-
-        //TU DO LICZENIA WEJSC W ARTYKULY ALE POTRZEBUJE SLUG
-
-//        if ($route && $route->getName() === 'article.create') {
-//            $slug = $route->parameter('slug');
-//
-//            $article = Article::where('slug', $slug)->first();
-//            if ($article) {
-//                $type = 'article';
-//                $modelId = $article->id;
-//                app(\App\Web\Services\VisitTrackerService::class)->logVisit($request, $type, $modelId);
-//
-//                return $next($request);
-//            }
-//        }
-
-        app(\App\Web\Services\VisitTrackerService::class)->logVisit($request);
+        if (in_array($routeName, $routesToLog)) {
+            app(\App\Web\Services\VisitTrackerService::class)->logVisit($request);
+        }
 
         return $next($request);
+    }
+
+    /**
+     * Sprawdza, czy żądanie powinno być pominięte (bot, ajax, json, nieistotne ścieżki).
+     */
+    protected function isSkippable(Request $request): bool
+    {
+        $userAgent = strtolower($request->userAgent());
+
+        return
+            $request->isMethod('post') ||
+            $request->ajax() ||
+            $request->expectsJson() ||
+            Str::contains($request->path(), ['favicon.ico', 'robots.txt', 'sitemap.xml']) ||
+            Str::contains($userAgent, ['bot', 'crawl', 'spider', 'slurp', 'bingpreview', 'facebookexternalhit']);
     }
 }

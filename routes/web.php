@@ -18,29 +18,11 @@ use App\Http\Middleware\ForcePasswordChangeMiddleware;
 use Illuminate\Auth\Access\AuthorizationException;
 use App\Cms\Repositories\ErrorsRepository;
 
-//tutaj daje routy do zliczania odwiedzin na blogu bez auth
-//Route::middleware(LogVisitMiddleware::class)->group(function () {
-  //  Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
-//    Route::get('/article/{slug}', [ArticleController::class, 'show']);
-//    Route::get('/category/{name}', [CategoryController::class, 'show']);
-//});
-
-//moge tez wywolac to w pojedynczym route, np:
-//Route::get('/article/{slug}', [ArticleController::class, 'show'])
-//    ->middleware(LogVisitMiddleware::class);
-
-
 Route::post('/store-comment', [WebCommentsController::class, 'storeComment'])->name('comment.store');
-
 Route::post('/contact/send', [MailContactController::class, 'sendMailFromReader'])->name('contact.send');
-
-
-
-
 
 Route::get('/email/verify', [VerificationController::class, 'show'])
     ->middleware('auth')
-    //->name('verification.show');
     ->name('verification.notice');
 
 
@@ -72,22 +54,24 @@ Route::get('/api/check-verification', function () {
 
 
 //Blog official
-Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
-//tu trzeba przyjazne linki ogarnac we w urlu
-Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
+//Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
+//tu trzeba PRZYJAZNE LINKI ogarnac we w urlu
+//    Route::get('/article/{slug}', [ArticleController::class, 'show']);
+//    Route::get('/category/{name}', [CategoryController::class, 'show']);
 
-Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
-Route::get('/blog-gallery', [\App\Web\Controllers\BlogController::class, 'getGallery'])->name('blog.gallery');
-Route::get('/blog-about-me', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
-Route::get('/blog-contact', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
-Route::get('/blog-map-point', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
-Route::get('/blog-privacy-policy', [\App\Web\Controllers\BlogController::class, 'getPrivacyPolicy'])->name('blog.privacy-policy');
+Route::middleware([LogVisitMiddleware::class])->group(function () {
+    Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
+    Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
+    Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
+    Route::get('/blog-gallery', [\App\Web\Controllers\BlogController::class, 'getGallery'])->name('blog.gallery');
+    Route::get('/blog-about-me', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
+    Route::get('/blog-contact', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
+    Route::get('/blog-map-point', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
+    Route::get('/blog-privacy-policy', [\App\Web\Controllers\BlogController::class, 'getPrivacyPolicy'])->name('blog.privacy-policy');
+});
 //END BLOG OFFICIAL ROUTES
 
-
-//Auth::routes(['verify' => true]);
-//Route::middleware(['auth', 'verified'])->group(function () { /// ----->> TEN ROUTE DAJ BO TYM NIZEJ MIERZE ODWIEDZINY A TO WYZEJ MAM MIERZYC ODWIEDZINY
-Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, LogVisitMiddleware::class])->group(function () {
+Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->group(function () {
 
     Route::get('/dashboard', function (\App\Web\Services\VisitTrackerService $tracker) {
         $browserStatsData = $tracker->getBrowserStatsByTopUrls();
@@ -128,8 +112,6 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     Route::post('/cms/image/upload', [ImageController::class, 'upload'])->name('image.upload');
     Route::post('/tinymce/upload', [ImageController::class, 'uploadTinyMce'])->name('tiny-mce-upload.store');
 
-
-
     Route::get('/createArticle', [\App\Cms\Controllers\ArticleController::class, 'getCreateArticle'])->name('article.create');
     Route::post('/storeArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreArticle'])->name('article.store');
 
@@ -137,23 +119,6 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
 
     Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
-
-    //testy errorow
-    Route::get('/test-error-500', function () {
-        throw new \Exception('To jest testowy błąd 500');
-    });
-
-    Route::get('/test-error-404', function () {
-        abort(404);
-    });
-
-    Route::get('/test-error-403', function () {
-        throw new AuthorizationException('Brak dostępu do tej funkcji');
-    });
-
-    Route::get('/test-error-419', function () {
-        abort(419); // np. CSRF Token mismatch
-    });
 
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
 
@@ -163,14 +128,8 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class, Log
 
     Route::post('updatePublishedArticle', [\App\Cms\Controllers\ArticleController::class, 'postUpdatePublishedArticle'])->name('article.update.published');
 
-
-
-
     Route::post('/articleRestore/{articleId}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
 
-
-    Route::get('/kontakt', [ContactController::class, 'showForm'])->name('contact.form');
-    Route::post('/kontakt', [ContactController::class, 'submit'])->name('contact.submit');
 
     //podglad wersji bloga
     Route::get('/preview/{name}', [\App\Web\Controllers\PreviewController::class, 'getPreviewBlogByBlogName'])->name('first.blog.preview');
