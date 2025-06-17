@@ -36,33 +36,17 @@
         <a href="{{ route('comments.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Komentarze</a>
         <a href="{{ route('user.settings') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Ustawienia</a>
         <hr>
-        <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>  Podgląd bloga</a>
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-folder-open w3-margin-right"></i>Kategorie</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tags w3-margin-right"></i>Tagi</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Overview</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Views</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Traffic</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>--}}
-{{--        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>--}}
+        <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>  Podgląd testowy bloga</a>
+        <a href="{{ url('/') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>  Podgląd bloga</a>
 
         @if(Auth::user()->is_admin)
             <a href="{{ route('errors.log') }}" class="w3-bar-item w3-button w3-padding w3-text-red">
                 <i class="fa fa-exclamation-triangle"></i>  Error_log
             </a>
-            <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>
-            <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>
-            <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga blogy</a>
-            <p>  ładne linki url !</p>
-            <p>  zahaszowane adresy img</p>
-            <p>  zakładka galeria ! !</p>
+{{--            <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>--}}
+{{--            <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>--}}
+{{--            <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga blogy</a>--}}
 
-            <div class="w3-container">
-                <a href="{{ url('/') }}"><h5>BLOG-zoba go :P</h5></a>
-
-            </div>
         @endif
     </div>
 </nav>

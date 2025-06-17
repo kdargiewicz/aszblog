@@ -5,6 +5,7 @@ namespace App\Web\Controllers;
 use App\Cms\Models\Article;
 use App\Cms\Models\Image;
 use App\Cms\Models\UserSetting;
+use App\Constants\Constants;
 use App\Http\Controllers\Controller;
 use App\Web\Helpers\BlogHelper;
 
@@ -26,7 +27,11 @@ class PreviewController extends Controller
 
     public function getPreviewArticle(int $articleId): object
     {
-        $article = app(Article::class)->getFullArticleById($articleId);
+        $article = app(Article::class)->getFullArticleById($articleId, Constants::PUBLISHED_STATES);
+
+        if (!$article) {
+            return redirect()->route('first.blog.preview', ['name' => 'blogy']);
+        }
 
         return $this->viewWithBlogTemplate('preview/article', compact('article'));
     }
@@ -76,10 +81,5 @@ class PreviewController extends Controller
         $articles = app(Article::class)->getAllForBlogMap(auth()->id());
 
         return $this->viewWithBlogTemplate('preview/blog-map', compact('articles'));
-
-
-
-
-        //return view('web.template.one.preview.blog-map', compact('articles'));
     }
 }

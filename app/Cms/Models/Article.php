@@ -46,9 +46,9 @@ class Article extends Model
         return $this->getAttribute('article_uuid');
     }
 
-    public function getFullArticleById(int $articleId): object
+    public function getFullArticleById(int $articleId, $isPublished = null): object|null
     {
-        return app(ArticleRepository::class)->getArticleDTOByArticleId($articleId);
+        return app(ArticleRepository::class)->getArticleDTOByArticleId($articleId, $isPublished);
     }
 
     public function getArticleOwnerInfo($articleId)

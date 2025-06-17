@@ -10,6 +10,7 @@ use App\Cms\Models\Tag;
 use App\Constants\Constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use function PHPUnit\Framework\isArray;
 
 class ArticleRepository
 {
@@ -132,7 +133,7 @@ class ArticleRepository
     public function getPublishedArticlesFromUser(int $userId): object
     {
         return $this->baseArticleQuery($userId)
-            ->where('articles.is_published', Constants::TEST_PUBLISHED)
+            ->whereIn('articles.is_published', Constants::PUBLISHED_STATES)
             ->get();
     }
 
@@ -163,48 +164,43 @@ class ArticleRepository
             ->first();
     }
 
-    public function getArticleWithComments(int $articleId): Object
+    public function getArticleWithComments(int $articleId, $isPublished = null): ?object
     {
-        $article = DB::table('articles')
+        $query = DB::table('articles')
             ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.id', $articleId)
             ->where('articles.deleted', Constants::NOT_DELETED)
             ->select([
                 'articles.*',
                 'categories.name as category_name',
-            ])
-            ->first();
+            ]);
+
+        if ($isPublished !== null) {
+            //if (isArray($isPublished)) {
+                $query->whereIn('articles.is_published', $isPublished);
+//            } else {
+//                $query->where('articles.is_published', $isPublished);
+//            }
+        }
+
+        $article = $query->first();
 
         if ($article) {
             $tagIds = json_decode($article->tags_id, true);
 
             $tags = app(Tag::class)->getTagsFromArticle($tagIds)->toArray();
-
-//            DB::table('tags')
-//                ->whereIn('id', $tagIds)
-//                ->where('deleted', Constants::NOT_DELETED)
-//                ->select('id', 'name')
-//                ->get();
-
-            $article->tags = $tags;
-
             $comments = app(Comments::class)->getAcceptedCommentsFromArticle($articleId);
 
-//            DB::table('comments')
-//                ->where('article_id', $articleId)
-//                ->where('accepted', true)
-//                ->where('deleted', Constants::NOT_DELETED)
-//                ->get();
-
+            $article->tags = $tags;
             $article->comments = $comments;
         }
 
         return $article;
     }
 
-    public function getArticleDTOByArticleId(int $articleId): null|ArticleDTO
+    public function getArticleDTOByArticleId(int $articleId, $isPublished): null|ArticleDTO
     {
-        $article = $this->getArticleWithComments($articleId);
+        $article = $this->getArticleWithComments($articleId, $isPublished);
         if ( !$article) {
             return null;
         }

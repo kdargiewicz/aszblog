@@ -5,6 +5,7 @@ namespace App\Web\Controllers;
 use App\Cms\Models\Article;
 use App\Cms\Models\Image;
 use App\Cms\Models\UserSetting;
+use App\Constants\Constants;
 use App\Http\Controllers\Controller;
 use App\Web\Helpers\BlogHelper;
 
@@ -13,7 +14,7 @@ class BlogController extends Controller
     public function welcome(): object
     {
         if (!app(UserSetting::class)->getBlogPublishedStatus()) {
-            return view('welcome');
+            return redirect()->route('welcome');
         }
 
         return $this->getBlog();
@@ -53,14 +54,13 @@ class BlogController extends Controller
         return view($path, $data);
     }
 
-    public function getViewArticle(int $articleId)
+    public function getViewArticle(int $articleId): object
     {
-        //tu powinienem sprawdzic czy artykul na pewno jest publikowany bo mozna zmodyfikowac adres w url chyba ze zrobie przyjazne linki
+        $article = app(Article::class)->getFullArticleById($articleId, [Constants::PUBLISHED]);
 
-
-        $article = app(Article::class)->getFullArticleById($articleId);
-        //to trzeba zrefaktoryzowac krzychu ! ! !
-        //$selectedBlogName = app(UserSetting::class)->getBlogOwnerSettings()->blog_template;
+        if (!$article) {
+            return redirect()->route('welcome');
+        }
 
         return $this->viewWithBlogTemplate('article', compact('article'));
 

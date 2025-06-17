@@ -36,7 +36,7 @@ class Image extends Model
             ->join('articles', 'images.article_id', '=', 'articles.id')
             ->where('articles.deleted', Constants::NOT_DELETED)
             ->where('articles.is_published', Constants::PUBLISHED)
-            ->select('images.*') 
+            ->select('images.*')
             ->get()
             ->toArray();
     }
