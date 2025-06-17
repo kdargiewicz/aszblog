@@ -2,6 +2,7 @@
 
 namespace App\Cms\Models;
 
+use App\Constants\Constants;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -31,9 +32,14 @@ class Image extends Model
 
     public function getAllImagesToGallery(): array
     {
-        return self::query()->whereNotNull('article_id')->get()->toArray();
+        return self::query()
+            ->join('articles', 'images.article_id', '=', 'articles.id')
+            ->where('articles.deleted', Constants::NOT_DELETED)
+            ->where('articles.is_published', Constants::PUBLISHED)
+            ->select('images.*') 
+            ->get()
+            ->toArray();
     }
-
 
     public function getUrlMinAttribute(): array|string|null
     {
