@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckBlogPublished;
 use App\Web\Controllers\MailContactController;
 use App\Web\Controllers\WebCommentsController;
 use Illuminate\Support\Facades\Route;
@@ -59,7 +60,10 @@ Route::get('/api/check-verification', function () {
 //    Route::get('/article/{slug}', [ArticleController::class, 'show']);
 //    Route::get('/category/{name}', [CategoryController::class, 'show']);
 
-Route::middleware([LogVisitMiddleware::class])->group(function () {
+Route::middleware([
+    LogVisitMiddleware::class,
+    CheckBlogPublished::class, // dodajemy klasę bez aliasu
+])->group(function () {
     Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
     Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
     Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
