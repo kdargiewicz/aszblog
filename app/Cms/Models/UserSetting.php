@@ -2,6 +2,7 @@
 
 namespace App\Cms\Models;
 
+use App\Constants\Constants;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -85,6 +86,19 @@ class UserSetting extends Model
             ->value('value');
 
         if ($userId == $userBlogOwnerId){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getBlogStatus(): bool
+    {
+        $blogStatus = (int) DB::table('settings')
+            ->where('key', 'the_blog_is_public')
+            ->value('value') ?? 0;
+
+        if ($blogStatus === Constants::BLOG_IS_PUBLISHED){
             return true;
         } else {
             return false;

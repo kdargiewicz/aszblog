@@ -2,6 +2,7 @@
 
 namespace App\Cms\Controllers;
 
+use App\Cms\Models\Settings;
 use App\Cms\Models\UserSetting;
 use App\Cms\Services\ImageService;
 use App\Http\Controllers\Controller;
@@ -12,10 +13,12 @@ class SettingsController extends Controller
     public function getSettings(): object
     {
         $settings = app(UserSetting::class)->getUserSettings(auth()->id());
+        $blogStatus =  app(UserSetting::class)->getBlogStatus();
         $isBlogOwner = app(UserSetting::class)->isBlogOwner(auth()->id());
 
         return view('cms.settings.main')
             ->with('settings', $settings)
+            ->with('blogStatus', $blogStatus)
             ->with('isBlogOwner', $isBlogOwner);
     }
 
@@ -42,6 +45,10 @@ class SettingsController extends Controller
                 'show_article_sidebar' => $validated['show_article_sidebar'] ?? null,
             ]
         );
+
+        if ($validated['blog_status']) {
+            app(Settings::class)->updateBlogPublishedSettings('the_blog_is_public', ['value' => $validated['blog_status']]);
+        }
 
         return redirect()
             ->route('user.settings')
@@ -76,6 +83,10 @@ class SettingsController extends Controller
         ];
 
         app(UserSetting::class)->postUpdateSettings($userId, $insert);
+
+        if ($validated['blog_status']) {
+            app(Settings::class)->updateBlogPublishedSettings('the_blog_is_public', ['value' => $validated['blog_status']]);
+        }
 
         return redirect()
             ->route('user.settings')

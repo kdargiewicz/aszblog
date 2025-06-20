@@ -130,7 +130,7 @@
                        placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}">
 
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.blog_template') }}</b></label>
-                <select class="w3-select w3-border w3-round w3-margin-bottom" name="blog_template">
+                <select class="w3-select w3-border w3-round w3-margin-bottom" name="blog_template" disabled>
                     <option
                         value="" {{ old('blog_template', $settings->blog_template ?? '') === '' ? 'selected' : '' }}>
                         {{ __('settings.user_settings.blog_template_select') }}
@@ -184,6 +184,16 @@
                     <option
                         value="{{ \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_NO }}" {{ old('show_article_sidebar', $settings->show_article_sidebar ?? '') === \App\Constants\Constants::SHOW_ARTICLE_SIDEBAR_NO ? 'selected' : '' }}>
                         {{ __('settings.user_settings.no') }}
+                    </option>
+                </select>
+
+                <label class="w3-text-grey"><b>{{ __('settings.user_settings.blog_status') }}</b></label>
+                <select class="w3-select w3-border w3-round w3-margin-bottom" name="blog_status">
+                    <option value="1" {{ old('blog_status', $blogStatus) === true ? 'selected' : '' }}>
+                        {{ __('settings.user_settings.blog_is_published') }}
+                    </option>
+                    <option value="0" {{ old('blog_status', $blogStatus) === false ? 'selected' : '' }}>
+                        {{ __('settings.user_settings.blog_is_not_published') }}
                     </option>
                 </select>
 

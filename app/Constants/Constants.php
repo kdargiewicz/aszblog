@@ -16,4 +16,5 @@ class Constants
     public const NUMBER_FOOTER_ARTICLES = 3;
     public const SHOW_ARTICLE_SIDEBAR_YES = 1;
     public const SHOW_ARTICLE_SIDEBAR_NO = 2;
+    public const BLOG_IS_PUBLISHED = 1;
 }

@@ -32,6 +32,7 @@ class UserSettingsRequest extends FormRequest
                 'in:diagonal,dots,grid,circles,overlapping_circles,diamonds,fractals'
             ],
             'show_article_sidebar' => ['nullable', 'in:1,2'],
+            'blog_status' => ['nullable', 'boolean'],
         ], $colorRules);
     }
 

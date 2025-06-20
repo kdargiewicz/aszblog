@@ -29,6 +29,9 @@ return [
         'restore_colors' => 'Kolory przywrócone',
         'restore_colors_button' => 'Wyzeruj kolory',
         'font-color' => 'Kolor czcionki:',
-        'showArticleSidebar' => 'Pokazuj boczny sidebar w podglądzie pojedynczego artykułu'
+        'showArticleSidebar' => 'Pokazuj boczny sidebar w podglądzie pojedynczego artykułu',
+        'blog_status' => 'Publikacja bloga',
+        'blog_is_published' => 'blog jest publikowany',
+        'blog_is_not_published' => 'NIE PUBLIKUJĘ BLOGA',
     ]
 ];
