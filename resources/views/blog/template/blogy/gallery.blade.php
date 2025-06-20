@@ -17,7 +17,12 @@
                     <img src="{{ asset($image['url']) }}"
                          alt="Obrazek"
                          loading="lazy"
-                         onclick="openModal('{{ asset($image['url']) }}', '{{ route('blog.article', $image['article_id']) }}')">
+{{--                         onclick="openModal('{{ asset($image['url']) }}', '{{ route('blog.article', $image['article_id']) }}')">--}}
+                         onclick="openModal('{{ asset($image['url']) }}', '{{ route('blog.article.slug', ['categorySlug' => $image['category_slug'], 'articleSlug' => $image['article_slug']]) }}')">
+
+
+
+
                 </div>
             @endforeach
         </div>

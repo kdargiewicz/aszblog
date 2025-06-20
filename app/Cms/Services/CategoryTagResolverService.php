@@ -4,6 +4,7 @@ namespace App\Cms\Services;
 
 use App\Cms\Models\Category;
 use App\Cms\Models\Tag;
+use Illuminate\Support\Str;
 
 class CategoryTagResolverService
 {
@@ -14,8 +15,8 @@ class CategoryTagResolverService
         }
 
         return Category::firstOrCreate(
-                ['name' => $categoryName],
-                ['user_id' => $userId])->id;
+            ['name' => $categoryName, 'user_id' => $userId],
+            ['slug' => Str::slug($categoryName)])->id;
     }
 
     public function resolveTagIds(?string $tagsCsv, $userId): array

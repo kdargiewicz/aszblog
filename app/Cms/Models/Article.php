@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $category_id
  * @property array|null $tags_id
  * @method static Article firstOrCreate(array $attributes, array $values = [])
+ * @property string|null $slug
  */
 class Article extends Model
 {
@@ -30,6 +31,7 @@ class Article extends Model
         'content',
         'allow_comments',
         'created_at',
+        'slug',
     ];
 
     protected $casts = [
@@ -44,6 +46,11 @@ class Article extends Model
     public function getArticleUuid(): string
     {
         return $this->getAttribute('article_uuid');
+    }
+
+    public function getFullArticleBySlug($categorySlug, $articleSlug): object|null
+    {
+        return app(ArticleRepository::class)->getFullArticleBySlug($categorySlug, $articleSlug);
     }
 
     public function getFullArticleById(int $articleId, $isPublished = null): object|null

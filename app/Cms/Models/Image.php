@@ -34,9 +34,14 @@ class Image extends Model
     {
         return self::query()
             ->join('articles', 'images.article_id', '=', 'articles.id')
+            ->join('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.deleted', Constants::NOT_DELETED)
             ->where('articles.is_published', Constants::PUBLISHED)
-            ->select('images.*')
+            ->select([
+                'images.*',
+                'articles.slug as article_slug',
+                'categories.slug as category_slug',
+            ])
             ->get()
             ->toArray();
     }

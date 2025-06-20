@@ -42,7 +42,7 @@
                         <ul>
                             @foreach($footerArticles as $article)
                                 <li>
-                                    <a href="{{ route('blog.article', $article->id) }}">
+                                    <a href="{{ route('blog.article.slug', ['categorySlug' => $article->category_slug, 'articleSlug' => $article->slug]) }}">
                                         <img src="{{ asset($article->preview_image) }}" alt="Image placeholder"
                                              class="me-4 rounded">
                                         <div class="text">

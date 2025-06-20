@@ -3,7 +3,7 @@
     <div class="container py-5">
         <div class="masonry-grid">
             @foreach($articles as $article)
-                <a href="{{ route('blog.article', $article->id) }}"
+                <a href="{{ route('blog.article.slug', ['categorySlug' => $article->category_slug, 'articleSlug' => $article->slug]) }}"
                    class="masonry-item {{ $article->tall ? 'tall' : '' }}"
                    style="background-image: url('{{ asset($article->preview_image_max) }}');">
                     <div class="overlay-text">

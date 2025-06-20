@@ -8,6 +8,7 @@ use App\Cms\Models\UserSetting;
 use App\Constants\Constants;
 use App\Http\Controllers\Controller;
 use App\Web\Helpers\BlogHelper;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -54,19 +55,18 @@ class BlogController extends Controller
         return view($path, $data);
     }
 
-    public function getViewArticle(int $articleId): object
+    public function getViewArticleBySlug(string $categorySlug, string $articleSlug): object
     {
-        $article = app(Article::class)->getFullArticleById($articleId, [Constants::PUBLISHED]);
+        $article = app(Article::class)->getFullArticleBySlug($categorySlug, $articleSlug);
 
         if (!$article) {
             return redirect()->route('welcome');
         }
 
-        return $this->viewWithBlogTemplate('article', compact('article'));
-
+        return $this->viewWithBlogTemplate('article', ['article' => $article]);
     }
 
-    public function getGallery(): object //tu powinienem zwracac zdjecia z opubikowanych artykułów? ewentualnie zrobić edycje które sie mają wyświetlac
+    public function getGallery(): object
     {
         $images = app(Image::class)->getAllImagesToGallery();
 

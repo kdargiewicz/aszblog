@@ -21,6 +21,7 @@ class ArticleRepository
             ], [
                 'user_id' => $userId,
                 'title' => $dto->title,
+                'slug' => $dto->slug,
                 'category_id' => $categoryId,
                 'tags_id' => $tagIds,
                 'latitude' => $dto->latitude,
@@ -36,6 +37,7 @@ class ArticleRepository
     {
         $article->update([
             'title' => $dto->title,
+            'slug' => $dto->slug,
             'category_id' => $categoryId,
             'tags_id' => $tagIds,
             'latitude' => $dto->latitude,
@@ -65,6 +67,7 @@ class ArticleRepository
             ->select([
                 'articles.*',
                 'categories.name as category_name',
+                'categories.slug as category_slug',
                 DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image"),
                 DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
             ])
@@ -86,49 +89,6 @@ class ArticleRepository
     {
         return $this->buildArticleQuery();
     }
-
-
-
-//    public function baseArticleQuery(int $userId): Builder
-//    {
-//        $subImageQuery = DB::table('images')
-//            ->select('url')
-//            ->whereColumn('images.article_id', 'articles.id')
-//            ->orderBy('id')
-//            ->limit(1);
-//
-//        return DB::table('articles')
-//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-//            ->where('articles.user_id', $userId)
-//            ->where('articles.deleted', Constants::NOT_DELETED)
-//            ->select([
-//                'articles.*',
-//                'categories.name as category_name',
-//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image"),
-//                DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
-//            ])
-//            ->mergeBindings($subImageQuery);
-//    }
-//
-//    public function getPublishedArticles()
-//    {
-//        $subImageQuery = DB::table('images')
-//            ->select('url')
-//            ->whereColumn('images.article_id', 'articles.id')
-//            ->orderBy('id')
-//            ->limit(1);
-//
-//        return DB::table('articles')
-//            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-//            ->where('articles.deleted', Constants::NOT_DELETED)
-//            ->select([
-//                'articles.*',
-//                'categories.name as category_name',
-//                DB::raw("REPLACE( ( {$subImageQuery->toSql()} ), '_max', '_min') as preview_image"),
-//                DB::raw("( {$subImageQuery->toSql()} ) as preview_image_max"),
-//            ])
-//            ->mergeBindings($subImageQuery);
-//    }
 
     public function getPublishedArticlesFromUser(int $userId): object
     {
@@ -176,11 +136,7 @@ class ArticleRepository
             ]);
 
         if ($isPublished !== null) {
-            //if (isArray($isPublished)) {
                 $query->whereIn('articles.is_published', $isPublished);
-//            } else {
-//                $query->where('articles.is_published', $isPublished);
-//            }
         }
 
         $article = $query->first();
@@ -196,6 +152,20 @@ class ArticleRepository
         }
 
         return $article;
+    }
+
+    public function getFullArticleBySlug($categorySlug, $articleSlug): ?ArticleDTO
+    {
+        $article = DB::table('articles')
+            ->join('categories', 'categories.id', '=', 'articles.category_id')
+            ->where('articles.slug', $articleSlug)
+            ->where('categories.slug', $categorySlug)
+            ->where('articles.is_published', Constants::PUBLISHED)
+            ->where('articles.deleted', Constants::NOT_DELETED)
+            ->select('articles.*', 'categories.name as category_name', 'categories.slug as category_slug')
+            ->first();
+
+        return $this->getArticleDTOByArticleId($article->id, [Constants::PUBLISHED]);
     }
 
     public function getArticleDTOByArticleId(int $articleId, $isPublished): null|ArticleDTO
@@ -224,6 +194,8 @@ class ArticleRepository
             created_at: $article->created_at ?? null,
             article_id: $articleId,
             comments: $article->comments ?? null,
+            slug: $article->slug ?? null,
+            category_slug: $article->category_slug ?? null,
         );
     }
 

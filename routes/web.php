@@ -26,7 +26,6 @@ Route::get('/email/verify', [VerificationController::class, 'show'])
     ->middleware('auth')
     ->name('verification.notice');
 
-
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
@@ -37,10 +36,8 @@ Route::post('/email/verification-notification', [VerificationController::class, 
 
 Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
 Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -52,28 +49,6 @@ Route::get('/api/check-verification', function () {
         'verified' => auth()->check() && auth()->user()->hasVerifiedEmail()
     ]);
 })->middleware('auth')->name('api.check-verification');
-
-
-//Blog official
-//Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
-//tu trzeba PRZYJAZNE LINKI ogarnac we w urlu
-//    Route::get('/article/{slug}', [ArticleController::class, 'show']);
-//    Route::get('/category/{name}', [CategoryController::class, 'show']);
-
-Route::middleware([
-    LogVisitMiddleware::class,
-    CheckBlogPublished::class, // dodajemy klasę bez aliasu
-])->group(function () {
-    Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
-    Route::get('/article-view/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('article.view');
-    Route::get('/blog-article/{articleId}', [\App\Web\Controllers\BlogController::class, 'getViewArticle'])->name('blog.article');
-    Route::get('/blog-gallery', [\App\Web\Controllers\BlogController::class, 'getGallery'])->name('blog.gallery');
-    Route::get('/blog-about-me', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
-    Route::get('/blog-contact', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
-    Route::get('/blog-map-point', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
-    Route::get('/blog-privacy-policy', [\App\Web\Controllers\BlogController::class, 'getPrivacyPolicy'])->name('blog.privacy-policy');
-});
-//END BLOG OFFICIAL ROUTES
 
 Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->group(function () {
 
@@ -121,19 +96,12 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
 
     //tu jakiej id trzeba przekazac niejawnie?
     Route::get('/editArticle/{uuid}', [\App\Cms\Controllers\ArticleController::class, 'getEditArticle'])->name('article.edit');
-
     Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
-
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
-
     Route::get('/articleList', [\App\Cms\Controllers\ArticleController::class, 'getArticleList'])->name('article.list');
-
     Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.list.delete');
-
     Route::post('updatePublishedArticle', [\App\Cms\Controllers\ArticleController::class, 'postUpdatePublishedArticle'])->name('article.update.published');
-
     Route::post('/articleRestore/{articleId}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
-
 
     //podglad wersji bloga
     Route::get('/preview/{name}', [\App\Web\Controllers\PreviewController::class, 'getPreviewBlogByBlogName'])->name('first.blog.preview');
@@ -153,5 +121,21 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
     Route::post('/comment-accept/{id}', [\App\Cms\Controllers\CommentsController::class, 'toggleAccept'])->name('comment.accept');
 
 });
+
+//Blog official
+Route::middleware([
+    LogVisitMiddleware::class,
+    CheckBlogPublished::class, // dodajemy klasę bez aliasu
+])->group(function () {
+    Route::get('/', [\App\Web\Controllers\BlogController::class, 'welcome'])->name('welcome');
+    Route::get('/galeria', [\App\Web\Controllers\BlogController::class, 'getGallery'])->name('blog.gallery');
+    Route::get('/o-autorze', [\App\Web\Controllers\BlogController::class, 'getAboutMe'])->name('blog.about-me');
+    Route::get('/kontakt', [\App\Web\Controllers\BlogController::class, 'getContact'])->name('blog.contact');
+    Route::get('/mapa', [\App\Web\Controllers\BlogController::class, 'getBlogMap'])->name('blog.google-map');
+    Route::get('/polityka-prywatnosci', [\App\Web\Controllers\BlogController::class, 'getPrivacyPolicy'])->name('blog.privacy-policy');
+    Route::get('/{categorySlug}/{articleSlug}', [\App\Web\Controllers\BlogController::class, 'getViewArticleBySlug'])->name('blog.article.slug');
+});
+//END BLOG OFFICIAL ROUTES
+
 
 

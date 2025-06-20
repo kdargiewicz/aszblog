@@ -6,6 +6,7 @@ use App\Cms\Models\Article;
 use App\Cms\Services\CategoryTagResolverService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ArticleDTO
 {
@@ -24,6 +25,8 @@ class ArticleDTO
         public ?string $created_at = null,
         public ?int $article_id = null,
         public Collection|null $comments = null,
+        public ?string $slug = null,
+        public ?string $category_slug = null,
     ) {
     }
 
@@ -39,6 +42,7 @@ class ArticleDTO
             content: $data['content'] ?? null,
             allow_comments: isset($data['allow_comments']) ? boolval($data['allow_comments']) : null,
             created_at: !empty($data['created_at']) ? \Carbon\Carbon::parse($data['created_at']) : null,
+            slug: isset($data['title']) ? Str::slug($data['title']) : null,
         );
     }
 
@@ -54,7 +58,8 @@ class ArticleDTO
             content: $article->content,
             allow_comments: $article->allow_comments,
             category_id: $article->category_id,
-            tag_ids: $article->tags_id
+            tag_ids: $article->tags_id,
+            slug: $article->slug,
         );
     }
 }
