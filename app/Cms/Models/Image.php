@@ -30,21 +30,41 @@ class Image extends Model
         'exif' => 'array',
     ];
 
-    public function getAllImagesToGallery(): array
+    protected function buildGalleryQuery(array $publishedStatus, bool $withCategorySlug = true)
     {
-        return self::query()
+        $query = self::query()
             ->join('articles', 'images.article_id', '=', 'articles.id')
-            ->join('categories', 'articles.category_id', '=', 'categories.id')
             ->where('articles.deleted', Constants::NOT_DELETED)
-            ->where('articles.is_published', Constants::PUBLISHED)
+            ->whereIn('articles.is_published', $publishedStatus)
             ->select([
                 'images.*',
                 'articles.slug as article_slug',
-                'categories.slug as category_slug',
-            ])
+            ]);
+
+        if ($withCategorySlug) {
+            $query->join('categories', 'articles.category_id', '=', 'categories.id')
+                ->addSelect('categories.slug as category_slug');
+        }
+
+        return $query;
+    }
+
+    public function getAllImagesToGallery(): array
+    {
+        return $this
+            ->buildGalleryQuery([Constants::PUBLISHED], true)
             ->get()
             ->toArray();
     }
+
+    public function getAllPreviewImagesToGallery(): array
+    {
+        return $this
+            ->buildGalleryQuery(Constants::PUBLISHED_STATES, false)
+            ->get()
+            ->toArray();
+    }
+
 
     public function getUrlMinAttribute(): array|string|null
     {

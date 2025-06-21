@@ -12,7 +12,7 @@ class Settings extends Model
         'value',
     ];
 
-    public function updateBlogPublishedSettings($key, $data): bool|int
+    public function updateBlogPublishedSettings($key, $data): int
     {
         return DB::table('settings')->where('key', $key)->update($data);
     }

@@ -15,33 +15,5 @@ class ContactController extends Controller
     {
         Mail::to($recipientEmail)->send(new ContactMessageMail($dto));
     }
-
-//    public function showForm()
-//    {
-//        return view('contact.form');
-//    }
-
-
-
-//    public function submit(Request $request)
-//    {
-//        $validated = $request->validate([
-//            'name'    => 'required|string|max:255',
-//            'email'   => 'required|email',
-//            'message' => 'required|string|max:5000',
-//        ]);
-//
-//        $dto = new ContactMessageDTO(
-//            name: $validated['name'],
-//            email: $validated['email'],
-//            message: $validated['message']
-//        );
-//
-//        ContactMessage::create((array)$dto);
-//
-//        Mail::to('admin@aszblog.pl')->send(new ContactMessageMail($dto));
-//
-//        return redirect()->back()->with('success', 'Dziękujemy za wiadomość!');
-//    }
 }
 

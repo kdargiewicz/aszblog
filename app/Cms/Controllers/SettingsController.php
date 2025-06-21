@@ -46,7 +46,7 @@ class SettingsController extends Controller
             ]
         );
 
-        if ($validated['blog_status']) {
+        if (isset($validated['blog_status'])) {
             app(Settings::class)->updateBlogPublishedSettings('the_blog_is_public', ['value' => $validated['blog_status']]);
         }
 
@@ -84,7 +84,7 @@ class SettingsController extends Controller
 
         app(UserSetting::class)->postUpdateSettings($userId, $insert);
 
-        if ($validated['blog_status']) {
+        if (isset($validated['blog_status'])) {
             app(Settings::class)->updateBlogPublishedSettings('the_blog_is_public', ['value' => $validated['blog_status']]);
         }
 

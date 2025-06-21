@@ -16,7 +16,6 @@ class WebCommentsController extends Controller
         $comment = app(Comments::class)->store($data);
 
         if ($comment->id){
-            //zapis do notification i wysylka email
             app(MailService::class)->sendNewCommentNotification($comment);
         }
 
