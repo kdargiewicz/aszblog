@@ -13,6 +13,7 @@ class FixCommand extends Command
      * The name and signature of the console command.
      *
      * @var string
+     * //php artisan app:fix-command add-articles-slugs
      */
     protected $signature = 'app:fix-command {target?}';
 
