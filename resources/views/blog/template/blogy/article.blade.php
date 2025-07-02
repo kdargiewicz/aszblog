@@ -63,16 +63,29 @@
                                         {!! $article->content !!}
                                     </div>
 
-                                    <p>{{ __('article.create-form.category') }}: <a href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}
-                                                    :
-                                        @foreach ($article->tags as $tag)
-                                            {{--                                tu trzeba uzupełnić route żeby klikająć w taga kierować do tej przestrzeni tagów--}}
-                                            {{--                                <a href="{{ route('tag.show', ['id' => $tag->id]) }}">#{{ $tag->name }}</a>@if (!$loop->last), @endif--}}
-                                            <a href="">#{{ $tag->name }}</a>@if (!$loop->last)
-                                            ,
-                                            @endif
-                                        @endforeach
+                                    <p>
+                                        {{ __('article.create-form.category') }}:
+                                        <a href="#">{{ $article->category }}</a>
+
+                                        @if ($article->tags && count($article->tags))
+                                            , {{ __('article.create-form.tags') }}:
+                                            @foreach ($article->tags as $tag)
+                                                <a href="">#{{ $tag->name }}</a>@if (!$loop->last), @endif
+                                            @endforeach
+                                        @endif
                                     </p>
+
+
+                                {{--                                    <p>{{ __('article.create-form.category') }}: <a href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}--}}
+{{--                                                    :--}}
+{{--                                        @foreach ($article->tags as $tag)--}}
+{{--                                            --}}{{--                                tu trzeba uzupełnić route żeby klikająć w taga kierować do tej przestrzeni tagów--}}
+{{--                                            --}}{{--                                <a href="{{ route('tag.show', ['id' => $tag->id]) }}">#{{ $tag->name }}</a>@if (!$loop->last), @endif--}}
+{{--                                            <a href="">#{{ $tag->name }}</a>@if (!$loop->last)--}}
+{{--                                            ,--}}
+{{--                                            @endif--}}
+{{--                                        @endforeach--}}
+{{--                                    </p>--}}
 
                                     @include('blog.template.blogy.comments')
 
