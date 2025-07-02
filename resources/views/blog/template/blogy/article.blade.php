@@ -75,18 +75,6 @@
                                         @endif
                                     </p>
 
-
-                                {{--                                    <p>{{ __('article.create-form.category') }}: <a href="#">{{ $article->category }}</a>, {{ __('article.create-form.tags') }}--}}
-{{--                                                    :--}}
-{{--                                        @foreach ($article->tags as $tag)--}}
-{{--                                            --}}{{--                                tu trzeba uzupełnić route żeby klikająć w taga kierować do tej przestrzeni tagów--}}
-{{--                                            --}}{{--                                <a href="{{ route('tag.show', ['id' => $tag->id]) }}">#{{ $tag->name }}</a>@if (!$loop->last), @endif--}}
-{{--                                            <a href="">#{{ $tag->name }}</a>@if (!$loop->last)--}}
-{{--                                            ,--}}
-{{--                                            @endif--}}
-{{--                                        @endforeach--}}
-{{--                                    </p>--}}
-
                                     @include('blog.template.blogy.comments')
 
                                     </div>
