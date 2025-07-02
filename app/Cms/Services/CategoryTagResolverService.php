@@ -14,9 +14,12 @@ class CategoryTagResolverService
             return null;
         }
 
+        $slug = Str::slug($categoryName);
+
         return Category::firstOrCreate(
-            ['name' => $categoryName, 'user_id' => $userId],
-            ['slug' => Str::slug($categoryName)])->id;
+            ['slug' => $slug, 'user_id' => $userId],
+            ['name' => $categoryName]
+        )->id;
     }
 
     public function resolveTagIds(?string $tagsCsv, $userId): array
