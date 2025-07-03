@@ -2,6 +2,7 @@
     tinymce.init({
         selector: 'textarea',
         language: 'pl',
+        content_style: 'body { text-align: justify; }',
         plugins: [
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
             'image', 'link', 'lists', 'media', 'searchreplace',

@@ -46,7 +46,7 @@
                 </label>
 
                 <textarea class="w3-input w3-border w3-round w3-margin-bottom"
-                          style="height: 50vh;"
+                          style="height: 110vh;"
                           id="editor"
                           name="content"
                           rows="10"

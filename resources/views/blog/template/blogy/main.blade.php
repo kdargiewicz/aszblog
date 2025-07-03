@@ -3,9 +3,6 @@
 * Template Author: Untree.co
 * Template URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
-
-TRZEBA TO PRZEROBIĆ NA SWOJE ! ! !
-
 */ -->
 <!doctype html>
 <html lang="pl">
