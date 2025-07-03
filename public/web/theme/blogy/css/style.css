@@ -10978,47 +10978,22 @@ ul.clean-list li:hover a {
     padding: 5px 10px;
     white-space: nowrap;
 }
-
-
 /*end mapa google*/
 
-/*.image-row {*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    gap: 10px;*/
-/*    justify-content: center;*/
-/*    margin: 1em 0;*/
-/*    align-items: flex-start;*/
-/*}*/
-
-/*.image-row img {*/
-/*    width: calc(50% - 10px);*/
-/*    aspect-ratio: 4/3;*/
-/*    object-fit: cover;*/
-/*    border-radius: 8px;*/
-/*    max-width: 100%;*/
-/*    height: auto;*/
-/*}*/
-
-/*@media (max-width: 768px) {*/
-/*    .image-row img {*/
-/*        width: 100%;*/
-/*    }*/
-/*}*/
-
+/*dwa zdjecia obok siebie w edytorze tinymce*/
 .image-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     margin: 2em auto;
-    max-width: 800px; /* 🧠 Główna szerokość kontenera – jak pojedyncze zdjęcie */
-    padding: 0 10px;   /* 🧽 Odstęp od brzegów, żeby się nie kleiło do krawędzi */
+    max-width: 800px;
+    padding: 0 10px;
 }
 
 .image-row img {
     flex: 1 1 0;
-    max-width: calc(50% - 10px); /* dwie połówki z odstępem */
+    max-width: calc(50% - 10px);
     aspect-ratio: 4/3;
     object-fit: cover;
     border-radius: 8px;
@@ -11035,6 +11010,7 @@ ul.clean-list li:hover a {
         max-width: 100%;
     }
 }
+/*end dwa zdjecia obok siebie w edytorze tinymce*/
 
 
 

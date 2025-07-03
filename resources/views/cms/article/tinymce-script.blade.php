@@ -1,75 +1,7 @@
-{{--<script>--}}
-{{--    tinymce.init({--}}
-{{--        selector: 'textarea',--}}
-{{--        language: 'pl',--}}
-{{--        content_style: 'body { text-align: justify; }',--}}
-{{--        plugins: [--}}
-{{--            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',--}}
-{{--            'image', 'link', 'lists', 'media', 'searchreplace',--}}
-{{--            'table', 'visualblocks', 'wordcount'--}}
-{{--        ],--}}
-{{--        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',--}}
-{{--        tinycomments_mode: 'embedded',--}}
-{{--        tinycomments_author: 'Author name',--}}
-{{--        images_upload_credentials: true,--}}
-{{--        automatic_uploads: true,--}}
-{{--        file_picker_types: 'image',--}}
-{{--        relative_urls: false,--}}
-{{--        remove_script_host: false,--}}
-{{--        convert_urls: false,--}}
-{{--        image_caption: true,--}}
-{{--        image_title: true,--}}
-{{--        images_upload_handler: function (blobInfo, progress) {--}}
-{{--            return new Promise(function (resolve, reject) {--}}
-{{--                const xhr = new XMLHttpRequest();--}}
-{{--                xhr.open('POST', '/tinymce/upload');--}}
-{{--                xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));--}}
-
-{{--                xhr.upload.onprogress = function (e) {--}}
-{{--                    progress(e.loaded / e.total * 100);--}}
-{{--                };--}}
-
-{{--                xhr.onload = function () {--}}
-{{--                    if (xhr.status !== 200) {--}}
-{{--                        return reject('HTTP Error: ' + xhr.status);--}}
-{{--                    }--}}
-
-{{--                    const json = JSON.parse(xhr.responseText);--}}
-
-{{--                    if (!json || typeof json.location !== 'string') {--}}
-{{--                        return reject('Invalid JSON: ' + xhr.responseText);--}}
-{{--                    }--}}
-
-{{--                    resolve(json.location);--}}
-{{--                };--}}
-
-{{--                xhr.onerror = function () {--}}
-{{--                    reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);--}}
-{{--                };--}}
-
-{{--                const formData = new FormData();--}}
-{{--                formData.append('file', blobInfo.blob(), blobInfo.filename());--}}
-{{--                const articleUuid = document.getElementById('article_uuid')?.value;--}}
-{{--                if (articleUuid) {--}}
-{{--                    formData.append('article_uuid', articleUuid);--}}
-{{--                }--}}
-{{--                formData.append('type', 'article');--}}
-
-{{--                xhr.send(formData);--}}
-{{--            });--}}
-{{--        },--}}
-{{--        mergetags_list: [--}}
-{{--            { value: 'First.Name', title: 'First Name' },--}}
-{{--            { value: 'Email', title: 'Email' },--}}
-{{--        ],--}}
-{{--        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),--}}
-{{--    });--}}
-{{--</script>--}}
 <script>
     tinymce.init({
         selector: 'textarea',
         language: 'pl',
-        height: 600,
         content_style: `
             body { text-align: justify; }
             .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
@@ -100,7 +32,6 @@
         extended_valid_elements: 'img[class|src|alt|width|height|style|title]',
 
         setup: function (editor) {
-            // 🔘 Dodaj przycisk "Obrazy obok"
             editor.ui.registry.addButton('insertimagerow', {
                 text: 'Obrazy obok',
                 icon: 'image',
@@ -108,35 +39,35 @@
                 onAction: function () {
                     const html = `
                         <div class="image-row">
-                            <img src="" alt="" style="width: 100%;" />
-                            <img src="" alt="" style="width: 100%;" />
-                        </div><p></p>
+                            <img src="" alt="img 1" style="width: 45%;" />
+                            <img src="" alt="img 2" style="width: 45%;" />
+                        </div>
                     `;
                     editor.insertContent(html);
                 }
             });
 
             // 🎯 Strzałki ← → przesuwają obrazek
-            editor.on('keydown', function (e) {
-                const img = editor.selection.getNode();
-                if (!img || img.tagName !== 'IMG') return;
-
-                let transform = img.style.transform || '';
-                let match = transform.match(/translateX\\((-?\\d+)px\\)/);
-                let currentX = match ? parseInt(match[1]) : 0;
-                const step = 5;
-
-                if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    currentX -= step;
-                }
-                if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    currentX += step;
-                }
-
-                img.style.transform = `translateX(${currentX}px)`;
-            });
+            // editor.on('keydown', function (e) {
+            //     const img = editor.selection.getNode();
+            //     if (!img || img.tagName !== 'IMG') return;
+            //
+            //     let transform = img.style.transform || '';
+            //     let match = transform.match(/translateX\\((-?\\d+)px\\)/);
+            //     let currentX = match ? parseInt(match[1]) : 0;
+            //     const step = 5;
+            //
+            //     if (e.key === 'ArrowLeft') {
+            //         e.preventDefault();
+            //         currentX -= step;
+            //     }
+            //     if (e.key === 'ArrowRight') {
+            //         e.preventDefault();
+            //         currentX += step;
+            //     }
+            //
+            //     img.style.transform = `translateX(${currentX}px)`;
+            // });
         },
 
         // 📤 Upload obrazków
@@ -171,7 +102,6 @@
             });
         },
 
-        // (niepotrzebne, ale zostawiam na przyszłość)
         mergetags_list: [
             { value: 'First.Name', title: 'First Name' },
             { value: 'Email', title: 'Email' },
