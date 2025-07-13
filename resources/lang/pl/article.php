@@ -54,6 +54,6 @@ return [
         'add_date' => 'data dodania: ',
         'no_content' => 'Brak treści artykułu.',
         'article_heading' => 'Artykuł ID: :id, tytuł: :title',
-        'choose_main_image_for_articles' => 'Wybierz zdjęcie główne dla każdego z artykułów',
+        'choose_main_image_for_articles' => 'Lista zdjęć z artykułów',
     ]
 ];

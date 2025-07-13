@@ -65,7 +65,7 @@ class Image extends Model
         return DB::table('articles')
             ->leftJoin('images', 'articles.id', '=', 'images.article_id')
             ->where('articles.user_id', '=', auth()->id())
-            ->whereIn('articles.is_published', [Constants::PUBLISHED, Constants::NOT_DELETED])
+//            ->whereIn('articles.is_published', [Constants::PUBLISHED, Constants::NOT_DELETED])
             ->select(
                 'articles.id as article_id',
                 'articles.title as article_title',
