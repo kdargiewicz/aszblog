@@ -40,12 +40,18 @@
                     <div class="w3-row">
                         @foreach($images as $image)
                             <div class="w3-col m3 w3-padding">
-                                <div class="w3-white w3-padding-small"
-                                     style="height: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 1px solid #ccc;">
-                                    <img src="{{ asset($image->imageUrl) }}"
-                                         class="w3-image"
-                                         style="max-width: 100%; height: auto; max-height: 160px; object-fit: cover;"
-                                         alt="no-image">
+                                <div class="w3-white w3-padding-small" style="height: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 1px solid #ccc;">
+                                    @if (!empty($image->imageUrl))
+                                        <img src="{{ asset($image->imageUrl) }}"
+                                             class="w3-image"
+                                             style="max-width: 100%; height: auto; max-height: 160px; object-fit: cover;"
+                                             alt="{{ $image->imageAlt ?? 'zdjęcie' }}">
+                                    @else
+                                        <div class="w3-text-red w3-small"
+                                             style="min-height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; background: #f3f3f3;">
+                                            {{ __('article.article_action.no_image') }}
+                                        </div>
+                                    @endif
 
                                     <div class="w3-small" style="text-align: left;">
                                         <label>

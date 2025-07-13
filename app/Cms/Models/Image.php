@@ -63,9 +63,8 @@ class Image extends Model
     public function getAllImagesFromArticles(): array
     {
         return DB::table('articles')
-            ->leftJoin('images', 'articles.id', '=', 'images.article_id')
+            ->join('images', 'articles.id', '=', 'images.article_id')
             ->where('articles.user_id', '=', auth()->id())
-//            ->whereIn('articles.is_published', [Constants::PUBLISHED, Constants::NOT_DELETED])
             ->select(
                 'articles.id as article_id',
                 'articles.title as article_title',

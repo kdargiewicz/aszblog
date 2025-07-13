@@ -47,6 +47,7 @@ return [
         'not_allow_comments' => 'Komentarze wyłączone',
         'main_image' => 'to jest zdjęcie główne',
         'show_in_gallery' => 'Widoczne w galerii w publikowanych art',
+        'no_image' => 'BRAK ZDJĘCIA',
     ],
 
     'article_list' => [
