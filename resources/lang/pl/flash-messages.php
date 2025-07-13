@@ -15,4 +15,5 @@ return [
 
     'add_comment' => 'Dziękujemy za komentarz!',
     'email_send' => 'Wiadomość email została wysłana',
+    'articles_main_photos_saved' => 'Zapisano główne zdjęcia.',
 ];

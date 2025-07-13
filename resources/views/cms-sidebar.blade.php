@@ -32,6 +32,7 @@
         <a href="{{ route('dashboard') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-tachometer w3-margin-right"></i>Pulpit</a>
         <a href="{{ route('article.create') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square w3-margin-right"></i>Utwórz artykuł</a>
         <a href="{{ route('article.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Lista artykułów</a>
+        <a href="{{ route('main-photo-in-article') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Zdjęcia w artykułach</a>
         <a href="{{ route('article.list.delete') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Lista usuniętych artykułów</a>
         <a href="{{ route('comments.list') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-list-alt w3-margin-right"></i>Komentarze</a>
         <a href="{{ route('user.settings') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Ustawienia</a>

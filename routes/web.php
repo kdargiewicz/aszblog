@@ -99,6 +99,8 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
     Route::delete('/article/{article}', [\App\Cms\Controllers\ArticleController::class, 'postArticleDelete'])->name('article.delete');
     Route::post('/updateArticle', [\App\Cms\Controllers\ArticleController::class, 'postStoreUpdate'])->name('article.update');
     Route::get('/articleList', [\App\Cms\Controllers\ArticleController::class, 'getArticleList'])->name('article.list');
+    Route::get('/mainPhotoInArticle', [\App\Cms\Controllers\ImageController::class, 'getMainPhotoInArticle'])->name('main-photo-in-article');
+    Route::post('/storeMainPhotosInArticles', [\App\Cms\Controllers\ImageController::class, 'postStoreMainImagesInArticles'])->name('store-main-photos-in-articles');
     Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.list.delete');
     Route::post('updatePublishedArticle', [\App\Cms\Controllers\ArticleController::class, 'postUpdatePublishedArticle'])->name('article.update.published');
     Route::post('/articleRestore/{articleId}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');

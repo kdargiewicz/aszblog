@@ -58,6 +58,7 @@ class ArticleRepository
         $subImageQuery = DB::table('images')
             ->select('url')
             ->whereColumn('images.article_id', 'articles.id')
+            ->orderByDesc('is_main_photo')
             ->orderBy('id')
             ->limit(1);
 
