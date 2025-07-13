@@ -38,6 +38,7 @@ class Image extends Model
             ->join('articles', 'images.article_id', '=', 'articles.id')
             ->where('articles.deleted', Constants::NOT_DELETED)
             ->whereIn('articles.is_published', $publishedStatus)
+            ->where('images.show_in_gallery', true)
             ->select([
                 'images.*',
                 'articles.slug as article_slug',
