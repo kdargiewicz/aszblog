@@ -46,7 +46,7 @@ return [
         'allow_comments' => 'Komentarze włączone',
         'not_allow_comments' => 'Komentarze wyłączone',
         'main_image' => 'to jest zdjęcie główne',
-        'show_in_gallery' => 'Widoczne w galerii zdjęć',
+        'show_in_gallery' => 'Widoczne w galerii w publikowanych art',
     ],
 
     'article_list' => [
@@ -55,5 +55,6 @@ return [
         'no_content' => 'Brak treści artykułu.',
         'article_heading' => 'Artykuł ID: :id, tytuł: :title',
         'choose_main_image_for_articles' => 'Lista zdjęć z artykułów',
+        'article_heading_prefix' => 'Artykuł ID: :id, tytuł:',
     ]
 ];
