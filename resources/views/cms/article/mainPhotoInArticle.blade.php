@@ -42,11 +42,29 @@
                                 <label>
                                     <img src="{{ asset($image->imageUrl) }}" class="w3-image" style="max-width: 200px;">
                                     <br>
+
+                                    {{-- Checkbox: główne zdjęcie --}}
                                     <input type="radio" name="main_image[{{ $articleId }}]"
                                            value="{{ $image->imageId }}" {{ $image->is_main_photo ? 'checked' : '' }}>
                                     {{ __('article.article_action.main_image') }}
+                                    <br>
+
+                                    {{-- Checkbox: pokazuj w galerii --}}
+                                    <input type="checkbox" name="show_in_gallery[{{ $image->imageId }}]"
+                                           value="1" {{ $image->show_in_gallery ? 'checked' : '' }}>
+                                    {{ __('article.article_action.show_in_gallery') }}
                                 </label>
                             </div>
+
+                            {{--                            <div class="w3-col m3 w3-center w3-padding">--}}
+{{--                                <label>--}}
+{{--                                    <img src="{{ asset($image->imageUrl) }}" class="w3-image" style="max-width: 200px;">--}}
+{{--                                    <br>--}}
+{{--                                    <input type="radio" name="main_image[{{ $articleId }}]"--}}
+{{--                                           value="{{ $image->imageId }}" {{ $image->is_main_photo ? 'checked' : '' }}>--}}
+{{--                                    {{ __('article.article_action.main_image') }}--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
                         @endforeach
                     </div>
                 </div>

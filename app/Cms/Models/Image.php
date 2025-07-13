@@ -23,6 +23,7 @@ class Image extends Model
         'extension',
         'type',
         'is_main_photo',
+        'show_in_gallery',
     ];
 
     protected $appends = ['url_min'];// ['url_max', 'url_min'];
@@ -70,6 +71,7 @@ class Image extends Model
                 'articles.is_published as article_is_published',
                 'images.id as imageId',
                 'images.url as imageUrl',
+                'images.show_in_gallery as show_in_gallery',
                 'images.is_main_photo as is_main_photo',
             )
             ->orderBy('articles.id')

@@ -45,7 +45,8 @@ return [
         'restore' => 'Przywróć artykuł',
         'allow_comments' => 'Komentarze włączone',
         'not_allow_comments' => 'Komentarze wyłączone',
-        'main_image' => 'to jest zdjęcie główne'
+        'main_image' => 'to jest zdjęcie główne',
+        'show_in_gallery' => 'Widoczne w galerii zdjęć',
     ],
 
     'article_list' => [

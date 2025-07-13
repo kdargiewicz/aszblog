@@ -44,6 +44,7 @@ class ImageController extends Controller
     {
         $userId = auth()->id();
         $mainImages = $request->input('main_image', []);
+        $showInGallery = $request->input('show_in_gallery', []);
 
         $errors = [];
 
@@ -63,7 +64,6 @@ class ImageController extends Controller
                     'article_id' => $articleId,
                     'image_id' => $imageId,
                 ]);
-
             }
         }
 
@@ -72,11 +72,18 @@ class ImageController extends Controller
         }
 
         foreach ($mainImages as $articleId => $imageId) {
-            \App\Cms\Models\Image::where('article_id', $articleId)->update(['is_main_photo' => false]);
-            \App\Cms\Models\Image::where('id', $imageId)->update(['is_main_photo' => true]);
+            Image::where('article_id', $articleId)->update(['is_main_photo' => false]);
+            Image::where('id', $imageId)->update(['is_main_photo' => true]);
         }
 
-        return back()->with('success', __('flash_messages.articles_main_photos_saved'));
+        $userImageIds = Image::where('user_id', $userId)->pluck('id');
+
+        foreach ($userImageIds as $id) {
+            $isVisible = isset($showInGallery[$id]) ? true : false;
+            Image::where('id', $id)->update(['show_in_gallery' => $isVisible]);
+        }
+
+        return back()->with('success', __('flash-messages.articles_main_photos_saved'));
     }
 
     public function upload(Request $request, ImageService $imageService)
