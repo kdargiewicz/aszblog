@@ -8,16 +8,42 @@
             @csrf
 
             @foreach($articleImagesList as $articleId => $images)
-                <div class="w3-panel w3-border w3-white w3-padding">
-                    <h4>{{ __('article.article_list.article_heading', ['id' => $articleId, 'title' => $images[0]->article_title]) }} @if($images[0]->article_is_published == 0 ) {{ __('article.article_action.not-published') }} @elseif($images[0]->article_is_published == 1) {{ __('article.article_action.test-published') }} @elseif($images[0]->article_is_published == 2) {{ __('article.article_action.published') }} @endif</h4>
-                    
+                <div class="w3-card w3-paper w3-margin-bottom w3-padding w3-round">
+                    <h4>
+                        {!! __('article.article_list.article_heading', [
+                            'id' => $articleId,
+                            'title' => $images[0]->article_title
+                                ? $images[0]->article_title
+                                : '<span style="color: red; font-weight: bold;">' . __('article.article_list.no_title') . '</span>'
+                        ]) !!}
+
+                        <span class="w3-tag
+                             {{ $images[0]->article_is_published == \App\Constants\Constants::PUBLISHED
+                                    ? 'w3-green'
+                                    : ($images[0]->article_is_published == \App\Constants\Constants::TEST_PUBLISHED
+                                        ? 'w3-yellow'
+                                        : 'w3-red') }}
+                             w3-small w3-round-small w3-hover-shadow"
+                              style="cursor: pointer;">
+
+                            @if($images[0]->article_is_published == \App\Constants\Constants::PUBLISHED)
+                                {{ __('article.article_action.published') }}
+                            @elseif($images[0]->article_is_published == \App\Constants\Constants::TEST_PUBLISHED)
+                                {{ __('article.article_action.test-published') }}
+                            @else
+                                {{ __('article.article_action.not-published') }}
+                            @endif
+                        </span>
+                    </h4>
+
                     <div class="w3-row">
                         @foreach($images as $image)
                             <div class="w3-col m3 w3-center w3-padding">
                                 <label>
                                     <img src="{{ asset($image->imageUrl) }}" class="w3-image" style="max-width: 200px;">
                                     <br>
-                                    <input type="radio" name="main_image[{{ $articleId }}]" value="{{ $image->imageId }}" {{ $image->is_main_photo ? 'checked' : '' }}>
+                                    <input type="radio" name="main_image[{{ $articleId }}]"
+                                           value="{{ $image->imageId }}" {{ $image->is_main_photo ? 'checked' : '' }}>
                                     {{ __('article.article_action.main_image') }}
                                 </label>
                             </div>
