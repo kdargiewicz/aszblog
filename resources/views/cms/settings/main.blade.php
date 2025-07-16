@@ -129,6 +129,17 @@
                        value="{{ old('my_motto', $settings->my_motto ?? '') }}"
                        placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}">
 
+
+{{--            //„Podróż tysiąca mil zaczyna się od jednego kroku.” – Laozi--}}
+
+                <label class="w3-text-grey"><b>{{ __('settings.user_settings.my_footer_motto') }}</b></label>
+                <input class="w3-input w3-border w3-round w3-margin-bottom"
+                       type="text"
+                       name="my_footer_motto"
+                       value="{{ old('my_footer_motto', $settings->my_footer_motto ?? __('settings.user_settings.my_footer_motto_default')) }}"
+                       placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}">
+
+
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.blog_template') }}</b></label>
                 <select class="w3-select w3-border w3-round w3-margin-bottom" name="blog_template" disabled>
                     <option

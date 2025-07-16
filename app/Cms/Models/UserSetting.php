@@ -24,6 +24,7 @@ class UserSetting extends Model
         'main_image',
         'about_me',
         'my_motto',
+        'my_footer_motto',
         'blog_template',
         'about_me_image',
         'main_colors',

@@ -33,5 +33,7 @@ return [
         'blog_status' => 'Publikacja bloga',
         'blog_is_published' => 'blog jest publikowany',
         'blog_is_not_published' => 'NIE PUBLIKUJĘ BLOGA',
+        'my_footer_motto' => 'motto w footer -> czyli dolne menu Asiu ;)',
+        'my_footer_motto_default' => '„Podróż tysiąca mil zaczyna się od jednego kroku.” – Laozi',
     ]
 ];

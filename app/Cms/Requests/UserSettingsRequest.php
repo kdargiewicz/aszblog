@@ -25,6 +25,7 @@ class UserSettingsRequest extends FormRequest
             'main_image' => ['nullable', 'image', 'max:40960'],
             'about_me' => ['nullable', 'string', 'max:5000'],
             'my_motto' => ['nullable', 'string', 'max:255'],
+            'my_footer_motto' => ['nullable', 'string', 'max:255'],
             'blog_template' => ['nullable', 'string', 'in:one,two,blogy,minimalist'],
             'about_me_image' => ['nullable', 'image', 'max:40960'],
             'main_colors.body_pattern' => [

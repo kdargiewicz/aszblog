@@ -7,8 +7,7 @@
                     <div class="row">
                         @include('blog.template.blogy.logo')
                     </div>
-                    {!! __('footer.footer_quote') !!}
-
+                        {{ $blogSettings->my_footer_motto }}
                 </div>
                 <div class="widget">
                     <h3>Social</h3>

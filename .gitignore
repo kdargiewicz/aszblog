@@ -27,5 +27,6 @@ entrypoint.sh
 nginx/default.conf
 /storage
 storage
-
-
+composer.lock
+bootstrap/app.php
+bootstrap/providers.php
