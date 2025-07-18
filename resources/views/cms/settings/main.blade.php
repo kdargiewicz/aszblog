@@ -1,5 +1,4 @@
 @extends('cms-main')
-
 @section('content')
     <div class="w3-container w3-light-grey w3-margin">
         <h2 class="w3-text-dark-grey w3-serif">{{ isset($settings) ? __('settings.user_settings.edit') : __('settings.user_settings.add') }}</h2>
@@ -39,7 +38,6 @@
                        style="display: none;">
             </div>
 
-
             @if($isBlogOwner)
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.main_image') }}</b></label>
 
@@ -74,11 +72,9 @@
                            style="display: none;">
                 </div>
 
-
                 <h4 class="w3-text-dark-grey w3-serif">{{ __('settings.user_settings.about_me_title') }}</h4>
 
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.about_me_main_image') }}</b></label>
-
                 <label class="w3-text-grey">
                     <b>{{ __('settings.user_settings.about_me_image') ?? 'Zdjęcie autora' }}</b>
                 </label>
@@ -127,10 +123,7 @@
                        type="text"
                        name="my_motto"
                        value="{{ old('my_motto', $settings->my_motto ?? '') }}"
-                       placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}">
-
-
-{{--            //„Podróż tysiąca mil zaczyna się od jednego kroku.” – Laozi--}}
+                       placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}" disabled>
 
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.my_footer_motto') }}</b></label>
                 <input class="w3-input w3-border w3-round w3-margin-bottom"
@@ -138,7 +131,6 @@
                        name="my_footer_motto"
                        value="{{ old('my_footer_motto', $settings->my_footer_motto ?? __('settings.user_settings.my_footer_motto_default')) }}"
                        placeholder="{{ __('settings.user_settings.my_motto_placeholder') }}">
-
 
                 <label class="w3-text-grey"><b>{{ __('settings.user_settings.blog_template') }}</b></label>
                 <select class="w3-select w3-border w3-round w3-margin-bottom" name="blog_template" disabled>
