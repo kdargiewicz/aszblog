@@ -77,8 +77,6 @@ class ImageService
 
         $this->repository->store($dto);
 
-        DB::table('system_debug')->insert(['value' => Storage::url($maxPath)]);
-
         return [
             'raw' => Storage::url($rawPath),
             'max' => Storage::url($maxPath),

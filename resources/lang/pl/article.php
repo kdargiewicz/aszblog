@@ -8,6 +8,13 @@ return [
     'error_back_to_list' => 'Powrót do listy',
     'empty_list' => 'Brak artykułów',
 
+    'tab-link' => [
+        'general' => 'Ogólne',
+        'map' => 'Mapa',
+        'contents' => 'Treść',
+        'saved-versions' => 'Zapisane wersje',
+    ],
+
     'create-form' => [
         'title' => 'Tytuł',
         'title-placeholder' => 'Wpisz tytuł artykułu',

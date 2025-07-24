@@ -2,8 +2,12 @@
     tinymce.init({
         selector: 'textarea',
         language: 'pl',
+
+        // tu sa nadawane style do obrazkow ktore maja byc obok siebie
         content_style: `
             body { text-align: justify; }
+
+
             .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
             .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
             @media (max-width: 768px) { .image-row img { width: 100%; } }

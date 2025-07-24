@@ -1,5 +1,6 @@
 <?php
 
+use App\Cms\Controllers\ArticleDraftController;
 use App\Http\Middleware\CheckBlogPublished;
 use App\Web\Controllers\MailContactController;
 use App\Web\Controllers\WebCommentsController;
@@ -104,6 +105,10 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
     Route::get('/articleDeleteList', [\App\Cms\Controllers\ArticleController::class, 'getDeleteArticleList'])->name('article.list.delete');
     Route::post('updatePublishedArticle', [\App\Cms\Controllers\ArticleController::class, 'postUpdatePublishedArticle'])->name('article.update.published');
     Route::post('/articleRestore/{articleId}', [\App\Cms\Controllers\ArticleController::class, 'postArticleRestore'])->name('article.restore');
+
+    //autosave article
+    Route::post('/article/draft/autosave', [ArticleDraftController::class, 'autosave'])->name('article.draft.autosave');
+
 
     //podglad wersji bloga
     Route::get('/preview/{name}', [\App\Web\Controllers\PreviewController::class, 'getPreviewBlogByBlogName'])->name('first.blog.preview');
