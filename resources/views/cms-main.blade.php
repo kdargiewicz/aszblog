@@ -39,6 +39,7 @@
         @include('cms.cms-footer')
     </div>
         <script src="{{ asset('cms/js/cms-sidebar.js') }}"></script>
+        <script src="{{ asset('cms/js/tablink.js') }}"></script>
     </body>
 </html>
 

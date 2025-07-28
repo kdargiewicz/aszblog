@@ -7,6 +7,9 @@
             <button class="w3-bar-item w3-button tablink" data-tab="general">{{ __('article.tab-link.general') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="map-content">{{ __('article.tab-link.map') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="content">{{ __('article.tab-link.contents') }}</button>
+            @if(isset($article))
+                <button class="w3-bar-item w3-button tablink" data-tab="gallery">{{ __('article.tab-link.gallery') }}</button>
+            @endif
             <button class="w3-bar-item w3-button tablink" data-tab="settings">{{ __('article.tab-link.settings') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="saved-versions">{{ __('article.tab-link.saved-versions') }}</button>
         </div>
@@ -41,6 +44,47 @@
             <div id="content" class="tabcontent" style="display:none">
                 <label class="w3-text-grey"><b>{{ __('article.create-form.content') }}</b></label>
                 <textarea class="w3-input w3-border w3-round w3-margin-bottom" style="height: 210vh;" id="editor" name="content" rows="50" placeholder="{{ __('article.create-form.content-placeholder') }}">{{ old('content', $article->content ?? '') }}</textarea>
+            </div>
+
+            <div id="gallery" class="tabcontent" style="display:none">
+                <div class="w3-row">
+                    @if(isset($imagesListFromArticle))
+                        @foreach($imagesListFromArticle as $image)
+                            <div class="w3-col m3 w3-padding">
+                                <div class="w3-white w3-padding-small" style="height: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px; border: 1px solid #ccc;">
+                                    @if (!empty($image->imageUrl))
+                                        <img src="{{ asset($image->imageUrl) }}"
+                                             class="w3-image"
+                                             style="max-width: 100%; height: auto; max-height: 160px; object-fit: cover;"
+                                             alt="{{ $image->imageAlt ?? 'zdjęcie' }}">
+                                    @else
+                                        <div class="w3-text-red w3-small"
+                                             style="min-height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; background: #f3f3f3;">
+                                            {{ __('article.article_action.no_image') }}
+                                        </div>
+                                    @endif
+
+                                    <div class="w3-small" style="text-align: left;">
+                                        <label>
+                                            <input type="radio" name="main_image[{{ $article->id }}]"
+                                                   value="{{ $image->imageId }}" {{ $image->is_main_photo ? 'checked' : '' }}>
+                                            {{ __('article.article_action.main_image') }}
+                                        </label>
+                                    </div>
+
+                                    <div class="w3-small" style="text-align: left;">
+                                        <label>
+                                            <input type="checkbox" name="show_in_gallery[{{ $image->imageId }}]"
+                                                   value="1" {{ $image->show_in_gallery ? 'checked' : '' }}>
+                                            {{ __('article.article_action.show_in_gallery') }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+
             </div>
 
             <div id="settings" class="tabcontent" style="display:none">
@@ -82,32 +126,6 @@
             @endif
         </form>
     </div>
-
-    <script>
-        // skrypt obsugujacy zakładki na górze formularza
-        document.querySelectorAll('.tablink').forEach(button => {
-            button.addEventListener('click', function (e) {
-                const tabName = this.dataset.tab;
-                openTab(e, tabName);
-            });
-        });
-
-        function openTab(evt, tabName) {
-            const x = document.getElementsByClassName("tabcontent");
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-
-            const tablinks = document.getElementsByClassName("tablink");
-            for (let i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("w3-light-blue");
-            }
-
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.classList.add("w3-light-blue");
-        }
-
-    </script>
 
     @include('cms.article.tinymce-script')
     @include('cms.article.autosave-js-script')

@@ -56,6 +56,11 @@ class ArticleRepository
         return DB::table('articles')->where('id', $articleId)->first();
     }
 
+    public function getArticleByUuid($uuid, $userId): object
+    {
+        return DB::table('articles')->where('article_uuid', $uuid)->where('user_id', $userId)->first();
+    }
+
     protected function buildArticleQuery(?int $userId = null): Builder
     {
         $subImageQuery = DB::table('images')

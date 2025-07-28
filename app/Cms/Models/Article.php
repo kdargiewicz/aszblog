@@ -60,6 +60,11 @@ class Article extends Model
         return app(ArticleRepository::class)->getArticleDTOByArticleId($articleId, $isPublished);
     }
 
+    public function getArticleByUuid(string $uuid, int $userId): object
+    {
+        return app(ArticleRepository::class)->getArticleByUuid($uuid, $userId);
+    }
+
     public function getArticleOwnerInfo($articleId)
     {
         return app(ArticleRepository::class)->getArticleOwnerMailAndTitle($articleId);

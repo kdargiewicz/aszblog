@@ -14,6 +14,7 @@ return [
         'contents' => 'Treść',
         'settings' => 'Ustawienia',
         'saved-versions' => 'Zapisane wersje',
+        'gallery' => 'Galeria',
     ],
 
     'create-form' => [

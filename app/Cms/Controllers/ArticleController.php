@@ -2,6 +2,7 @@
 
 namespace App\Cms\Controllers;
 
+use App\Cms\Models\Image;
 use App\Cms\Repositories\ArticleRepository;
 use App\Cms\Repositories\ImageRepository;
 use App\Cms\Requests\ArticlePublishRequest;
@@ -33,11 +34,13 @@ class ArticleController extends Controller
 
     public function getEditArticle(string $uuid, CategoryTagResolverService $resolver): object
     {
+        $userId = auth()->id();
         $article = Article::where('article_uuid', $uuid)->firstOrFail();
-        $categories = Category::where('user_id', Auth::id())->get();
+        $imagesListFromArticle = app(ImageRepository::class)->getImagesUsedInContent($uuid, $userId);
+        $categories = Category::where('user_id', $userId)->get();
         $dto = ArticleDTO::fromModel($article, $resolver);
 
-        return view('cms.article.main', compact('dto', 'article', 'categories'));
+        return view('cms.article.main', compact('dto', 'article', 'categories', 'imagesListFromArticle'));
     }
 
     public function postStoreUpdate(ArticleRequest $request, ArticleRepository $articleRepository, CategoryTagResolverService $categoryTagResolver): object
@@ -57,6 +60,25 @@ class ArticleController extends Controller
 
                 $articleRepository->update($article, $dto, $categoryId, $tagIds);
                 $this->imageRepository->assignArticleIdByUuid($article->getArticleUuid(), $article->getArticleId(), $userId);
+
+                $articleId = $article->id;
+                $mainImageId = $request->input("main_image.$articleId");
+                $showInGallery = $request->input('show_in_gallery', []);
+
+                if ($mainImageId && is_numeric($mainImageId)) {
+                    app(ImageRepository::class)->setMainPhoto($mainImageId, $articleId, $userId);
+                }
+
+                if (!empty($showInGallery)) {
+                    app(ImageRepository::class)->resetShowInGallery($userId, $articleId);
+
+                    foreach ($showInGallery as $imageId => $value) {
+                        if ($value) {
+                            app(ImageRepository::class)->setVisibleInGallery($imageId, $userId, $articleId);
+                        }
+                    }
+                }
+
 
                 $action = $request->input('action');
 
