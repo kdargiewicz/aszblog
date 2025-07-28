@@ -2,6 +2,7 @@
     tinymce.init({
         selector: 'textarea',
         language: 'pl',
+        height: 900,
 
         // tu sa nadawane style do obrazkow ktore maja byc obok siebie
         content_style: `
@@ -50,28 +51,6 @@
                     editor.insertContent(html);
                 }
             });
-
-            // 🎯 Strzałki ← → przesuwają obrazek
-            // editor.on('keydown', function (e) {
-            //     const img = editor.selection.getNode();
-            //     if (!img || img.tagName !== 'IMG') return;
-            //
-            //     let transform = img.style.transform || '';
-            //     let match = transform.match(/translateX\\((-?\\d+)px\\)/);
-            //     let currentX = match ? parseInt(match[1]) : 0;
-            //     const step = 5;
-            //
-            //     if (e.key === 'ArrowLeft') {
-            //         e.preventDefault();
-            //         currentX -= step;
-            //     }
-            //     if (e.key === 'ArrowRight') {
-            //         e.preventDefault();
-            //         currentX += step;
-            //     }
-            //
-            //     img.style.transform = `translateX(${currentX}px)`;
-            // });
         },
 
         // 📤 Upload obrazków

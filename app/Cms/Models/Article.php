@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $longitude
  * @property string|null $content
  * @property bool|null $allow_comments
+ * @property bool|null $use_system_image_layout
  * @property int|null $category_id
  * @property array|null $tags_id
  * @method static Article firstOrCreate(array $attributes, array $values = [])
@@ -30,6 +31,7 @@ class Article extends Model
         'longitude',
         'content',
         'allow_comments',
+        'use_system_image_layout',
         'created_at',
         'slug',
     ];

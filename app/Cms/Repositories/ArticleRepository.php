@@ -8,6 +8,7 @@ use App\Cms\Models\Article;
 use App\Cms\Models\Comments;
 use App\Cms\Models\Tag;
 use App\Constants\Constants;
+use App\Web\Helpers\BlogHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use function PHPUnit\Framework\isArray;
@@ -28,6 +29,7 @@ class ArticleRepository
                 'longitude' => $dto->longitude,
                 'content' => $dto->content,
                 'allow_comments' => $dto->allow_comments,
+                'use_system_image_layout' => $dto->use_system_image_layout,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -44,6 +46,7 @@ class ArticleRepository
             'longitude' => $dto->longitude,
             'content' => $dto->content,
             'allow_comments' => $dto->allow_comments,
+            'use_system_image_layout' => $dto->use_system_image_layout,
             'created_at' => $dto->created_at,
         ]);
     }
@@ -182,6 +185,11 @@ class ArticleRepository
             ->orderBy('created_at', 'asc')
             ->first();
 
+        $content = $article->content ?? '';
+        if ($article->use_system_image_layout) {
+            $content = app(BlogHelper::class)->transformImagesToGroupedGallery($content);
+        }
+
         return new ArticleDTO(
             article_uuid: $article->article_uuid,
             title: $article->title,
@@ -189,8 +197,9 @@ class ArticleRepository
             category: $article->category_name ?? '',
             latitude: $article->latitude ?? null,
             longitude: $article->longitude ?? null,
-            content: $article->content ?? '',
+            content: $content,
             allow_comments: $article->allow_comments ?? false,
+            use_system_image_layout: $article->use_system_image_layout ?? null,
             firstImageFromArticle: $image->url ?? null,
             created_at: $article->created_at ?? null,
             article_id: $articleId,

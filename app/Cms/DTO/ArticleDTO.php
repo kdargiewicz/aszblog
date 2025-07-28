@@ -19,6 +19,7 @@ class ArticleDTO
         public ?float $longitude,
         public ?string $content,
         public ?bool $allow_comments,
+        public ?bool $use_system_image_layout,
         public ?int $category_id = null,
         public ?array $tag_ids = [],
         public ?string $firstImageFromArticle = null,
@@ -41,6 +42,7 @@ class ArticleDTO
             longitude: isset($data['longitude']) ? floatval($data['longitude']) : null,
             content: $data['content'] ?? null,
             allow_comments: isset($data['allow_comments']) ? boolval($data['allow_comments']) : null,
+            use_system_image_layout: isset($data['use_system_image_layout']) ? boolval($data['use_system_image_layout']) : null,
             created_at: !empty($data['created_at']) ? \Carbon\Carbon::parse($data['created_at']) : null,
             slug: isset($data['title']) ? Str::slug($data['title']) : null,
         );
@@ -57,6 +59,7 @@ class ArticleDTO
             longitude: $article->longitude,
             content: $article->content,
             allow_comments: $article->allow_comments,
+            use_system_image_layout: $article->use_system_image_layout,
             category_id: $article->category_id,
             tag_ids: $article->tags_id,
             slug: $article->slug,

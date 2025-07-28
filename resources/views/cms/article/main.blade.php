@@ -7,6 +7,7 @@
             <button class="w3-bar-item w3-button tablink" data-tab="general">{{ __('article.tab-link.general') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="map-content">{{ __('article.tab-link.map') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="content">{{ __('article.tab-link.contents') }}</button>
+            <button class="w3-bar-item w3-button tablink" data-tab="settings">{{ __('article.tab-link.settings') }}</button>
             <button class="w3-bar-item w3-button tablink" data-tab="saved-versions">{{ __('article.tab-link.saved-versions') }}</button>
         </div>
 
@@ -40,6 +41,15 @@
             <div id="content" class="tabcontent" style="display:none">
                 <label class="w3-text-grey"><b>{{ __('article.create-form.content') }}</b></label>
                 <textarea class="w3-input w3-border w3-round w3-margin-bottom" style="height: 210vh;" id="editor" name="content" rows="50" placeholder="{{ __('article.create-form.content-placeholder') }}">{{ old('content', $article->content ?? '') }}</textarea>
+            </div>
+
+            <div id="settings" class="tabcontent" style="display:none">
+                <label class="w3-text-grey"><b>{{ __('article.create-form.use_system_image_layout') }}</b></label>
+                <select class="w3-select w3-border w3-round w3-margin-bottom" name="use_system_image_layout">
+                    <option value="" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === '' ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-select') }}</option>
+                    <option value="1" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === 1 ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-yes') }}</option>
+                    <option value="0" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === 0 ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-no') }}</option>
+                </select>
 
                 @if(isset($article) && $article->created_at)
                     <label class="w3-text-grey"><b>{{ __('article.create-form.date_time') }}</b></label>
@@ -97,19 +107,6 @@
             evt.currentTarget.classList.add("w3-light-blue");
         }
 
-        // function openTab(evt, tabName) {
-        //     var i, x, tablinks;
-        //     x = document.getElementsByClassName("tabcontent");
-        //     for (i = 0; i < x.length; i++) {
-        //         x[i].style.display = "none";
-        //     }
-        //     tablinks = document.getElementsByClassName("tablink");
-        //     for (i = 0; i < tablinks.length; i++) {
-        //         tablinks[i].classList.remove("w3-light-blue");
-        //     }
-        //     document.getElementById(tabName).style.display = "block";
-        //     evt.currentTarget.classList.add("w3-light-blue");
-        // }
     </script>
 
     @include('cms.article.tinymce-script')

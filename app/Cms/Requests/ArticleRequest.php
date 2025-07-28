@@ -21,6 +21,7 @@ class ArticleRequest extends FormRequest
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'content' => ['nullable', 'string'],
+            'use_system_image_layout' => ['nullable', 'boolean'],
             'allow_comments' => ['nullable', 'boolean'],
             'created_at' => [
                 'nullable',

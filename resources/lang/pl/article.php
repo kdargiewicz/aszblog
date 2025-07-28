@@ -12,6 +12,7 @@ return [
         'general' => 'Ogólne',
         'map' => 'Mapa',
         'contents' => 'Treść',
+        'settings' => 'Ustawienia',
         'saved-versions' => 'Zapisane wersje',
     ],
 
@@ -30,6 +31,7 @@ return [
         'allow-comments-select' => 'Wybierz opcję',
         'set-map-location' => 'Wybierz lokalizację na mapie',
         'date_time' => 'Edytuj datę publikacji (z godziną)',
+        'use_system_image_layout' => 'Czy używać systemowego (domyślnego) układu zdjęć',
     ],
 
     'requests' => [
