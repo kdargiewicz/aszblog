@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/css/glightbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/tinymce.css') }}">
     <link rel="stylesheet" href="{{ asset('web/theme/blogy/css/flatpickr.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>

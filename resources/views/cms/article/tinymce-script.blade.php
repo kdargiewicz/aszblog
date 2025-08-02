@@ -8,19 +8,118 @@
         content_style: `
             body { text-align: justify; }
 
-
+            /* Obrazy obok siebie */
             .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
             .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
             @media (max-width: 768px) { .image-row img { width: 100%; } }
+
+            /* Style obrazków i figure */
             img { cursor: pointer; }
             img:focus { outline: 2px dashed #007acc; }
+
+            img.float-left {
+                float: left;
+                margin: 0 1.5rem 1rem 0;
+                max-width: 45%;
+                vertical-align: top;
+            }
+
+            img.float-right {
+                float: right;
+                margin: 0 0 1rem 1.5rem;
+                max-width: 45%;
+            }
+
+            figure.image {
+                display: block;
+                clear: none;
+            }
+
+            figure.image.float-left {
+                float: left;
+                margin: 0 1.5rem 1rem 0;
+                max-width: 45%;
+                vertical-align: top;
+            }
+
+            figure.image.float-right {
+                float: right;
+                margin: 0 0 1rem 1.5rem;
+                max-width: 45%;
+            }
+
+            figure.image img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            figure.image figcaption {
+                font-size: 0.9em;
+                color: #666;
+                text-align: center;
+                margin-top: 0.3em;
+            }
+
+            /* Responsywność — floaty się wyłączają */
+            @media (max-width: 768px) {
+                img.float-left, img.float-right,
+                figure.image.float-left, figure.image.float-right {
+                    float: none;
+                    display: block;
+                    margin: 1rem auto;
+                    max-width: 100%;
+                }
+            }
         `,
+
+        // content_style: `
+        //     body { text-align: justify; }
+        //     .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
+        //     .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
+        //     @media (max-width: 768px) { .image-row img { width: 100%; } }
+        //     img { cursor: pointer; }
+        //     img:focus { outline: 2px dashed #007acc; }
+        //
+        //     img.float-left {
+        //         float: left;
+        //         margin: 0 1.5rem 1rem 0;
+        //         max-width: 45%;
+        //         vertical-align: top;
+        //     }
+        //
+        //     img.float-right {
+        //         float: right;
+        //         margin: 0 0 1rem 1.5rem;
+        //         max-width: 45%;
+        //     }
+        //
+        //     @media (max-width: 768px) {
+        //         img.float-left, img.float-right {
+        //             float: none;
+        //             display: block;
+        //             margin: 1rem auto;
+        //             max-width: 100%;
+        //         }
+        //     }
+        // `,
+
+        // content_style: `
+        //     body { text-align: justify; }
+        //
+        //
+        //     .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
+        //     .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
+        //     @media (max-width: 768px) { .image-row img { width: 100%; } }
+        //     img { cursor: pointer; }
+        //     img:focus { outline: 2px dashed #007acc; }
+        // `,
         plugins: [
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
             'image', 'link', 'lists', 'media', 'searchreplace',
             'table', 'visualblocks', 'wordcount', 'code'
         ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | insertimagerow',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | insertimagerow | floatleft | floatright',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
         images_upload_credentials: true,
@@ -34,7 +133,7 @@
         image_advtab: true,
         image_dimensions: true,
         object_resizing: true,
-        extended_valid_elements: 'img[class|src|alt|width|height|style|title]',
+        extended_valid_elements: 'img[class|src|alt|width|height|style|title],figure[class],figcaption',
 
         setup: function (editor) {
             editor.ui.registry.addButton('insertimagerow', {
@@ -51,6 +150,55 @@
                     editor.insertContent(html);
                 }
             });
+            // editor.ui.registry.addButton('floatleft', {
+            //     text: 'Obrazek z lewej',
+            //     onAction: function () {
+            //         const img = editor.selection.getNode();
+            //         if (img.nodeName === 'IMG') {
+            //             img.classList.remove('float-right');
+            //             img.classList.add('float-left');
+            //         }
+            //     }
+            // });
+            editor.ui.registry.addButton('floatleft', {
+                text: 'Obrazek z lewej',
+                onAction: function () {
+                    const node = editor.selection.getNode();
+                    const figure = node.closest('figure');
+                    const target = figure || node.closest('img');
+
+                    if (target) {
+                        target.classList.add('float-left');
+                        target.classList.remove('float-right');
+                    }
+                }
+            });
+
+
+            editor.ui.registry.addButton('floatright', {
+                text: 'Obrazek z prawej',
+                onAction: function () {
+                    const node = editor.selection.getNode();
+                    const figure = node.closest('figure');
+                    const target = figure || node.closest('img');
+
+                    if (target) {
+                        target.classList.remove('float-left');
+                        target.classList.add('float-right');
+                    }
+                }
+            });
+
+            // editor.ui.registry.addButton('floatright', {
+            //     text: 'Obrazek z prawej',
+            //     onAction: function () {
+            //         const img = editor.selection.getNode();
+            //         if (img.nodeName === 'IMG') {
+            //             img.classList.remove('float-left');
+            //             img.classList.add('float-right');
+            //         }
+            //     }
+            // });
         },
 
         // 📤 Upload obrazków
