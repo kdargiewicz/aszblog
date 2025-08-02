@@ -44,6 +44,8 @@
             <a href="{{ route('errors.log') }}" class="w3-bar-item w3-button w3-padding w3-text-red">
                 <i class="fa fa-exclamation-triangle"></i>  Error_log
             </a>
+            <a href="{{ route('test.newspaper') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  test-gazeta</a>
+            <a href="{{ route('test.newspaper2') }}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  test-gazeta2</a>
 {{--            <a href="{{ route('first.blog.preview', 'one') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga one</a>--}}
 {{--            <a href="{{ route('first.blog.preview', 'two') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga two</a>--}}
 {{--            <a href="{{ route('first.blog.preview', 'blogy') }}" class="w3-bar-item w3-button w3-padding w3-text-red"><i class="fa fa-list-alt w3-margin-right"></i>  podglad bloga blogy</a>--}}

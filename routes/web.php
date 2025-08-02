@@ -127,6 +127,15 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
     Route::get('/comments', [\App\Cms\Controllers\CommentsController::class, 'getComments'])->name('comments.list');
     Route::post('/comment-accept/{id}', [\App\Cms\Controllers\CommentsController::class, 'toggleAccept'])->name('comment.accept');
 
+    //testy rozne
+    Route::get('/test-newspaper', function () {
+        return view('cms/test/newspaper');
+    })->name('test.newspaper');
+
+    Route::get('/test-newspaper2', function () {
+        return view('cms/test/newspaper2');
+    })->name('test.newspaper2');
+
 });
 
 //Blog official
