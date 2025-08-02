@@ -89,7 +89,7 @@
 
             <div id="settings" class="tabcontent" style="display:none">
                 <label class="w3-text-grey"><b>{{ __('article.create-form.use_system_image_layout') }}</b></label>
-                <select class="w3-select w3-border w3-round w3-margin-bottom" name="use_system_image_layout">
+                <select class="w3-select w3-border w3-round w3-margin-bottom" name="use_system_image_layout" disabled>
                     <option value="" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === '' ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-select') }}</option>
                     <option value="1" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === 1 ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-yes') }}</option>
                     <option value="0" {{ old('use_system_image_layout', isset($article) ? (int) $article->use_system_image_layout : '') === 0 ? 'selected' : '' }}>{{ __('article.create-form.allow-comments-no') }}</option>
