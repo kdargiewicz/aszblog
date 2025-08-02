@@ -15,10 +15,21 @@
             margin: 0;
             padding: 0;
             font-family: "Georgia", "Times New Roman", serif;
-            background-color: #f5f5f5;
+            background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            background-color: #f3f0e8;
             color: #333;
             line-height: 1.6;
         }
+
+
+        /*html, body {*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    font-family: "Georgia", "Times New Roman", serif;*/
+        /*    background-color: #f5f5f5;*/
+        /*    color: #333;*/
+        /*    line-height: 1.6;*/
+        /*}*/
 
         h1, h2 {
             font-family: "Georgia", serif;
@@ -175,7 +186,7 @@
 
     <div class="clearfix">
         <figure class="image">
-            <img src="https://placehold.co/400x300" alt="Przykładowe zdjęcie">
+            <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=400&h=300&q=80" alt="Przykładowe zdjęcie 3" />
             <figcaption>Przykładowy podpis zdjęcia</figcaption>
         </figure>
 
@@ -198,7 +209,7 @@
         </p>
 
         <figure class="image-right">
-            <img src="https://placehold.co/400x300" alt="Przykładowe zdjęcie">
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&h=300&q=80" alt="Przykładowe zdjęcie 2" />
             <figcaption>Przykładowy podpis zdjęcia</figcaption>
         </figure>
 
@@ -221,7 +232,7 @@
         </p>
 
         <figure class="image">
-            <img src="https://placehold.co/400x300" alt="Przykładowe zdjęcie">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80" alt="Przykładowe zdjęcie 1" />
             <figcaption>Przykładowy podpis zdjęcia</figcaption>
         </figure>
 
