@@ -373,7 +373,19 @@
         .site-header {
             background-color: #f7f3e7;
             padding: 1rem 2rem 0.5rem;
+            position: relative;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 0, 0, 0.2) 30%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.2) 70%,
+                transparent
+            ) 1;
+            opacity: 0.7;
         }
+
 
         .container {
             display: flex;
@@ -421,39 +433,115 @@
             opacity: 0.7;
         }
 
+
+
+
+         /*....................*/
+        .newspaper.site-header {
+            background-color: #f7f3e7;
+            padding: 1rem 2rem 0.5rem;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 90%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Hamburger menu (mobilne) */
+        #menu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Nawigacja desktop */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        /* Subtelna linia */
+        .subtle-divider {
+            height: 2px;
+            width: 90%;
+            margin: 0.5rem auto 0;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 0, 0, 0.2) 30%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.2) 70%,
+                transparent
+            );
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+
+        /* ===== Responsive mobile ===== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: #f7f3e7;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+                gap: 1rem;
+                width: 100%;
+                display: none;
+                z-index: 10;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            #menu-toggle:checked + .hamburger + .nav-links {
+                display: flex;
+            }
+        }
+
+
     </style>
 </head>
 <body>
 
-{{--<header class="site-header">--}}
-{{--    <div class="nav-container">--}}
-{{--        <div class="logo">LOGO</div>--}}
-{{--        <nav class="nav-links">--}}
-{{--            <a href="#">Mapa</a>--}}
-{{--            <a href="#">Artykuły</a>--}}
-{{--            <a href="#">Pierdoły</a>--}}
-{{--            <a href="#">2137</a>--}}
-{{--        </nav>--}}
-{{--        <button class="nav-toggle" aria-label="Otwórz menu">&#9776;</button>--}}
-{{--    </div>--}}
-{{--</header>--}}
-
-{{--<header class="site-header">--}}
-{{--    <div class="container">--}}
-{{--        <div class="logo">Logo</div>--}}
-{{--        <nav class="nav-links">--}}
-{{--            <a href="#">Mapa</a>--}}
-{{--            <a href="#">Artykuły</a>--}}
-{{--            <a href="#">Pierdoły</a>--}}
-{{--            <a href="#">2137</a>--}}
-{{--        </nav>--}}
-{{--    </div>--}}
-{{--    <div class="subtle-divider"></div> <!-- Tutaj przeniesiona linia -->--}}
-{{--</header>--}}
-
 <header class="site-header">
     <div class="container">
         <div class="logo">Aszblog</div>
+
+        <!-- Hamburger menu toggle -->
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
         <nav class="nav-links">
             <a href="#">Mapa</a>
             <a href="#">Artykuły</a>
@@ -461,15 +549,8 @@
             <a href="#">2137</a>
         </nav>
     </div>
-    <div class="subtle-divider"></div>
+
 </header>
-
-
-
-{{--linia ktora sie sciasnia ku koncowi--}}
-{{--<div class="subtle-divider"></div>--}}
-
-
 
 <div class="newspaper">
 
@@ -482,9 +563,6 @@
             <span class="symbol">♦</span>
         </a>
     </div>
-
-
-
 
 
     <h1>Przykładowy Artykuł w Stylu Gazetowym</h1>
@@ -576,9 +654,6 @@
         </div>
 
 
-
-
-
     </div>
 </div>
 <footer style="width: 90%; margin: 3rem auto 2rem; text-align: center; font-size: 0.9em; color: #777;">
@@ -607,9 +682,6 @@
         navLinks.classList.toggle('show');
     });
 </script>
-
-
-
 
 </body>
 </html>
