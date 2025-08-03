@@ -21,16 +21,6 @@
             line-height: 1.6;
         }
 
-
-        /*html, body {*/
-        /*    margin: 0;*/
-        /*    padding: 0;*/
-        /*    font-family: "Georgia", "Times New Roman", serif;*/
-        /*    background-color: #f5f5f5;*/
-        /*    color: #333;*/
-        /*    line-height: 1.6;*/
-        /*}*/
-
         h1, h2 {
             font-family: "Georgia", serif;
             color: #111;
@@ -113,44 +103,241 @@
             line-height: 1.6;
         }
 
-        /*kreska pozioma*/
+        /*kreska pozioma -- klikalna*/
+
         .line-with-symbols {
             position: relative;
             height: 2px;
             background: black;
             margin: 40px 0;
             opacity: 0.3;
+            z-index: 0;
         }
 
-        .line-with-symbols::before,
-        .line-with-symbols::after {
-            content: "♦";
+        /* Główne klikane linki zawierające symbol i tło */
+        .line-link {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 0;
+            height: 100%;
+            width: 10%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        /* pozycjonowanie: lewa/prawa */
+        .line-link.left {
+            left: 0;
+        }
+
+        .line-link.right {
+            right: 0;
+        }
+
+        /* Symbol karo */
+        .line-link .symbol {
             font-size: 20px;
             font-weight: bold;
             color: black;
-            opacity: 1;
-
-            background: transparent; /* bez tła */
-            padding: 0;
-            border-radius: 0;
-
-            /* wklęsły efekt przez cień tekstu */
             text-shadow:
                 1px 1px 2px rgba(255,255,255,0.8),
                 -1px -1px 2px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+        }
+
+        /* Efekty po najechaniu */
+        .line-link:hover {
+            background-color: rgba(179, 0, 0, 0.4);
+            transform: scaleY(1.5);
+            cursor: pointer;
+        }
+
+        .line-link:hover .symbol {
+            transform: scale(2.5);
+            color: #b30000;
+            text-shadow:
+                0 0 6px rgba(179, 0, 0, 0.9),
+                0 0 20px rgba(0, 0, 0, 0.4);
         }
 
 
-        .line-with-symbols::before {
-            left: 10%;
+        /* TOOLTIPY */
+        .line-link::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -2.2em;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #222;
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease-in;
+            z-index: 5;
         }
 
-        .line-with-symbols::after {
-            right: 10%;
+        /* natychmiastowe pojawianie się tooltipów */
+        .line-link:hover::after {
+            opacity: 1;
         }
+
+        /*tytul i data arta*/
+        .article-meta {
+            font-family: "Georgia", serif;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.3rem;      /* mniejszy odstęp od h1 */
+            margin-bottom: 1.2rem;
+            user-select: none;
+            text-align: center;      /* wyśrodkowanie */
+        }
+
+        .article-meta strong {
+            font-style: normal;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;   /* mniejszy odstęp pod tytułem */
+        }
+
+
+        /*END tytul i data arta*/
+
+
+
+
+
+        /*.line-with-symbols {*/
+        /*    position: relative;*/
+        /*    height: 2px;*/
+        /*    background: black;*/
+        /*    margin: 40px 0;*/
+        /*    opacity: 0.3;*/
+        /*    transition: background-color 0.3s ease;*/
+        /*}*/
+
+        /*!* Klikalne obszary po bokach *!*/
+        /*.line-with-symbols .line-left,*/
+        /*.line-with-symbols .line-right {*/
+        /*    position: absolute;*/
+        /*    top: 0;*/
+        /*    height: 100%;*/
+        /*    width: 10%;*/
+        /*    z-index: 1;*/
+        /*    transition: background-color 0.3s ease, transform 0.3s ease;*/
+        /*}*/
+
+        /*!* Lewa i prawa część *!*/
+        /*.line-with-symbols .line-left {*/
+        /*    left: 0;*/
+        /*}*/
+
+        /*.line-with-symbols .line-right {*/
+        /*    right: 0;*/
+        /*}*/
+
+        /*!* Tooltip + zmiana koloru linii *!*/
+        /*.line-with-symbols .line-left:hover,*/
+        /*.line-with-symbols .line-right:hover {*/
+        /*    background-color: rgba(179, 0, 0, 0.4);*/
+        /*    cursor: pointer;*/
+        /*    transform: scaleY(2); !* powiększenie "linii" pionowo *!*/
+        /*}*/
+
+        /*!* Styl symboli ♦ *!*/
+        /*.line-with-symbols a.left-link,*/
+        /*.line-with-symbols a.right-link {*/
+        /*    position: absolute;*/
+        /*    top: 50%;*/
+        /*    transform: translateY(-50%);*/
+        /*    font-size: 20px;*/
+        /*    font-weight: bold;*/
+        /*    color: black;*/
+        /*    text-decoration: none;*/
+        /*    background: transparent;*/
+        /*    border-radius: 0;*/
+        /*    opacity: 1;*/
+        /*    z-index: 2;*/
+        /*    transition: all 0.3s ease;*/
+        /*    text-shadow:*/
+        /*        1px 1px 2px rgba(255,255,255,0.8),*/
+        /*        -1px -1px 2px rgba(0,0,0,0.6);*/
+        /*}*/
+
+        /*!* Pozycja ♦ *!*/
+        /*.line-with-symbols .left-link {*/
+        /*    left: 10%;*/
+        /*}*/
+
+        /*.line-with-symbols .right-link {*/
+        /*    right: 10%;*/
+        /*}*/
+
+        /*!* Hover na ♦ — powiększenie, kolor, podpowiedź *!*/
+        /*.line-with-symbols a.left-link:hover,*/
+        /*.line-with-symbols a.right-link:hover {*/
+        /*    color: #b30000;*/
+        /*    transform: translateY(-50%) scale(1.5);*/
+        /*    text-shadow:*/
+        /*        0 0 3px rgba(179, 0, 0, 0.5),*/
+        /*        0 0 10px rgba(0, 0, 0, 0.2);*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+
+
+
+
+        /*.line-with-symbols {*/
+        /*    position: relative;*/
+        /*    height: 2px;*/
+        /*    background: black;*/
+        /*    margin: 40px 0;*/
+        /*    opacity: 0.3;*/
+        /*}*/
+
+        /*.line-with-symbols::before,*/
+        /*.line-with-symbols::after {*/
+        /*    content: "♦";*/
+        /*    position: absolute;*/
+        /*    top: 50%;*/
+        /*    transform: translateY(-50%);*/
+        /*    font-size: 20px;*/
+        /*    font-weight: bold;*/
+        /*    color: black;*/
+        /*    opacity: 1;*/
+
+        /*    background: transparent; !* bez tła *!*/
+        /*    padding: 0;*/
+        /*    border-radius: 0;*/
+
+        /*    !* wklęsły efekt przez cień tekstu *!*/
+        /*    text-shadow:*/
+        /*        1px 1px 2px rgba(255,255,255,0.8),*/
+        /*        -1px -1px 2px rgba(0,0,0,0.6);*/
+        /*}*/
+
+
+        /*.line-with-symbols::before {*/
+        /*    left: 10%;*/
+        /*}*/
+
+        /*.line-with-symbols::after {*/
+        /*    right: 10%;*/
+        /*}*/
+        /*end kreska pozioma*/
 
         /* Mobilki — float off, obrazek full width */
         @media (max-width: 768px) {
@@ -180,9 +367,41 @@
 <body>
 
 <div class="newspaper">
-    <div class="line-with-symbols"> </div>
+{{--    <div class="line-with-symbols"> </div>--}}
+
+{{--    klikalne linki w lewo i prawo--}}
+{{--    <div class="line-with-symbols">--}}
+{{--        <a href="https://example.com/lewo" class="left-link">♦</a>--}}
+{{--        <a href="https://example.com/prawo" class="right-link">♦</a>--}}
+{{--    </div>--}}
+{{--    <div class="line-with-symbols">--}}
+{{--        <a href="https://example.com/lewo" class="line-left" data-tooltip="poprzedni"></a>--}}
+{{--        <a href="https://example.com/prawo" class="line-right" data-tooltip="następny"></a>--}}
+
+{{--        <a href="https://example.com/lewo" class="left-link" data-tooltip="poprzedni">♦</a>--}}
+{{--        <a href="https://example.com/prawo" class="right-link" data-tooltip="następny">♦</a>--}}
+{{--    </div>--}}
+
+    <div class="line-with-symbols">
+        <a href="https://example.com/lewo" class="line-link left" data-tooltip="poprzedni">
+            <span class="symbol">♦</span>
+        </a>
+        <a href="https://example.com/prawo" class="line-link right" data-tooltip="następny">
+            <span class="symbol">♦</span>
+        </a>
+    </div>
+
+
+
+
 
     <h1>Przykładowy Artykuł w Stylu Gazetowym</h1>
+
+    <div class="article-meta">
+        <span class="category">Kategoria: <strong>Styl życia</strong></span> |
+        <time datetime="2025-08-03">3 sierpnia 2025</time>
+    </div>
+
 
     <div class="clearfix">
         <figure class="image">
@@ -254,9 +473,52 @@
             ante vel felis. Pellentesque in justo laoreet, viverra nulla ut, porttitor leo.
         </p>
 
-        <div class="line-with-symbols"> </div>
+{{--        <div class="line-with-symbols"> </div>--}}
+{{--        <div class="line-with-symbols">--}}
+{{--            <a href="https://example.com/lewo" class="left-link">♦</a>--}}
+{{--            <a href="https://example.com/prawo" class="right-link">♦</a>--}}
+{{--        </div>--}}
+{{--        <div class="line-with-symbols">--}}
+{{--            <a href="https://example.com/lewo" class="line-left" data-tooltip="poprzedni"></a>--}}
+{{--            <a href="https://example.com/prawo" class="line-right" data-tooltip="następny"></a>--}}
+
+{{--            <a href="https://example.com/lewo" class="left-link" data-tooltip="poprzedni">♦</a>--}}
+{{--            <a href="https://example.com/prawo" class="right-link" data-tooltip="następny">♦</a>--}}
+{{--        </div>--}}
+
+        <div class="line-with-symbols">
+            <a href="https://example.com/lewo" class="line-link left" data-tooltip="poprzedni">
+                <span class="symbol">♦</span>
+            </a>
+            <a href="https://example.com/prawo" class="line-link right" data-tooltip="następny">
+                <span class="symbol">♦</span>
+            </a>
+        </div>
+
+
+
+
+
     </div>
 </div>
+    <footer style="width: 90%; margin: 3rem auto 2rem; text-align: center; font-size: 0.9em; color: #777;">
+        <nav style="margin-bottom: 1rem;">
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">CMS</a>
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">O mnie</a>
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Galeria</a>
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Kontakt</a>
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Mapa</a>
+            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">ZDJĘCIA KRZYŚKA :P</a>
+        </nav>
+
+        <div style="font-style: italic; margin-bottom: 1rem; color: #555; font-size: 1em;">
+            „Żyj tak, aby Twoje motto mówiło więcej niż słowa.”
+        </div>
+
+        <div style="font-style: italic;">© {{ date('Y') }} {{ __('footer.main') }} {{ __('footer.author') }}</div>
+    </footer>
+
+
 
 </body>
 </html>
