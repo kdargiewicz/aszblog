@@ -259,6 +259,105 @@
             border-radius: 1px;
         }
 
+        /*menu*/
+        .site-header {
+            /*background-color: #f7f3e7;*/
+            /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            font-family: "Georgia", serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-family: "Georgia", serif;
+            font-size: 1rem;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #b30000;
+        }
+
+        /* Przycisk burgera (ukryty na desktopie) */
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /*header test*/
+        .site-header {
+            background-color: #f7f3e7;
+            padding: 1rem 2rem;
+        }
+
+        .subtle-divider {
+            height: 2px;
+            width: 90%;
+            margin: 0.5rem auto 0; /* mniejszy margines */
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 0, 0, 0.2) 30%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.2) 70%,
+                transparent
+            );
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+
+        /*end header test*/
+
+        /* === Mobile === */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: #f7f3e7;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 1rem;
+                padding: 1rem 2rem;
+                display: none;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+        /*END menu*/
+
 
         @media (max-width: 480px) {
             .subtle-divider {
@@ -270,11 +369,105 @@
 
 
         /*end main fancy line*/
+
+        .site-header {
+            background-color: #f7f3e7;
+            padding: 1rem 2rem 0.5rem;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .subtle-divider {
+            height: 2px;
+            width: 90%;
+            margin: 0.5rem auto 0;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 0, 0, 0.2) 30%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.2) 70%,
+                transparent
+            );
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="subtle-divider"></div>
+{{--<header class="site-header">--}}
+{{--    <div class="nav-container">--}}
+{{--        <div class="logo">LOGO</div>--}}
+{{--        <nav class="nav-links">--}}
+{{--            <a href="#">Mapa</a>--}}
+{{--            <a href="#">Artykuły</a>--}}
+{{--            <a href="#">Pierdoły</a>--}}
+{{--            <a href="#">2137</a>--}}
+{{--        </nav>--}}
+{{--        <button class="nav-toggle" aria-label="Otwórz menu">&#9776;</button>--}}
+{{--    </div>--}}
+{{--</header>--}}
+
+{{--<header class="site-header">--}}
+{{--    <div class="container">--}}
+{{--        <div class="logo">Logo</div>--}}
+{{--        <nav class="nav-links">--}}
+{{--            <a href="#">Mapa</a>--}}
+{{--            <a href="#">Artykuły</a>--}}
+{{--            <a href="#">Pierdoły</a>--}}
+{{--            <a href="#">2137</a>--}}
+{{--        </nav>--}}
+{{--    </div>--}}
+{{--    <div class="subtle-divider"></div> <!-- Tutaj przeniesiona linia -->--}}
+{{--</header>--}}
+
+<header class="site-header">
+    <div class="container">
+        <div class="logo">Aszblog</div>
+        <nav class="nav-links">
+            <a href="#">Mapa</a>
+            <a href="#">Artykuły</a>
+            <a href="#">Pierdoły</a>
+            <a href="#">2137</a>
+        </nav>
+    </div>
+    <div class="subtle-divider"></div>
+</header>
+
+
+
+{{--linia ktora sie sciasnia ku koncowi--}}
+{{--<div class="subtle-divider"></div>--}}
 
 
 
@@ -404,6 +597,17 @@
 
     <div style="font-style: italic;">© {{ date('Y') }} {{ __('footer.main') }} {{ __('footer.author') }}</div>
 </footer>
+
+<script>
+    // menu
+    const toggleButton = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    toggleButton.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+</script>
+
 
 
 
