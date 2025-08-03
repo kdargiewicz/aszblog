@@ -136,6 +136,10 @@ Route::middleware(['auth', 'verified', ForcePasswordChangeMiddleware::class])->g
         return view('cms/test/newspaper2');
     })->name('test.newspaper2');
 
+    Route::get('/main-newspaper', function () {
+        return view('cms/test/main-newspaper');
+    })->name('main.newspaper');
+
 });
 
 //Blog official

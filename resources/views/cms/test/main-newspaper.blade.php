@@ -239,9 +239,44 @@
             }
         }
 
+
+
+
+
+        /*main fancy line*/
+        .subtle-divider {
+            height: 2px;
+            width: 90%;
+            margin: 2rem auto;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0, 0, 0, 0.3) 25%,
+                rgba(0, 0, 0, 0.6) 50%,
+                rgba(0, 0, 0, 0.3) 75%,
+                transparent
+            );
+            border-radius: 1px;
+        }
+
+
+        @media (max-width: 480px) {
+            .subtle-divider {
+                margin: 1.5rem auto;
+                max-width: 90%;
+            }
+        }
+
+
+
+        /*end main fancy line*/
     </style>
 </head>
 <body>
+
+<div class="subtle-divider"></div>
+
+
 
 <div class="newspaper">
 
@@ -353,22 +388,22 @@
 
     </div>
 </div>
-    <footer style="width: 90%; margin: 3rem auto 2rem; text-align: center; font-size: 0.9em; color: #777;">
-        <nav style="margin-bottom: 1rem;">
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">CMS</a>
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">O mnie</a>
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Galeria</a>
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Kontakt</a>
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Mapa</a>
-            <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">ZDJĘCIA KRZYŚKA :P</a>
-        </nav>
+<footer style="width: 90%; margin: 3rem auto 2rem; text-align: center; font-size: 0.9em; color: #777;">
+    <nav style="margin-bottom: 1rem;">
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">CMS</a>
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">O mnie</a>
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Galeria</a>
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Kontakt</a>
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">Mapa</a>
+        <a href="#" style="margin: 0 10px; text-decoration: none; color: #888;">ZDJĘCIA KRZYŚKA :P</a>
+    </nav>
 
-        <div style="font-style: italic; margin-bottom: 1rem; color: #555; font-size: 1em;">
-            „Żyj tak, aby Twoje motto mówiło więcej niż słowa.”
-        </div>
+    <div style="font-style: italic; margin-bottom: 1rem; color: #555; font-size: 1em;">
+        „Żyj tak, aby Twoje motto mówiło więcej niż słowa.”
+    </div>
 
-        <div style="font-style: italic;">© {{ date('Y') }} {{ __('footer.main') }} {{ __('footer.author') }}</div>
-    </footer>
+    <div style="font-style: italic;">© {{ date('Y') }} {{ __('footer.main') }} {{ __('footer.author') }}</div>
+</footer>
 
 
 
