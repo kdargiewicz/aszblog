@@ -7,126 +7,133 @@
         content_style: `
             body { text-align: justify; }
 
-            /* Style obrazków i figure */
             img { cursor: pointer; }
             img:focus { outline: 2px dashed #007acc; }
 
-img.float-left {
-    float: left;
-    margin: 0 1.5rem 1rem 0;
-    max-width: 45%;
-    vertical-align: top;
-}
+            img.float-left {
+                float: left;
+                margin: 0 1.5rem 1rem 0;
+                max-width: 45%;
+                vertical-align: top;
+            }
 
-img.float-right {
-    float: right;
-    margin: 0 0 1rem 1.5rem;
-    max-width: 45%;
-}
+            img.float-right {
+                float: right;
+                margin: 0 0 1rem 1.5rem;
+                max-width: 45%;
+            }
 
-img.image-full {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 1rem auto;
-}
+            img.image-full {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 1rem auto;
+            }
 
-img.image-60 {
-    display: block;
-    width: 60%;
-    height: auto;
-    margin: 1rem auto;
-}
-figure.image {
-    display: block;
-    clear: none;
-}
+            img.image-60 {
+                display: block;
+                width: 60%;
+                height: auto;
+                margin: 1rem auto;
+            }
+            figure.image {
+                display: block;
+                clear: none;
+            }
 
-figure.image img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+            figure.image img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
 
-figure.image figcaption {
-    font-size: 0.9em;
-    color: #666;
-    text-align: center;
-    margin-top: 0.3em;
-}
+            figure.image figcaption {
+                font-size: 0.9em;
+                color: #666;
+                text-align: center;
+                margin-top: 0.3em;
+            }
 
-/* Figure z floatami */
-figure.image.float-left {
-    float: left;
-    margin: 0 1.5rem 1rem 0;
-    max-width: 45%;
-    vertical-align: top;
-}
+            figure.image.float-left {
+                float: left;
+                margin: 0 1.5rem 1rem 0;
+                max-width: 45%;
+                vertical-align: top;
+            }
 
-figure.image.float-right {
-    float: right;
-    margin: 0 0 1rem 1.5rem;
-    max-width: 45%;
-    vertical-align: top;
-}
+            figure.image.float-right {
+                float: right;
+                margin: 0 0 1rem 1.5rem;
+                max-width: 45%;
+                vertical-align: top;
+            }
 
-/* Rozmiary */
-figure.image.image-full {
-    display: block;
-    margin: 1rem auto;
-    width: 100%;
-    max-width: 100%;
-}
+            figure.image.image-full {
+                display: block;
+                margin: 1rem auto;
+                width: 100%;
+                max-width: 100%;
+            }
 
-figure.image.image-60 {
-    display: block;
-    margin: 1rem auto;
-    width: 60%;
-    max-width: 100%;
-}
+            figure.image.image-60 {
+                display: block;
+                margin: 1rem auto;
+                width: 60%;
+                max-width: 100%;
+            }
 
-/* Obrazki w środku figure z klasą image-full lub image-60 */
-figure.image.image-full img,
-figure.image.image-60 img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+            figure.image.image-full img,
+            figure.image.image-60 img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
 
-figure.image > img.image-60 {
-    display: block;
-    width: 60%;
-    height: auto;
-    margin: 1rem auto;
-}
+            figure.image > img.image-60 {
+                display: block;
+                width: 60%;
+                height: auto;
+                margin: 1rem auto;
+            }
 
-figure.image > img.image-full {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 1rem auto;
-}
+            figure.image > img.image-full {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 1rem auto;
+            }
 
+            img.float-left,
+            figure.image.float-left {
+                margin-right: 1.5rem;
+                margin-bottom: 1rem;
+            }
 
-@media (max-width: 768px) {
-    /* IMG */
-    img.float-left,
-    img.float-right,
-    img.image-full,
-    img.image-60,
+            img.float-right,
+            figure.image.float-right {
+                margin-left: 1.5rem;
+                margin-bottom: 1rem;
+            }
 
-        /* FIGURE */
-    figure.image.float-right,
-    figure.image.float-left,
-    figure.image.image-60,
-    figure.image.image-full {
-        float: none;
-        display: block;
-        margin: 1rem auto;
-        width: 100% !important;
-        max-width: 100%;
-    }
-}
+            @media (max-width: 768px) {
+                /* IMG */
+                img.float-left,
+                img.float-right,
+                img.image-full,
+                img.image-60,
+
+                    /* FIGURE */
+                figure.image.float-right,
+                figure.image.float-left,
+                figure.image.image-60,
+                figure.image.image-full {
+                    float: none;
+                    display: block;
+                    margin: 1rem auto;
+                    width: 100% !important;
+                    max-width: 100%;
+                }
+            }
         `,
         plugins: [
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
