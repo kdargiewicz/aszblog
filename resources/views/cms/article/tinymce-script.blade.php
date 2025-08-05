@@ -4,122 +4,136 @@
         language: 'pl',
         height: 900,
 
-        // tu sa nadawane style do obrazkow ktore maja byc obok siebie
         content_style: `
             body { text-align: justify; }
-
-            /* Obrazy obok siebie */
-            .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
-            .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
-            @media (max-width: 768px) { .image-row img { width: 100%; } }
 
             /* Style obrazków i figure */
             img { cursor: pointer; }
             img:focus { outline: 2px dashed #007acc; }
 
-            img.float-left {
-                float: left;
-                margin: 0 1.5rem 1rem 0;
-                max-width: 45%;
-                vertical-align: top;
-            }
+img.float-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 45%;
+    vertical-align: top;
+}
 
-            img.float-right {
-                float: right;
-                margin: 0 0 1rem 1.5rem;
-                max-width: 45%;
-            }
+img.float-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 45%;
+}
 
-            figure.image {
-                display: block;
-                clear: none;
-            }
+img.image-full {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+}
 
-            figure.image.float-left {
-                float: left;
-                margin: 0 1.5rem 1rem 0;
-                max-width: 45%;
-                vertical-align: top;
-            }
+img.image-60 {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: 1rem auto;
+}
+figure.image {
+    display: block;
+    clear: none;
+}
 
-            figure.image.float-right {
-                float: right;
-                margin: 0 0 1rem 1.5rem;
-                max-width: 45%;
-            }
+figure.image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
-            figure.image img {
-                display: block;
-                width: 100%;
-                height: auto;
-            }
+figure.image figcaption {
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+    margin-top: 0.3em;
+}
 
-            figure.image figcaption {
-                font-size: 0.9em;
-                color: #666;
-                text-align: center;
-                margin-top: 0.3em;
-            }
+/* Figure z floatami */
+figure.image.float-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 45%;
+    vertical-align: top;
+}
 
-            /* Responsywność — floaty się wyłączają */
-            @media (max-width: 768px) {
-                img.float-left, img.float-right,
-                figure.image.float-left, figure.image.float-right {
-                    float: none;
-                    display: block;
-                    margin: 1rem auto;
-                    max-width: 100%;
-                }
-            }
+figure.image.float-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 45%;
+    vertical-align: top;
+}
+
+/* Rozmiary */
+figure.image.image-full {
+    display: block;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+figure.image.image-60 {
+    display: block;
+    margin: 1rem auto;
+    width: 60%;
+    max-width: 100%;
+}
+
+/* Obrazki w środku figure z klasą image-full lub image-60 */
+figure.image.image-full img,
+figure.image.image-60 img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure.image > img.image-60 {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: 1rem auto;
+}
+
+figure.image > img.image-full {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+}
+
+
+@media (max-width: 768px) {
+    /* IMG */
+    img.float-left,
+    img.float-right,
+    img.image-full,
+    img.image-60,
+
+        /* FIGURE */
+    figure.image.float-right,
+    figure.image.float-left,
+    figure.image.image-60,
+    figure.image.image-full {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
         `,
-
-        // content_style: `
-        //     body { text-align: justify; }
-        //     .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
-        //     .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
-        //     @media (max-width: 768px) { .image-row img { width: 100%; } }
-        //     img { cursor: pointer; }
-        //     img:focus { outline: 2px dashed #007acc; }
-        //
-        //     img.float-left {
-        //         float: left;
-        //         margin: 0 1.5rem 1rem 0;
-        //         max-width: 45%;
-        //         vertical-align: top;
-        //     }
-        //
-        //     img.float-right {
-        //         float: right;
-        //         margin: 0 0 1rem 1.5rem;
-        //         max-width: 45%;
-        //     }
-        //
-        //     @media (max-width: 768px) {
-        //         img.float-left, img.float-right {
-        //             float: none;
-        //             display: block;
-        //             margin: 1rem auto;
-        //             max-width: 100%;
-        //         }
-        //     }
-        // `,
-
-        // content_style: `
-        //     body { text-align: justify; }
-        //
-        //
-        //     .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
-        //     .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
-        //     @media (max-width: 768px) { .image-row img { width: 100%; } }
-        //     img { cursor: pointer; }
-        //     img:focus { outline: 2px dashed #007acc; }
-        // `,
         plugins: [
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
             'image', 'link', 'lists', 'media', 'searchreplace',
             'table', 'visualblocks', 'wordcount', 'code'
         ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | insertimagerow | floatleft | floatright',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | imagefull | imagesixty | floatleft | floatright',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
         images_upload_credentials: true,
@@ -136,30 +150,36 @@
         extended_valid_elements: 'img[class|src|alt|width|height|style|title],figure[class],figcaption',
 
         setup: function (editor) {
-            editor.ui.registry.addButton('insertimagerow', {
-                text: 'Obrazy obok',
+            editor.ui.registry.addButton('imagefull', {
+                text: 'Zdjęcie pełnej szerokości',
                 icon: 'image',
-                tooltip: 'Wstaw dwa obrazy obok siebie',
+                tooltip: 'Zdjęcie na 100% szerokości',
                 onAction: function () {
-                    const html = `
-                        <div class="image-row">
-                            <img src="" alt="img 1" style="width: 45%;" />
-                            <img src="" alt="img 2" style="width: 45%;" />
-                        </div>
-                    `;
-                    editor.insertContent(html);
+                    const node = editor.selection.getNode();
+                    const img = node.closest('img');
+
+                    if (img) {
+                        img.classList.remove('float-left', 'float-right', 'image-60');
+                        img.classList.add('image-full');
+                    }
                 }
             });
-            // editor.ui.registry.addButton('floatleft', {
-            //     text: 'Obrazek z lewej',
-            //     onAction: function () {
-            //         const img = editor.selection.getNode();
-            //         if (img.nodeName === 'IMG') {
-            //             img.classList.remove('float-right');
-            //             img.classList.add('float-left');
-            //         }
-            //     }
-            // });
+
+            editor.ui.registry.addButton('imagesixty', {
+                text: 'Zdjęcie 60%',
+                icon: 'image',
+                tooltip: 'Zdjęcie na 60% szerokości',
+                onAction: function () {
+                    const node = editor.selection.getNode();
+                    const img = node.closest('img');
+
+                    if (img) {
+                        img.classList.remove('float-left', 'float-right', 'image-full');
+                        img.classList.add('image-60');
+                    }
+                }
+            });
+
             editor.ui.registry.addButton('floatleft', {
                 text: 'Obrazek z lewej',
                 onAction: function () {
@@ -174,7 +194,6 @@
                 }
             });
 
-
             editor.ui.registry.addButton('floatright', {
                 text: 'Obrazek z prawej',
                 onAction: function () {
@@ -188,17 +207,6 @@
                     }
                 }
             });
-
-            // editor.ui.registry.addButton('floatright', {
-            //     text: 'Obrazek z prawej',
-            //     onAction: function () {
-            //         const img = editor.selection.getNode();
-            //         if (img.nodeName === 'IMG') {
-            //             img.classList.remove('float-left');
-            //             img.classList.add('float-right');
-            //         }
-            //     }
-            // });
         },
 
         // 📤 Upload obrazków
