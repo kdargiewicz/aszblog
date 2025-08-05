@@ -90,7 +90,8 @@
         }
 
         .newspaper {
-            max-width: 740px;
+            width: 70%;
+            max-width: 1200px;
             margin: 2rem auto;
             padding: 1.5rem;
             /*background: #ffffff;*/
@@ -565,7 +566,7 @@
     </div>
 
 
-    <h1>Przykładowy Artykuł w Stylu Gazetowym</h1>
+    <h1>Przykładowy Artykuł w Stylu Gazetowym 2137</h1>
 
     <div class="article-meta">
         <span class="category">Kategoria: <strong>Styl życia</strong></span> |
