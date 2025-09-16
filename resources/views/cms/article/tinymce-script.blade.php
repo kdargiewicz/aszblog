@@ -134,13 +134,43 @@
                     max-width: 100%;
                 }
             }
+
+            .image-column-row {
+                display: flex;
+                justify-content: center;
+                align-items: stretch; /* oba obrazki mają tę samą wysokość */
+                margin: 1em 0;
+            }
+
+            .image-column-row img {
+                height: 400px; /* wysokość stała */
+                width: auto; /* szerokość proporcjonalna */
+                object-fit: cover;
+                border-radius: 8px;
+            }
+            @media (max-width: 768px) {
+                .image-column-row {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .image-column-row img {
+                    height: auto;
+                    width: 90%;
+                    margin: 0 0 1em 0;
+                }
+            }
+
+            .image-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1em 0; align-items: flex-start; }
+            .image-row img { width: calc(50% - 10px); aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; max-width: 100%; height: auto; }
+            @media (max-width: 768px) { .image-row img { width: 100%; } }
         `,
         plugins: [
             'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
             'image', 'link', 'lists', 'media', 'searchreplace',
             'table', 'visualblocks', 'wordcount', 'code'
         ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | imagefull | imagesixty | floatleft | floatright',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code | insertimagerow | insertimagecolumn | imagefull | imagesixty | floatleft | floatright',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
         images_upload_credentials: true,
@@ -157,6 +187,37 @@
         extended_valid_elements: 'img[class|src|alt|width|height|style|title],figure[class],figcaption',
 
         setup: function (editor) {
+            editor.ui.registry.addButton('insertimagerow', {
+                text: '2 zdjęcia poziome obok',
+                icon: 'image',
+                tooltip: 'Wstaw dwa obrazy obok siebie',
+                onAction: function () {
+                    const html = `
+                        <div class="image-row">
+                            <img src="" alt="img 1" style="width: 45%;" />
+                            <img src="" alt="img 2" style="width: 45%;" />
+                        </div>
+                    `;
+                    editor.insertContent(html);
+                }
+            });
+
+            editor.ui.registry.addButton('insertimagecolumn', {
+                text: '2 zdjęcia pionowe obok',
+                icon: 'image',
+                tooltip: 'Wstaw dwa obrazki pionowe obok siebie (pełna wysokość)',
+                onAction: function () {
+                    const html = `
+            <div class="image-column-row">
+                <img src="" alt="img 1" style="height: 400px; width: auto; object-fit: cover; border-radius: 8px; margin-right: 10px;" />
+                <img src="" alt="img 2" style="height: 400px; width: auto; object-fit: cover; border-radius: 8px;" />
+            </div>
+        `;
+                    editor.insertContent(html);
+                }
+            });
+
+
             editor.ui.registry.addButton('imagefull', {
                 text: 'Zdjęcie pełnej szerokości',
                 icon: 'image',
@@ -188,7 +249,8 @@
             });
 
             editor.ui.registry.addButton('floatleft', {
-                text: 'Obrazek z lewej',
+                text: 'Zdjęcie z lewej',
+                icon: 'image',
                 onAction: function () {
                     const node = editor.selection.getNode();
                     const figure = node.closest('figure');
@@ -202,7 +264,8 @@
             });
 
             editor.ui.registry.addButton('floatright', {
-                text: 'Obrazek z prawej',
+                text: 'Zdjęcie z prawej',
+                icon: 'image',
                 onAction: function () {
                     const node = editor.selection.getNode();
                     const figure = node.closest('figure');

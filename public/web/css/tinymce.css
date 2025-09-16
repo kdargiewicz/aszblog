@@ -103,6 +103,59 @@ figure.image.float-right {
     margin-bottom: 1rem;
 }
 
+/*tu zdjecia obok siebie w poziomie*/
+.image-row,
+.figure.image-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1em 0;
+    align-items: flex-start;
+}
+.image-row img,
+.figure.image-row img {
+    width: calc(50% - 10px);
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+    max-width: 45%;
+    height: auto;
+}
+@media (max-width: 768px) { .image-row img { width: 100%; } }
+
+/*end tu zdjecia obok siebie w poziomie*/
+
+/*tu obrazki obok siebie ale w pionie*/
+.image-column-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* oba obrazki mają tę samą wysokość */
+    margin: 1em 0;
+}
+
+.image-column-row img {
+    height: 400px; /* wysokość stała */
+    width: auto; /* szerokość proporcjonalna */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .image-column-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-column-row img {
+        height: auto;
+        width: 90%;
+        margin: 0 0 1em 0;
+    }
+}
+
+/*end obrazki w pionie*/
+
 @media (max-width: 768px) {
     img.float-left,
     img.float-right,

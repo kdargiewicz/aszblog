@@ -90,6 +90,7 @@
         }
 
         .newspaper {
+            /*te wartosci i nizej szerokosc przekazac z backendu z ustawien usera*/
             width: 70%;
             max-width: 1200px;
             margin: 2rem auto;
