@@ -20,11 +20,18 @@
         header {
             background: #f1efe6;
             color: #333;
-            padding: 1rem 2rem;
+            padding: 1rem 0;                /* usuwamy duże boczne paddingi */
+            display: flex;
+            justify-content: center;        /* centrum kontenera */
+            position: relative;
+        }
+        header .inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            width: 100%;
+            max-width: 1200px;              /* szerokość jak content */
+            padding: 0 2rem;                /* odsunięcie od samego brzegu */
         }
         header::after {
             content: "";
@@ -156,22 +163,24 @@
 </head>
 <body>
 <header>
-    <div class="logo">Aszblog</div>
+    <div class="inner">
+        <div class="logo">Aszblog</div>
 
-    <div class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="navMenu">
+            <ul>
+                <li><a href="#">Mapa</a></li>
+                <li><a href="#">Artykuły</a></li>
+                <li><a href="#">Pierdoly</a></li>
+                <li><a href="#">2137</a></li>
+            </ul>
+        </nav>
     </div>
-
-    <nav id="navMenu">
-        <ul>
-            <li><a href="#">Mapa</a></li>
-            <li><a href="#">Artykuły</a></li>
-            <li><a href="#">Pierdoly</a></li>
-            <li><a href="#">2137</a></li>
-        </ul>
-    </nav>
 </header>
 
 <main>
